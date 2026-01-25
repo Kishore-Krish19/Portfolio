@@ -1,0 +1,149 @@
+/* Home.css */
+
+.home-container {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  background-color: #000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Center Image */
+.home-image {
+  width: 280px;
+  height: 280px;
+  object-fit: cover;
+  border-radius: 16px;
+  border: 1px solid #444;
+  box-shadow: 0 0 25px rgba(0, 0, 0, 0.8);
+  transition: all 0.3s ease;
+}
+
+/* Buttons */
+.home-btn {
+  position: absolute;
+  padding: 10px 20px;
+  border: 1px solid #3b82f6;
+  background: transparent;
+  color: white;
+  border-radius: 8px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.home-btn:hover {
+  background-color: #3b82f6;
+  transform: scale(1.05);
+}
+/* Active Button Effect */
+
+.home-btn.active {
+  background: linear-gradient(135deg, #3b82f6, #22c55e);
+  border: none;
+  color: black;
+
+  box-shadow:
+    0 0 15px rgba(59,130,246,0.7),
+    0 0 30px rgba(34,197,94,0.4);
+
+  transform: scale(1.1);
+}
+
+/* Label Above Image */
+
+.home-label {
+  position: absolute;
+  top: 18%;
+  left: 50%;
+  transform: translateX(-50%);
+
+  font-size: 26px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  text-align: center;
+/* Animated Glowing Label */
+  background: linear-gradient(
+    90deg,
+    #3b82f6,
+    #22c55e,
+    #a855f7,
+    #ec4899,
+    #3b82f6
+  );
+
+  background-size: 300% 300%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+
+  animation: glowMove 6s ease infinite, pulse 2s ease-in-out infinite;
+
+  text-shadow:
+    0 0 10px rgba(59,130,246,0.6),
+    0 0 20px rgba(59,130,246,0.4),
+    0 0 40px rgba(59,130,246,0.2);
+}
+
+/* Gradient Animation */
+@keyframes glowMove {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* Pulse Animation */
+@keyframes pulse {
+  0%, 100% {
+    transform: translateX(-50%) scale(1);
+  }
+  50% {
+    transform: translateX(-50%) scale(1.05);
+  }
+}
+
+
+/* Positions */
+.top-left {
+  top: 80px;
+  left: 80px;
+}
+
+.top-right {
+  top: 80px;
+  right: 80px;
+}
+
+.bottom-left {
+  bottom: 80px;
+  left: 80px;
+}
+
+.bottom-right {
+  bottom: 80px;
+  right: 80px;
+}
+
+/* .center-left {
+  left: 24px;
+  top: 50%;
+  transform: translateY(-50%);
+} */
+
+/* Fade + Zoom Animation */
+
+.home-image {
+  opacity: 1;
+  transform: scale(1);
+  transition: opacity 0.4s ease, transform 0.4s ease;
+}
+
+.home-image.fade {
+  opacity: 0;
+  transform: scale(0.95);
+}
+.home-image.zoom {
+  opacity: 1;
+  transform: scale(1);
+}
