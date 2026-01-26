@@ -1,141 +1,95 @@
-/* Home.css */
+/* ===============================
+   Main Container
+================================ */
 
 .home-container {
   position: relative;
   width: 100%;
   height: 100vh;
-  background-color: #000;
+
+  background: #000;
+  overflow: hidden;
+
   display: flex;
-  justify-content: center;
   align-items: center;
+  justify-content: center;
 }
 
-/* Center Image */
-.home-image {
-  width: 280px;
-  height: 280px;
-  object-fit: cover;
-  border-radius: 16px;
-  border: 1px solid #444;
-  box-shadow: 0 0 25px rgba(0, 0, 0, 0.8);
-  transition: all 0.3s ease;
+/* ===============================
+   Center Area
+================================ */
+
+.home-center {
+  position: relative;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  gap: 80px;
+
+  height: 100%;
+  z-index: 2;
 }
 
-/* Buttons */
-.home-btn {
-  position: absolute;
-  padding: 10px 20px;
-  border: 1px solid #3b82f6;
-  background: transparent;
-  color: white;
-  border-radius: 8px;
-  font-size: 16px;
-  cursor: pointer;
-  transition: all 0.3s ease;
-}
-
-.home-btn:hover {
-  background-color: #3b82f6;
-  transform: scale(1.05);
-}
-/* Active Button Effect */
-
-.home-btn.active {
-  background: linear-gradient(135deg, #3b82f6, #22c55e);
-  border: none;
-  color: black;
-
-  box-shadow:
-    0 0 15px rgba(59,130,246,0.7),
-    0 0 30px rgba(34,197,94,0.4);
-
-  transform: scale(1.1);
-}
-
-/* Label Above Image */
+/* ===============================
+   Label
+================================ */
 
 .home-label {
-  position: absolute;
-  top: 18%;
-  left: 50%;
-  transform: translateX(-50%);
-
-  font-size: 26px;
+  font-size: 40px;
   font-weight: 700;
-  letter-spacing: 1.5px;
+
   text-align: center;
-/* Animated Glowing Label */
+  letter-spacing: 1.5px;
+
   background: linear-gradient(
     90deg,
     #3b82f6,
     #22c55e,
-    #a855f7,
+    #7618ce,
     #ec4899,
     #3b82f6
   );
 
   background-size: 300% 300%;
+
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
+  background-clip: text;
 
-  animation: glowMove 6s ease infinite, pulse 2s ease-in-out infinite;
+  animation: glowMove 5s ease infinite, pulse 2s ease-in-out infinite;
 
-  text-shadow:
-    0 0 10px rgba(59,130,246,0.6),
-    0 0 20px rgba(59,130,246,0.4),
-    0 0 40px rgba(59,130,246,0.2);
+  user-select: none;
 }
 
-/* Gradient Animation */
 @keyframes glowMove {
   0% { background-position: 0% 50%; }
   50% { background-position: 100% 50%; }
   100% { background-position: 0% 50%; }
 }
 
-/* Pulse Animation */
 @keyframes pulse {
-  0%, 100% {
-    transform: translateX(-50%) scale(1);
-  }
-  50% {
-    transform: translateX(-50%) scale(1.05);
-  }
+  0%,100% { transform: scale(1); }
+  50% { transform: scale(1.05); }
 }
 
-
-/* Positions */
-.top-left {
-  top: 80px;
-  left: 80px;
-}
-
-.top-right {
-  top: 80px;
-  right: 80px;
-}
-
-.bottom-left {
-  bottom: 80px;
-  left: 80px;
-}
-
-.bottom-right {
-  bottom: 80px;
-  right: 80px;
-}
-
-/* .center-left {
-  left: 24px;
-  top: 50%;
-  transform: translateY(-50%);
-} */
-
-/* Fade + Zoom Animation */
+/* ===============================
+   Image
+================================ */
 
 .home-image {
-  opacity: 1;
-  transform: scale(1);
+  width: 280px;
+  height: 280px;
+
+  object-fit: cover;
+
+  border-radius: 19px;
+  border: none;
+
+  box-shadow: 0 0 25px rgba(255, 255, 255, 0.377);
+
   transition: opacity 0.4s ease, transform 0.4s ease;
 }
 
@@ -143,7 +97,255 @@
   opacity: 0;
   transform: scale(0.95);
 }
-.home-image.zoom {
-  opacity: 1;
-  transform: scale(1);
+
+/* ===============================
+   Buttons Base
+================================ */
+
+.home-btn {
+  position: absolute;
+
+  min-width: 110px;
+  min-height: 44px;
+
+  padding: 10px 22px;
+
+  background: transparent;
+  color: white;
+
+  border: none;
+  border-radius: 19px;
+
+  font-size: 14px;
+  font-weight: 500;
+
+  cursor: pointer;
+
+  transition: all 0.3s ease;
+
+  box-sizing: border-box;
+  isolation: isolate;
+
+  z-index: 10;
+}
+
+/* ===============================
+   Button Positions - Four Corners with Inset
+================================ */
+
+.top-left {
+  top: 100px;
+  left: 100px;
+}
+
+.top-right {
+  top: 100px;
+  right: 100px;
+}
+
+.bottom-left {
+  bottom: 100px;
+  left: 100px;
+}
+
+.bottom-right {
+  bottom: 100px;
+  right: 100px;
+}
+
+/* ===============================
+   Glow Buttons
+================================ */
+
+.glow-btn {
+  position: absolute;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  overflow: visible;
+}
+
+/* Border */
+
+.glow-btn::before {
+  content: "";
+
+  position: absolute;
+  inset: -1px;
+
+  background: linear-gradient(
+    90deg,
+    #3b82f6,
+    #7618ce,
+    #22c55e,
+    #3b82f6
+  );
+
+  background-size: 400% 400%;
+
+  animation: rotateBorder 5s linear infinite;
+
+  border-radius: inherit;
+
+  z-index: -1;
+}
+
+.glow-btn::after {
+  content: "";
+
+  position: absolute;
+  inset: 2px;
+
+  background: #020617;
+
+  border-radius: inherit;
+
+  z-index: -1;
+}
+
+@keyframes rotateBorder {
+  0% { background-position: 0% 50%; }
+  100% { background-position: 400% 50%; }
+}
+
+/* Hover */
+
+.glow-btn:hover {
+  transform: scale(1.08);
+
+  box-shadow:
+    0 0 15px #3b82f6,
+    0 0 30px #9333ea,
+    0 0 45px #22c55e;
+}
+
+/* Active */
+
+.glow-btn.active {
+  color: #fff;
+
+  text-shadow:
+    0 0 6px #3b82f6,
+    0 0 12px #9333ea,
+    0 0 20px #22c55e;
+
+  box-shadow:
+    0 0 20px #3b82f6,
+    0 0 40px #9333ea,
+    0 0 60px #22c55e;
+
+  transform: scale(1.12);
+
+  animation: activePulse 1.5s ease-in-out infinite alternate;
+}
+
+.glow-btn.active::before {
+  filter: brightness(1.6);
+}
+
+@keyframes activePulse {
+  from {
+    box-shadow:
+      0 0 15px #3b82f6,
+      0 0 30px #9333ea,
+      0 0 45px #22c55e;
+  }
+
+  to {
+    box-shadow:
+      0 0 30px #3b82f6,
+      0 0 60px #9333ea,
+      0 0 90px #22c55e;
+  }
+}
+
+/* ===============================
+   Image Glow Wrapper
+================================ */
+
+.image-glow-wrapper {
+  position: relative;
+
+  width: 280px;
+  height: 280px;
+
+  border-radius: 16px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Glow Layer */
+
+.image-glow-wrapper::before {
+  content: "";
+
+  position: absolute;
+
+  inset: -8px;
+
+  border-radius: inherit;
+
+  background: linear-gradient(
+    90deg,
+    #3b82f6,
+    #9333ea,
+    #22c55e,
+    #3b82f6
+  );
+
+  background-size: 400% 400%;
+
+  filter: blur(18px);
+
+  opacity: 0.9; 
+
+  animation: rotateBorder 6s linear infinite;
+
+  z-index: 0;
+}
+
+/* Make Image Above Glow */
+
+.image-glow-wrapper img {
+  position: relative;
+  z-index: 1;
+}
+
+/* ===============================
+   Mobile
+================================ */
+
+@media (max-width: 700px) {
+
+  .home-label {
+    font-size: 26px;
+  }
+
+  .home-image {
+    width: 220px;
+    height: 220px;
+  }
+
+  .top-left {
+    top: 30px;
+    left: 30px;
+  }
+
+  .top-right {
+    top: 30px;
+    right: 30px;
+  }
+
+  .bottom-left {
+    bottom: 30px;
+    left: 30px;
+  }
+
+  .bottom-right {
+    bottom: 30px;
+    right: 30px;
+  }
 }

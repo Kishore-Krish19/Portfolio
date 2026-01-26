@@ -48,7 +48,7 @@ export default function Home() {
     // Mobile tap
     const handleTap = (img, text, btn, id) => {
         if (!isMobile) {
-            document.getElementById(id).scrollIntoView({ behavior: "smooth" });
+            document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
             return;
         }
 
@@ -59,7 +59,7 @@ export default function Home() {
 
         // Second tap = navigate
         else {
-            document.getElementById(id).scrollIntoView({ behavior: "smooth" });
+            document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
         }
     };
 
@@ -71,96 +71,113 @@ export default function Home() {
                 if (isMobile) resetPreview();
             }}
         >
-            {/* Label */}
-            <div className="home-label">{label}</div>
+            {/* Buttons Layer */}
+            <div className="home-buttons">
 
-            {/* Image */}
-            <img
-                src={image}
-                alt="Preview"
-                className={`home-image ${fade ? "fade" : ""}`}
-                onClick={(e) => e.stopPropagation()}
-            />
+                {/* ABOUT */}
+                <button
+                    className={`home-btn glow-btn top-left ${activeBtn === "about" ? "active" : ""
+                        }`}
+                    onMouseEnter={() =>
+                        handleHover(aboutImg, "Know About Me", "about")
+                    }
+                    onMouseLeave={!isMobile ? resetPreview : null}
+                    onClick={(e) => {
+                        e.stopPropagation();
+                        handleTap(aboutImg, "Know About Me", "about", "about");
+                    }}
+                >
+                    About
+                </button>
 
-            {/* ABOUT */}
-            <button
-                className={`home-btn top-left ${activeBtn === "about" ? "active" : ""
-                    }`}
-                onMouseEnter={() =>
-                    handleHover(aboutImg, "Know About Me", "about")
-                }
-                onMouseLeave={!isMobile ? resetPreview : null}
-                onClick={(e) => {
-                    e.stopPropagation();
-                    handleTap(aboutImg, "Know About Me", "about", "about");
-                }}
-            >
-                About
-            </button>
+                {/* SKILLS */}
+                <button
+                    className={`home-btn glow-btn top-right ${activeBtn === "skills" ? "active" : ""
+                        }`}
+                    onMouseEnter={() =>
+                        handleHover(skillsImg, "Click to know about my Skills", "skills")
+                    }
+                    onMouseLeave={!isMobile ? resetPreview : null}
+                    onClick={(e) => {
+                        e.stopPropagation();
+                        handleTap(
+                            skillsImg,
+                            "Click to know about my Skills",
+                            "skills",
+                            "skills"
+                        );
+                    }}
+                >
+                    Skills
+                </button>
 
-            {/* SKILLS */}
-            <button
-                className={`home-btn top-right ${activeBtn === "skills" ? "active" : ""}`}
-                onMouseEnter={() =>
-                    handleHover(skillsImg, "Click to know about my Skills", "skills")
-                }
-                onMouseLeave={!isMobile ? resetPreview : null}
-                onClick={(e) => {
-                    e.stopPropagation();
-                    handleTap(
-                        skillsImg,
-                        "Click to know about my Skills",
-                        "skills",
-                        "skills"
-                    );
-                }}
-            >
-                Skills
-            </button>
+                {/* PROJECTS */}
+                <button
+                    className={`home-btn glow-btn bottom-left ${activeBtn === "projects" ? "active" : ""
+                        }`}
+                    onMouseEnter={() =>
+                        handleHover(projectsImg, "Click to see my Projects", "projects")
+                    }
+                    onMouseLeave={!isMobile ? resetPreview : null}
+                    onClick={(e) => {
+                        e.stopPropagation();
+                        handleTap(
+                            projectsImg,
+                            "Click to see my Projects",
+                            "projects",
+                            "projects"
+                        );
+                    }}
+                >
+                    Projects
+                </button>
 
-            {/* PROJECTS */}
-            <button
-                className={`home-btn bottom-left ${activeBtn === "projects" ? "active" : ""}`}
-                onMouseEnter={() =>
-                    handleHover(projectsImg, "Click to see my Projects", "projects")
-                }
-                onMouseLeave={!isMobile ? resetPreview : null}
-                onClick={(e) => {
-                    e.stopPropagation();
-                    handleTap(
-                        projectsImg,
-                        "Click to see my Projects",
-                        "projects",
-                        "projects"
-                    );
-                }}
-            >
-                Projects
-            </button>
+                {/* CONTACT */}
+                <button
+                    className={`home-btn glow-btn bottom-right ${activeBtn === "contact" ? "active" : ""
+                        }`}
+                    onMouseEnter={() =>
+                        handleHover(
+                            contactImg,
+                            "Click for Contact Details",
+                            "contact"
+                        )
+                    }
+                    onMouseLeave={!isMobile ? resetPreview : null}
+                    onClick={(e) => {
+                        e.stopPropagation();
+                        handleTap(
+                            contactImg,
+                            "Click for Contact Details",
+                            "contact",
+                            "contact"
+                        );
+                    }}
+                >
+                    Contact
+                </button>
 
-            {/* CONTACT */}
-            <button
-                className={`home-btn bottom-right ${activeBtn === "contact" ? "active" : ""}`}
-                onMouseEnter={() =>
-                    handleHover(
-                        contactImg,
-                        "Click for Contact Details",
-                        "contact"
-                    )
-                }
-                onMouseLeave={!isMobile ? resetPreview : null}
-                onClick={(e) => {
-                    e.stopPropagation();
-                    handleTap(
-                        contactImg,
-                        "Click for Contact Details",
-                        "contact",
-                        "contact"
-                    );
-                }}
-            >
-                Contact
-            </button>
+            </div>
+
+            {/* Center Content */}
+            <div className="home-center">
+
+                {/* Label */}
+                <div className="home-label">{label}</div>
+
+                {/* Image */}
+                <div className="image-glow-wrapper">
+                    <img
+                        src={image}
+                        alt="Preview"
+                        className={`home-image ${fade ? "fade" : ""}`}
+                        onClick={(e) => e.stopPropagation()}
+                    />
+                </div>
+
+
+            </div>
+
         </section>
     );
 }

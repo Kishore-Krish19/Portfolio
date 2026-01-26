@@ -1,8 +1,13 @@
+/* ===============================
+   Navbar
+================================ */
+
 .navbar {
   position: fixed;
   top: -80px;
-  left: 0;
-  width: 100%;
+  left: 10px;
+  right: 10px;
+  width: calc(100% - 20px);
   height: 70px;
 
   background: rgba(2, 6, 23, 0.9);
@@ -12,7 +17,7 @@
   justify-content: space-between;
   align-items: center;
 
-  padding: 0 20px; /* reduced */
+  padding: 0 50px;
 
   color: white;
   z-index: 1000;
@@ -26,46 +31,107 @@
   top: 0;
 }
 
+/* ===============================
+   Logo
+================================ */
+
 .logo {
   font-weight: 700;
   letter-spacing: 1px;
   white-space: nowrap;
 }
 
-/* Nav Links */
+/* ===============================
+   Nav Links Container
+================================ */
 
 .nav-links {
   display: flex;
-  gap: 18px;
-  flex-wrap: wrap; /* allow wrap */
+  align-items: center;
+
+  gap: 20px;
+
+  flex-wrap: wrap;
   justify-content: flex-end;
+
   max-width: 70%;
 }
 
+/* ===============================
+   Nav Buttons (Icon + Text)
+================================ */
+
 .nav-links button {
+  display: flex;              /* 👈 IMPORTANT */
+  align-items: center;        /* 👈 Vertical align */
+  justify-content: center;
+
+  gap: 4px;                   /* Space between icon & text */
+
   background: none;
   border: none;
+
   color: white;
 
   font-size: 14px;
+  font-weight: 500;
+
   cursor: pointer;
 
-  padding: 4px 6px;
+  padding: 6px 8px;
 
-  transition: color 0.3s ease;
   white-space: nowrap;
+
+  transition: all 0.25s ease;
 }
+
+/* ===============================
+   Icons
+================================ */
+
+.nav-links button svg {
+  width: 15px;
+  height: 15px;
+
+  stroke: currentColor;
+
+  transition: 0.25s ease;
+}
+
+/* ===============================
+   Hover Effect
+================================ */
 
 .nav-links button:hover {
   color: #3b82f6;
+  transform: scale(1.15);
 }
 
-/* Mobile */
+.nav-links button:hover svg {
+  stroke: #3b82f6;
+}
+
+/* ===============================
+   Active Link (Optional)
+================================ */
+
+.nav-links button.active {
+  color: #22c55e;
+}
+
+.nav-links button.active svg {
+  stroke: #22c55e;
+}
+
+/* ===============================
+   Mobile
+================================ */
 
 @media (max-width: 768px) {
   .navbar {
     height: auto;
     padding: 10px 15px;
+
     flex-direction: column;
     gap: 8px;
   }
@@ -73,5 +139,6 @@
   .nav-links {
     max-width: 100%;
     justify-content: center;
+    flex-wrap: wrap;
   }
 }

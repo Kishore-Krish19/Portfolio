@@ -12,6 +12,14 @@ export default function Resume() {
       <p>
         View or download my resume below.
       </p>
+      {/* Download */}
+      <a
+        href="/resume.pdf"
+        download
+        className="resume-btn"
+      >
+        Download Resume
+      </a>
 
       {/* PDF Preview */}
       <div className="resume-viewer">
@@ -22,14 +30,6 @@ export default function Resume() {
         ></iframe>
       </div>
 
-      {/* Download */}
-      <a
-        href="/resume.pdf"
-        download
-        className="resume-btn"
-      >
-        Download Resume
-      </a>
 
     </section>
   );
