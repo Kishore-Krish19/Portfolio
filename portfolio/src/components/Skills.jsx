@@ -1,11 +1,8 @@
 import "./Skills.css";
-import HomeButton from "./HomeButton";
 
 export default function Skills() {
   return (
-    <section id="skills" className="skills-section">
-
-      <HomeButton />
+    <section id="skills" className="section skills-section">
 
       <h1>Technical Skills</h1>
 

@@ -1,11 +1,9 @@
 import "./About.css";
-import HomeButton from "./HomeButton";
 
 export default function About() {
     return (
-        <section id="about" className="about-section">
+        <section id="about" className="section about-section">
 
-            <HomeButton />
 
             {/* About Me */}
             <h1>About Me</h1>

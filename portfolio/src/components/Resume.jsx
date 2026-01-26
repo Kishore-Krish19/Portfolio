@@ -1,35 +1,57 @@
+import { useState } from "react";
 import "./Resume.css";
-import HomeButton from "./HomeButton";
 
 export default function Resume() {
-  return (
-    <section id="resume" className="resume-section">
 
-      <HomeButton />
+  const [showPreview, setShowPreview] = useState(false);
+
+  return (
+    <section id="resume" className="section resume-section">
 
       <h1>My Resume</h1>
 
       <p>
         View or download my resume below.
       </p>
-      {/* Download */}
-      <a
-        href="/resume.pdf"
-        download
-        className="resume-btn"
-      >
-        Download Resume
-      </a>
 
-      {/* PDF Preview */}
-      <div className="resume-viewer">
-        <iframe
-          src="/resume.pdf"
-          title="Resume Preview"
-          frameBorder="0"
-        ></iframe>
+      {/* Buttons */}
+      <div className="resume-actions">
+
+        {/* Download */}
+        <button
+          className="resume-btn"
+          onClick={() => {
+            const link = document.createElement("a");
+            link.href = "/resume.pdf";
+            link.download = "Kishore_Resume.pdf";
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+          }}
+        >
+          Download Resume
+        </button>
+
+        {/* View */}
+        <button
+          className="resume-btn view-btn"
+          onClick={() => setShowPreview(!showPreview)}
+        >
+          {showPreview ? "Hide Resume" : "View Resume"}
+        </button>
+
       </div>
 
+      {/* PDF Preview (Conditional) */}
+      {showPreview && (
+        <div className="resume-viewer">
+          <iframe
+            src="/resume.pdf"
+            title="Resume Preview"
+            frameBorder="0"
+          ></iframe>
+        </div>
+      )}
 
     </section>
   );

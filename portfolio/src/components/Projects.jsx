@@ -1,5 +1,4 @@
 import "./Projects.css";
-import HomeButton from "./HomeButton";
 
 export default function Projects() {
   const projects = [
@@ -52,9 +51,7 @@ export default function Projects() {
 
 
   return (
-    <section id="projects" className="projects-section">
-
-      <HomeButton />
+    <section id="projects" className="section projects-section">
 
       <h1>Projects</h1>
 

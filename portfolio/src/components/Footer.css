@@ -1,8 +1,8 @@
 .footer {
-  background: #020617;
+  background: #000416a2;
   color: white;
 
-  padding: 40px 10% 20px;
+  padding: 20px 20% 20px;
 
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
@@ -15,45 +15,13 @@
 
 .footer-left h3 {
   font-size: 22px;
+  margin-bottom: 10px;
 }
 
 .footer-left p {
   color: #cbd5f5;
   font-size: 14px;
 }
-
-/* Center */
-
-.footer-center {
-  display: flex;
-  flex-wrap: nowrap;
-  gap: 15px;
-  justify-content: center;
-}
-
-.footer-center button {
-  background: none;
-  border: none;
-  color: #cbd5f6;
-
-  cursor: pointer;
-  font-size: 14px;
-
-  transition: all 0.25s ease; /* 👈 Animation */
-}
-.footer-center button svg {
-  stroke: #ffffff; /* neon blue */
-  transition: 0.3s;
-}
-.footer-center button:hover svg {
-  stroke: #3b82f6; /* green glow */
-}
-/* Hover */
-.footer-center button:hover {
-  color: #3b82f6;
-  transform: scale(1.15); /* 👈 Zoom */
-}
-
 /* Right */
 
 .footer-right {
@@ -73,13 +41,13 @@
   text-decoration: none;
   font-size: 14px;
 
-  transition: all 0.25s ease; /* 👈 Animation */
+  transition: all 0.25s ease;
 }
 
 /* Hover */
 .social-link:hover {
   color: #02eafa;
-  transform: scale(1.15); /* 👈 Zoom */
+  transform: scale(1.15);
 }
 
 .social-link svg {
