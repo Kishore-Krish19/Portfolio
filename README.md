@@ -33,7 +33,7 @@ This portfolio showcases my skills, projects, certifications, and contact inform
 ---
 
 ## 📁 Project Structure
-
+```
 portfolio/
 │
 ├── src/
@@ -54,7 +54,7 @@ portfolio/
 ├── public/
 ├── package.json
 └── README.md
-
+```
 📸 Sections Overview:
 
 🏠 Home
