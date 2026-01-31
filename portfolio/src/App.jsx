@@ -2,15 +2,17 @@ import Home from "./components/Home";
 import Projects from "./components/Projects";
 import Resume from "./components/Resume";
 import Contact from "./components/Contact";
-import emailjs from "emailjs-com";
-import { useState } from "react";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import About from "./components/About";
 import Skills from "./components/Skills";
-import { useEffect } from "react";
+import { useEffect, useState } from "react"; // Added useState here
 
 function App() {
+  // 1. Define the loading state
+  const [isLoading, setIsLoading] = useState(true);
+
+  // 2. Parallax Scroll Logic (Your original code)
   useEffect(() => {
     const far = document.getElementById("layer-far");
     const mid = document.getElementById("layer-mid");
@@ -18,80 +20,69 @@ function App() {
 
     const handleScroll = () => {
       const y = window.scrollY;
-
       if (far) far.style.transform = `translateY(${y * 0.05}px)`;
       if (mid) mid.style.transform = `translateY(${y * 0.12}px)`;
       if (near) near.style.transform = `translateY(${y * 0.2}px)`;
     };
 
     window.addEventListener("scroll", handleScroll, { passive: true });
-
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-    };
+    return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  // 3. Loading Screen Timer
   useEffect(() => {
-    const tilt = document.getElementById("tilt-root");
-
-    const handleMove = (e) => {
-      if (!tilt) return;
-
-      const x = (window.innerWidth / 2 - e.clientX) / 40;
-      const y = (window.innerHeight / 2 - e.clientY) / 40;
-
-      tilt.style.transform = `
-      rotateY(${x}deg)
-      rotateX(${y}deg)
-    `;
-    };
-
-    const reset = () => {
-      if (tilt) tilt.style.transform = "rotateX(0) rotateY(0)";
-    };
-
-    window.addEventListener("mousemove", handleMove);
-    window.addEventListener("mouseleave", reset);
-
-    return () => {
-      window.removeEventListener("mousemove", handleMove);
-      window.removeEventListener("mouseleave", reset);
-    };
+    const timer = setTimeout(() => setIsLoading(false), 500);
+    return () => clearTimeout(timer);
   }, []);
+
+  // 4. Fade-in Reveal Logic
+  useEffect(() => {
+    if (isLoading) return;
+
+    const revealCallback = (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          // Add class when it enters the screen
+          entry.target.classList.add("active");
+        } else {
+          // REMOVE class when it leaves the screen so it can animate again
+          entry.target.classList.remove("active");
+        }
+      });
+    };
+
+    const observer = new IntersectionObserver(revealCallback, {
+      threshold: 0.1, // Trigger as soon as 10% is visible
+    });
+
+    const revealElements = document.querySelectorAll(".reveal");
+    revealElements.forEach((el) => observer.observe(el));
+
+    return () => observer.disconnect();
+  }, [isLoading]);
 
   return (
     <>
- 
-      {/* Space Background Layers */}
+      <div className={`loader-wrapper ${!isLoading ? "hidden" : ""}`}></div>
+
+      {/* Background Layers */}
       <div className="space-galaxy"></div>
       <div className="space-stars"></div>
-     
       <div className="space-layer far" id="layer-far"></div>
       <div className="space-layer mid" id="layer-mid"></div>
       <div className="space-layer near" id="layer-near"></div>
- 
 
       <Navbar />
-      {/* Home Section */}
-      <Home />
 
-      {/* About Section */}
-      <About />
-
-      {/* Skills Section */}
-      <Skills />
-
-      {/* Projects Section */}
-      <Projects />
-
-      {/* Resume Section */}
-      <Resume />
-
-      {/* Contact Section */}
-      <Contact />
+      {/* Wrapped sections */}
+      <div className="reveal"><Home /></div>
+      <div className="reveal"><About /></div>
+      <div className="reveal"><Skills /></div>
+      <div className="reveal"><Projects /></div>
+      <div className="reveal"><Resume /></div>
+      <div className="reveal"><Contact /></div>
 
       <Footer />
-
     </>
   );
 }

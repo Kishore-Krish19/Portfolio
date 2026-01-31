@@ -129,7 +129,7 @@ export default function Contact() {
                 <form className="contact-form" onSubmit={sendEmail}>
 
                     <h2 className="contact-form-title">
-                        Or Reach me now by sending your name and email 👇
+                        Or Reach me by sending your name and email 👇
                     </h2>
                     <label htmlFor="name" className="sr-only">Name</label>
                     <input
