@@ -2,11 +2,11 @@ import { useState, useEffect } from "react";
 import "./Home.css";
 
 // Images
-import aboutImg from "../assets/about.png";
-import skillsImg from "../assets/skills.png";
-import projectsImg from "../assets/projects.png";
-import contactImg from "../assets/contact.png";
-import defaultImg from "../assets/default.png";
+import aboutImg from "../assets/about.jpg";
+import skillsImg from "../assets/skills.jpg";
+import projectsImg from "../assets/projects.jpg";
+import contactImg from "../assets/contact.jpg";
+import defaultImg from "../assets/default.jpg";
 import RisingText from "./RisingText";
 
 export default function Home() {
