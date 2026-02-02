@@ -6,14 +6,18 @@ export default function Navbar() {
 
   useEffect(() => {
     const handleScroll = () => {
-      setShow(window.scrollY > window.innerHeight - 100);
+      if (window.scrollY < window.innerHeight * 0.6) {
+        setShow(false);
+      } else {
+        setShow(true);
+      }
     };
 
     window.addEventListener("scroll", handleScroll);
-
-    return () =>
-      window.removeEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
   }, []);
+
+
 
   const scrollTo = (id) => {
     document

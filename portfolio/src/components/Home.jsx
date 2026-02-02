@@ -7,6 +7,7 @@ import skillsImg from "../assets/skills.png";
 import projectsImg from "../assets/projects.png";
 import contactImg from "../assets/contact.png";
 import defaultImg from "../assets/default.png";
+import RisingText from "./RisingText";
 
 export default function Home() {
     const [image, setImage] = useState(defaultImg);
@@ -66,7 +67,7 @@ export default function Home() {
     return (
         <section
             id="home"
-            className="section"
+            className="section scroll-3d"
         >
             {/* CONTENT LAYER */}
             <div

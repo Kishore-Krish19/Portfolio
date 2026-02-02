@@ -1,5 +1,6 @@
 import { useState } from "react";
 import "./Resume.css";
+import RisingText from "./RisingText";
 
 export default function Resume() {
 
@@ -8,14 +9,14 @@ export default function Resume() {
   return (
     <section id="resume" className="section resume-section">
 
-      <h1>My Resume</h1>
+      <h1><RisingText text="My Resume" /></h1>
 
-      <p>
+      <p className="line-reveal">
         View or download my resume below.
       </p>
 
       {/* Buttons */}
-      <div className="resume-actions">
+      <div className="resume-actions reveal">
 
         {/* Download */}
         <button
@@ -35,12 +36,13 @@ export default function Resume() {
         {/* View */}
         <button
           className="resume-btn view-btn"
-          onClick={() => setShowPreview(!showPreview)}
+          onClick={() => setShowPreview((prev) => !prev)}
         >
           {showPreview ? "Hide Resume" : "View Resume"}
         </button>
 
       </div>
+
 
       {/* PDF Preview (Conditional) */}
       {showPreview && (

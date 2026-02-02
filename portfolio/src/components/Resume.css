@@ -69,3 +69,31 @@
     height: 350px;
   }
 }
+.resume-actions .resume-btn {
+  opacity: 0;
+  transform: scale(0.6) translateY(10px);
+}
+.resume-actions.reveal.active .resume-btn {
+  animation: bounceIn 0.7s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+}
+@keyframes bounceIn {
+  0% {
+    opacity: 0;
+    transform: scale(0.6) translateY(10px);
+  }
+  60% {
+    opacity: 1;
+    transform: scale(1.12) translateY(0);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+.resume-actions.reveal.active .resume-btn:nth-child(1) {
+  animation-delay: 0.15s;
+}
+
+.resume-actions.reveal.active .resume-btn:nth-child(2) {
+  animation-delay: 0.3s;
+}

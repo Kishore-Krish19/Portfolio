@@ -17,7 +17,6 @@
 }
 
 html,
-body,
 #root {
   width: 100%;
   min-height: 100%;
@@ -27,6 +26,24 @@ body,
   font-family: system-ui, sans-serif;
 }
 
+/* 3D perspective for whole page */
+.page-3d {
+  perspective: 1200px;
+  transform-style: preserve-3d;
+}
+
+/* 3D Scroll Effect */
+.scroll-3d {
+  transform-style: preserve-3d;
+  will-change: transform;
+  transition: transform 0.15s linear;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .scroll-3d {
+    transform: none !important;
+  }
+}
 
 /* ===============================
    Section Scroll Fix (Navbar)
@@ -156,9 +173,9 @@ section {
       rgba(180, 100, 255, 0.1),
       rgba(120, 80, 255, 0.1));
 
-  filter: blur(150px);
+  filter: blur(180px);
   animation: galaxySpin 20s linear infinite;
-  opacity: 0.15;
+  opacity: 0.08;
   z-index: 1;
   pointer-events: none;
 }
@@ -211,19 +228,59 @@ section {
   transform: translateY(0) scale(1);
 }
 
-/* ===============================
-   Simplified Loading Screen 
-   (Just a dark fade-out, no spinner)
-================================ */
-.loader-wrapper {
-  position: fixed;
-  inset: 0;
-  background: #000205;
-  z-index: 9999;
-  transition: opacity 0.8s ease;
-  pointer-events: none;
+.fade-in {
+  opacity: 0;
+  transform: translateY(16px);
+  animation: fadeIn 0.9s ease forwards;
 }
 
-.loader-wrapper.hidden {
+@keyframes fadeIn {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ===============================
+   Line-by-line Fade In
+================================ */
+
+.line-reveal {
   opacity: 0;
+  transform: translateY(12px);
+}
+
+.line-reveal.active {
+  animation: lineFade 1.8s ease forwards;
+}
+
+@keyframes lineFade {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Line wrapper (this is CRITICAL) */
+.rise-line {
+  display: inline-block;
+  overflow: hidden;
+}
+
+.rise-word {
+  display: inline-block;
+  transform: translateY(140%);
+  opacity: 0;
+  will-change: transform, opacity;
+}
+
+.rise-word.animate {
+  animation: riseUp 1.5s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+@keyframes riseUp {
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
 }

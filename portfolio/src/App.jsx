@@ -6,13 +6,11 @@ import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import About from "./components/About";
 import Skills from "./components/Skills";
-import { useEffect, useState } from "react"; // Added useState here
+import { useEffect } from "react";
 
 function App() {
-  // 1. Define the loading state
-  const [isLoading, setIsLoading] = useState(true);
 
-  // 2. Parallax Scroll Logic (Your original code)
+  //  Parallax Scroll Logic 
   useEffect(() => {
     const far = document.getElementById("layer-far");
     const mid = document.getElementById("layer-mid");
@@ -29,41 +27,64 @@ function App() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  // 3. Loading Screen Timer
   useEffect(() => {
-    const timer = setTimeout(() => setIsLoading(false), 500);
-    return () => clearTimeout(timer);
-  }, []);
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("active");
+          } else {
+            entry.target.classList.remove("active");
+          }
+        });
+      },
+      {
+        threshold: 0.1,
+        rootMargin: "0px 0px -50px 0px"
+      }
+    );
 
-  // 4. Fade-in Reveal Logic
-  useEffect(() => {
-    if (isLoading) return;
-
-    const revealCallback = (entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          // Add class when it enters the screen
-          entry.target.classList.add("active");
-        } else {
-          // REMOVE class when it leaves the screen so it can animate again
-          entry.target.classList.remove("active");
-        }
-      });
-    };
-
-    const observer = new IntersectionObserver(revealCallback, {
-      threshold: 0.1, // Trigger as soon as 10% is visible
-    });
-
-    const revealElements = document.querySelectorAll(".reveal");
-    revealElements.forEach((el) => observer.observe(el));
+    const lines = document.querySelectorAll(".line-reveal");
+    lines.forEach((line) => observer.observe(line));
 
     return () => observer.disconnect();
-  }, [isLoading]);
+  }, []);
+
+  // 3D Scroll Effect
+  useEffect(() => {
+    const sections = document.querySelectorAll(".scroll-3d");
+    let ticking = false;
+
+    const onScroll = () => {
+      if (!ticking) {
+        window.requestAnimationFrame(() => {
+          sections.forEach((section) => {
+            const rect = section.getBoundingClientRect();
+            const center = window.innerHeight / 2;
+            const distance = rect.top - center;
+
+            const rotateX = distance * -0.04;
+            const translateZ = distance * -0.15;
+
+            section.style.transform = `
+              rotateX(${rotateX}deg)
+              translateZ(${translateZ}px)
+            `;
+          });
+
+          ticking = false;
+        });
+
+        ticking = true;
+      }
+    };
+
+    window.addEventListener("scroll", onScroll);
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
 
   return (
     <>
-      <div className={`loader-wrapper ${!isLoading ? "hidden" : ""}`}></div>
 
       {/* Background Layers */}
       <div className="space-galaxy"></div>
@@ -72,17 +93,21 @@ function App() {
       <div className="space-layer mid" id="layer-mid"></div>
       <div className="space-layer near" id="layer-near"></div>
 
+      {/* Navbar */}
       <Navbar />
-
+      <div className="page-3d">
       {/* Wrapped sections */}
-      <div className="reveal"><Home /></div>
-      <div className="reveal"><About /></div>
-      <div className="reveal"><Skills /></div>
-      <div className="reveal"><Projects /></div>
-      <div className="reveal"><Resume /></div>
-      <div className="reveal"><Contact /></div>
-
+      <div className="fade-in"><Home /></div>
+      <div className="fade-in"><About /></div>
+      <div className="fade-in"><Skills /></div>
+      <div className="fade-in"><Projects /></div>
+      <div className="fade-in"><Resume /></div>
+      <div className="fade-in"><Contact /></div>
+      </div>
+      
+      {/* Footer */}
       <Footer />
+
     </>
   );
 }
