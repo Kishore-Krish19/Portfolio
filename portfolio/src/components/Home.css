@@ -111,7 +111,7 @@
   padding: 10px 22px;
 
   background: transparent;
-  color: white;
+  color: rgb(24, 217, 224);
 
   border: none;
   border-radius: 19px;
@@ -223,7 +223,7 @@
 /* Active */
 
 .glow-btn.active {
-  color: #fff;
+  color:rgb(24, 217, 224);;
 
   text-shadow:
     0 0 6px #3b82f6,

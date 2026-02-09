@@ -1,6 +1,4 @@
-/* ===============================
-   Tailwind (If Used)
-================================ */
+@import "tailwindcss";
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
