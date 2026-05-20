@@ -38,20 +38,18 @@
 ================================ */
 
 .home-label {
-  font-size: 40px;
+  font-size: 30px;
   font-weight: 700;
 
   text-align: center;
-  letter-spacing: 1.5px;
+  letter-spacing: 1px;
 
-  background: linear-gradient(
-    90deg,
-    #3b82f6,
-    #22c55e,
-    #7618ce,
-    #ec4899,
-    #3b82f6
-  );
+  background: linear-gradient(90deg,
+      #3b82f6,
+      #22c55e,
+      #7618ce,
+      #ec4899,
+      #3b82f6);
 
   background-size: 300% 300%;
 
@@ -59,20 +57,19 @@
   -webkit-text-fill-color: transparent;
   background-clip: text;
 
-  animation: glowMove 5s ease infinite, pulse 2s ease-in-out infinite;
-
   user-select: none;
 }
 
-@keyframes glowMove {
-  0% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
-  100% { background-position: 0% 50%; }
-}
-
 @keyframes pulse {
-  0%,100% { transform: scale(1); }
-  50% { transform: scale(1.05); }
+
+  0%,
+  100% {
+    transform: scale(1);
+  }
+
+  50% {
+    transform: scale(1.05);
+  }
 }
 
 /* ===============================
@@ -174,13 +171,11 @@
   position: absolute;
   inset: -1px;
 
-  background: linear-gradient(
-    90deg,
-    #3b82f6,
-    #7618ce,
-    #22c55e,
-    #3b82f6
-  );
+  background: linear-gradient(90deg,
+      #3b82f6,
+      #7618ce,
+      #22c55e,
+      #3b82f6);
 
   background-size: 400% 400%;
 
@@ -205,8 +200,13 @@
 }
 
 @keyframes rotateBorder {
-  0% { background-position: 0% 50%; }
-  100% { background-position: 400% 50%; }
+  0% {
+    background-position: 0% 50%;
+  }
+
+  100% {
+    background-position: 400% 50%;
+  }
 }
 
 /* Hover */
@@ -223,7 +223,8 @@
 /* Active */
 
 .glow-btn.active {
-  color:rgb(24, 217, 224);;
+  color: rgb(24, 217, 224);
+  ;
 
   text-shadow:
     0 0 6px #3b82f6,
@@ -288,19 +289,17 @@
 
   border-radius: inherit;
 
-  background: linear-gradient(
-    90deg,
-    #3b82f6,
-    #9333ea,
-    #22c55e,
-    #3b82f6
-  );
+  background: linear-gradient(90deg,
+      #3b82f6,
+      #9333ea,
+      #22c55e,
+      #3b82f6);
 
   background-size: 400% 400%;
 
   filter: blur(18px);
 
-  opacity: 0.9; 
+  opacity: 0.9;
 
   animation: rotateBorder 6s linear infinite;
 
@@ -318,34 +317,267 @@
    Mobile
 ================================ */
 
-@media (max-width: 700px) {
+/* ===============================
+   Mobile Responsiveness (Improved)
+================================ */
+
+
+/* ===============================
+   Side Content (Left & Right)
+================================ */
+.home-left-intro {
+  position: absolute;
+  left: 80px;
+  top: 50%;
+  transform: translateY(-50%);
+  max-width: 240px;
+  text-align: left;
+  color: #e2e8f0;
+  z-index: 5;
+}
+
+.home-right-skills {
+  position: absolute;
+  right: 80px;
+  top: 50%;
+  transform: translateY(-50%);
+  max-width: 200px;
+  text-align: right;
+  color: #e2e8f0;
+  z-index: 5;
+}
+
+.text-glow {
+  color: rgb(24, 217, 224);
+  font-size: 1.2rem;
+  margin-bottom: 10px;
+  text-shadow: 0 0 10px rgba(24, 217, 224, 0.5);
+}
+
+.home-left-intro p {
+  font-size: 0.9rem;
+  line-height: 1.6;
+  opacity: 0.8;
+}
+
+.home-right-skills ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  font-size: 0.9rem;
+  line-height: 1.8;
+  opacity: 0.8;
+}
+
+/* ===============================
+   Bottom Action Area
+================================ */
+.home-bottom-action {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  z-index: 10;
+  margin-top: 20px;
+  /* Adds breathing room below the image */
+}
+
+.resume-btn {
+  text-decoration: none;
+  min-width: 160px;
+  padding: 12px 24px;
+  font-size: 15px;
+  color: black !important;
+  /* Black text color */
+  border-radius: 9999px !important;
+  /* Forces full rounded pill shape */
+  background: linear-gradient(90deg, #3b82f6, #22c55e) !important;
+  /* Blue to green gradient body */
+}
+
+/* Deactivate the glowing border animation layer for this specific button */
+.resume-btn::before {
+  display: none !important;
+}
+
+/* Align the central body layer's styling to match */
+.resume-btn::after {
+  background: transparent !important;
+  /* Remove dark cut-out */
+  border-radius: inherit !important;
+}
+
+.social-links {
+  display: flex;
+  gap: 15px;
+  align-items: center;
+}
+
+.social-links a {
+  color: #94a3b8;
+  text-decoration: none;
+  font-size: 0.9rem;
+  transition: color 0.3s ease;
+}
+
+.social-links a:hover {
+  color: rgb(24, 217, 224);
+  text-shadow: 0 0 8px rgba(24, 217, 224, 0.5);
+}
+
+.dot-separator {
+  color: #475569;
+}
+
+/* ===============================
+   Mobile Responsiveness (Improved)
+================================ */
+@media (max-width: 900px) {
+
+  /* Hide the right side stack completely on mobile */
+  .home-right-skills {
+    display: none !important;
+  }
+
+  /* Move the left intro above the image and center it */
+  .home-left-intro {
+    position: absolute;
+    top: 22%;
+    /* Positions it above the central image */
+    left: 50%;
+    transform: translateX(-50%);
+    text-align: center;
+    width: 85%;
+    max-width: 320px;
+    display: block !important;
+  }
+
+  /* Ensure the intro text scales well when centered */
+  .home-left-intro .text-glow {
+    font-size: 1.1rem;
+    margin-bottom: 5px;
+  }
+
+  .home-left-intro p {
+    font-size: 0.85rem;
+  }
+
+  /* Adjust center spacing so image doesn't overlap text */
+  .home-center {
+    gap: 20px;
+  }
 
   .home-label {
-    font-size: 26px;
+    font-size: 24px;
+    margin-bottom: 70px;
+    /* Creates a physical gap in the flex layout for the absolute-positioned intro to sit inside */
   }
 
+  /* Reduce central image size significantly on mobile */
+  .image-glow-wrapper,
   .home-image {
-    width: 220px;
-    height: 220px;
+    width: 170px;
+    height: 170px;
   }
 
+  /* Adjust corner button positions for mobile content layer */
   .top-left {
     top: 30px;
-    left: 30px;
+    left: 20px;
   }
 
   .top-right {
     top: 30px;
-    right: 30px;
+    right: 20px;
   }
 
   .bottom-left {
     bottom: 30px;
-    left: 30px;
+    left: 20px;
   }
 
   .bottom-right {
     bottom: 30px;
-    right: 30px;
+    right: 20px;
   }
+
+  .glowing-line {
+    width: 170px !important;
+  }
+}
+
+/* ===============================
+   Rising Sequence Animations
+================================ */
+
+/* Initial Label State */
+.home-initial-label {
+  opacity: 0;
+  transform: translateY(10px);
+  transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+.home-initial-label.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* The Stage */
+.rising-stage {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+}
+
+/* The Mask - Hides anything below its bottom edge */
+.image-mask {
+  position: relative;
+  overflow: hidden;
+  /* Add padding to prevent the glow from being cut off on the top/sides */
+  padding: 30px;
+  padding-bottom: 0px; /* Flat bottom to rest perfectly on the line */
+  display: flex;
+  flex-direction: column; /* Stack image then line vertically */
+  justify-content: flex-end; /* Push content to bottom so the image rests on the line */
+  align-items: center; /* Center horizontally */
+}
+
+/* The Image Wrapper - Starts pushed down below the mask */
+.image-mask .image-glow-wrapper {
+  transform: translateY(120%);
+  transition: transform 1s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.image-mask .image-glow-wrapper.rise {
+  transform: translateY(0);
+}
+
+/* The Bold Glowing Line */
+.glowing-line {
+  width: 280px; /* Match the image width for alignment */
+  height: 4px; /* Bold */
+  background-color: #ffffff;
+  border-radius: 4px;
+  
+  /* White Glowing Shadows */
+  box-shadow: 
+    0 0 10px rgba(255, 255, 255, 0.8),
+    0 0 20px rgba(255, 255, 255, 0.6),
+    0 0 30px rgba(255, 255, 255, 0.4);
+
+  margin-top: 5px; /* Sits right under the mask */
+  z-index: 10;
+  
+  /* Start collapsed */
+  transform: scaleX(0);
+  transition: transform 0.6s ease-out;
+}
+
+.glowing-line.expand {
+  transform: scaleX(1);
+}
+
+/* Mobile Adjustments */
+@media (max-width: 700px) {
 }

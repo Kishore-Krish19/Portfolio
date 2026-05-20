@@ -1,6 +1,5 @@
 import { useState } from "react";
 import "./Resume.css";
-import RisingText from "./RisingText";
 
 export default function Resume() {
 
@@ -9,14 +8,14 @@ export default function Resume() {
   return (
     <section id="resume" className="section resume-section">
 
-      <h1><RisingText text="My Resume" /></h1>
+      <h1>My Resume</h1>
 
-      <p className="line-reveal">
+      <p>
         View or download my resume below.
       </p>
 
       {/* Buttons */}
-      <div className="resume-actions reveal">
+      <div className="resume-actions">
 
         {/* Download */}
         <button

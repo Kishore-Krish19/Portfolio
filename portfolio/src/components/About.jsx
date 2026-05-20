@@ -1,5 +1,4 @@
 import "./About.css";
-import RisingText from "./RisingText";
 
 export default function About() {
     return (
@@ -8,27 +7,27 @@ export default function About() {
             <div className="content-layer">
                 {/* About Me */}
                 <h1 className="about-title">
-                    <RisingText text="About Me" />
+                    About Me
                 </h1>
                 <ul className="about-points">
-                    <li className="line-reveal">
+                    <li>
                         Passionate Software Developer with experience in building
                         desktop and web applications using Java, React.js, JavaFX, and
                         Spring Boot.
                     </li>
-                    <li className="line-reveal">
+                    <li>
                         Hands-on experience in developing RESTful APIs, managing
                         databases using MySQL and PostgreSQL, and working with Git-based
                         workflows.
                     </li>
-                    <li className="line-reveal">
+                    <li>
                         Enjoy solving real-world problems through code and continuously
                         improving my skills through projects and coding practice.
                     </li>
                 </ul>
                 {/* Coding Profiles */}
                 <h2 className="about-subtitle">
-                    <RisingText text="Coding Profiles" /></h2>
+                    Coding Profiles</h2>
 
                 <div className="coding-profiles">
 
@@ -37,7 +36,7 @@ export default function About() {
                         href="https://leetcode.com/yourusername"
                         target="_blank"
                         rel="noreferrer"
-                        className="profile-card line-reveal"
+                        className="profile-card"
                     >
                         <svg
                             xmlns="http://www.w3.org/2000/svg"
@@ -51,8 +50,8 @@ export default function About() {
                         </svg>
 
                         <div>
-                            <h4 className="line-reveal">LeetCode</h4>
-                            <p className="line-reveal">Solved 100+ DSA Problems</p>
+                            <h4>LeetCode</h4>
+                            <p>Solved 100+ DSA Problems</p>
                         </div>
                     </a>
 
@@ -61,7 +60,7 @@ export default function About() {
                         href="https://www.hackerrank.com/yourusername"
                         target="_blank"
                         rel="noreferrer"
-                        className="profile-card line-reveal"
+                        className="profile-card"
                     >
                         <svg
                             xmlns="http://www.w3.org/2000/svg"
@@ -74,24 +73,24 @@ export default function About() {
                         </svg>
 
                         <div>
-                            <h4 className="line-reveal">HackerRank</h4>
-                            <p className="line-reveal">5⭐ Rating in Java & SQL</p>
+                            <h4>HackerRank</h4>
+                            <p>5⭐ Rating in Java & SQL</p>
                         </div>
                     </a>
 
                 </div>
                 {/* Education */}
                 <h2 className="about-subtitle">
-                    <RisingText text="Education" /></h2>
+                    Education</h2>
 
                 <div className="edu-timeline">
 
                     <div className="edu-item ">
-                        <span> <RisingText text="2023 – Present" /></span>
+                        <span> 2023 – Present</span>
 
-                        <h3 className="line-reveal">B.E. Computer Science and Engineering</h3>
+                        <h3>B.E. Computer Science and Engineering</h3>
 
-                        <p className="line-reveal">
+                        <p>
                             Government College of Engineering, Erode<br />
                             CGPA: 8.58
                         </p>

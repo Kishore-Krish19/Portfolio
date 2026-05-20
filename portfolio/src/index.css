@@ -26,6 +26,8 @@ html,
 
 /* 3D perspective for whole page */
 .page-3d {
+  position: relative;
+  z-index: 10;
   perspective: 1200px;
   transform-style: preserve-3d;
 }
@@ -58,7 +60,7 @@ section {
 
 .section {
   position: relative;
-  z-index: 5;
+  z-index: 10;
   width: 100%;
   min-height: 100vh;
   overflow: visible;
@@ -127,9 +129,9 @@ section {
   inset: 0;
 
   background:
-    radial-gradient(1px 1px at 15% 25%, rgb(255, 255, 255), transparent),
-    radial-gradient(1px 1px at 45% 70%, rgb(255, 255, 255), transparent),
-    radial-gradient(1px 1px at 65% 40%, rgb(255, 255, 255), transparent);
+    radial-gradient(2px 2px at 15% 25%, rgb(255, 255, 255), transparent),
+    radial-gradient(2px 2px at 45% 70%, rgb(255, 255, 255), transparent),
+    radial-gradient(2px 2px at 65% 40%, rgb(255, 255, 255), transparent);
 
   background-size: 400px 400px;
 
@@ -205,80 +207,4 @@ section {
 .space-layer.near {
   z-index: 4;
   opacity: 0.8;
-}
-
-/* ===============================
-   Animations: The "Drop-In" Effect
-================================ */
-
-.reveal {
-  opacity: 0;
-  /* Starts 80px higher and slightly scaled up */
-  transform: translateY(-30px) scale(0.98);
-  transition: opacity 1.5s ease-out,
-    transform 1.5s cubic-bezier(0.34, 1.56, 0.64, 1);
-  will-change: transform, opacity;
-}
-
-/* When the section is scrolled into view */
-.reveal.active {
-  opacity: 1;
-  transform: translateY(0) scale(1);
-}
-
-.fade-in {
-  opacity: 0;
-  transform: translateY(16px);
-  animation: fadeIn 0.9s ease forwards;
-}
-
-@keyframes fadeIn {
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-/* ===============================
-   Line-by-line Fade In
-================================ */
-
-.line-reveal {
-  opacity: 0;
-  transform: translateY(12px);
-}
-
-.line-reveal.active {
-  animation: lineFade 1.8s ease forwards;
-}
-
-@keyframes lineFade {
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-/* Line wrapper (this is CRITICAL) */
-.rise-line {
-  display: inline-block;
-  overflow: hidden;
-}
-
-.rise-word {
-  display: inline-block;
-  transform: translateY(140%);
-  opacity: 0;
-  will-change: transform, opacity;
-}
-
-.rise-word.animate {
-  animation: riseUp 1.5s cubic-bezier(0.22, 1, 0.36, 1) forwards;
-}
-
-@keyframes riseUp {
-  to {
-    transform: translateY(0);
-    opacity: 1;
-  }
 }

@@ -1,49 +1,6 @@
 import "./Projects.css";
-import RisingText from "./RisingText";
-import { useEffect } from "react";
 
 export default function Projects() {
-
-  useEffect(() => {
-    const reveals = document.querySelectorAll(".reveal");
-
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add("active");
-          } else {
-            // 👇 THIS enables repeat animation
-            entry.target.classList.remove("active");
-          }
-        });
-      },
-      { threshold: 0.25 }
-    );
-
-    reveals.forEach((el) => observer.observe(el));
-
-    return () => observer.disconnect();
-  }, []);
-
-
-  useEffect(() => {
-    const reveals = document.querySelectorAll(".reveal");
-
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add("active");
-          }
-        });
-      },
-      { threshold: 0.2 }
-    );
-
-    reveals.forEach((el) => observer.observe(el));
-    return () => observer.disconnect();
-  }, []);
 
   const projects = [
     {
@@ -97,20 +54,20 @@ export default function Projects() {
   return (
     <section id="projects" className="section projects-section">
 
-      <h1><RisingText text="Projects" /></h1>
+      <h1>Projects</h1>
 
       <div className="projects-grid">
 
         {projects.map((p, index) => (
-          <div key={index} className="project-card reveal">
+          <div key={index} className="project-card">
 
-            <h2 className="line-reveal"><RisingText text={p.title} /></h2>
+            <h2>{p.title}</h2>
 
-            <p className="project-tech line-reveal"><RisingText text={p.tech} /></p>
+            <p className="project-tech">{p.tech}</p>
 
             <ul className="project-desc">
               {p.desc.map((item, i) => (
-                <li className="line-reveal" key={i}>
+                <li key={i}>
                   {item}
                 </li>
               ))}

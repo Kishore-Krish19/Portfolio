@@ -1,8 +1,6 @@
-import { useState } from "react";
+import { useState, useRef } from "react";
 import emailjs from "emailjs-com";
 import "./Contact.css";
-import RisingText from "./RisingText";
-import { useEffect, useRef } from "react";
 
 export default function Contact() {
     const [form, setForm] = useState({
@@ -44,36 +42,18 @@ export default function Contact() {
     };
     const contactRef = useRef(null);
 
-    useEffect(() => {
-        const el = contactRef.current;
-        if (!el) return;
-
-        const observer = new IntersectionObserver(
-            ([entry]) => {
-                if (entry.isIntersecting) {
-                    el.classList.add("active");
-                } else {
-                    el.classList.remove("active"); // allows replay
-                }
-            },
-            { threshold: 0.25 }
-        );
-
-        observer.observe(el);
-        return () => observer.disconnect();
-    }, []);
     return (
         <section id="contact" className="section contact-section">
 
             <div className="content-layer">
 
-                <h1><RisingText text="Contact Me" /></h1>
+                <h1>Contact Me</h1>
 
-                <p className="contact-desc line-reveal">
-                    Feel free to reach out for opportunities, projects, or collaboration.
+                <p className="contact-desc">
+                    Feel free to reach out for projects, or collaboration.
                 </p>
                 {/* Contact Info */}
-                <div className="contact-animate reveal">
+                <div className="contact-animate">
                     <div className="contact-info">
 
                         {/* Location */}
@@ -150,7 +130,7 @@ export default function Contact() {
                     {/* Contact Form */}
                     <form className="contact-form" onSubmit={sendEmail}>
 
-                        <h2 className="contact-form-title line-reveal">
+                        <h2 className="contact-form-title">
                             Or Reach me by sending your name and email 👇
                         </h2>
                         <label htmlFor="name" className="sr-only">Name</label>
