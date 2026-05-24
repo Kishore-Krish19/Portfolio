@@ -1,0 +1,845 @@
+/* ==========================================================================
+   Achievements Section Styles
+   ========================================================================== */
+
+.achievements-section {
+  position: relative;
+  min-height: 100vh;
+  padding: 80px 10% 80px;
+  color: white;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
+.achievements-title {
+  text-align: center;
+  font-size: 40px;
+  margin-bottom: 8px;
+  font-weight: 800;
+  letter-spacing: -0.025em;
+}
+
+.achievements-subtitle-underline {
+  width: 80px;
+  height: 4px;
+  background: linear-gradient(to right, #a855f7, #06b6d4);
+  margin: 0 auto 40px;
+  border-radius: 9999px;
+}
+
+/* ==========================================================================
+   Interactive Stats Cards Grid (Perfectly Level Height Constraints)
+   ========================================================================== */
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 32px;
+  width: 100%;
+  max-width: 1024px;
+  margin: 0 auto 48px;
+}
+
+@media (min-width: 1024px) {
+  .stats-grid {
+    grid-template-columns: repeat(2, 1fr);
+    grid-auto-rows: 1fr; /* Forces the columns to hold identical pixel heights */
+    align-items: stretch; /* Stretches card wrappers down evenly */
+  }
+}
+
+/* Stat Card Base Structure */
+.stat-card-wrapper {
+  perspective: 1000px;
+  width: 100%;
+  height: 100%;
+}
+
+.stat-card {
+  position: relative;
+  background: #110a1f;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 24px;
+  padding: 24px; /* Uniform grid cell interior spacing */
+  min-height: 240px;
+  height: 100%; /* Spans the complete stretched wrapper height footprint */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  box-shadow: 0 10px 30px rgba(168, 85, 247, 0.05);
+  text-decoration: none;
+  color: white;
+  box-sizing: border-box;
+  overflow: hidden;
+}
+
+.stat-card:hover {
+  transform: translateY(-5px);
+  border-color: rgba(168, 85, 247, 0.4);
+  box-shadow: 0 15px 35px rgba(168, 85, 247, 0.15), 
+              0 0 30px rgba(249, 115, 22, 0.1);
+}
+
+/* Specific Card Custom Glows */
+.stat-card.leetcode:hover {
+  border-color: rgba(249, 115, 22, 0.4);
+  box-shadow: 0 15px 35px rgba(249, 115, 22, 0.15);
+}
+
+.stat-card.hackerrank:hover {
+  border-color: rgba(34, 197, 94, 0.4);
+  box-shadow: 0 15px 35px rgba(34, 197, 94, 0.15);
+}
+
+/* Hover Gradient BG Layer */
+.card-glow-bg {
+  position: absolute;
+  inset: 0;
+  border-radius: 24px;
+  background: linear-gradient(135deg, rgba(249, 115, 22, 0.08) 0%, rgba(168, 85, 247, 0.08) 100%);
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.stat-card:hover .card-glow-bg {
+  opacity: 1;
+}
+
+.stat-card.hackerrank .card-glow-bg {
+  background: linear-gradient(135deg, rgba(34, 197, 94, 0.08) 0%, rgba(168, 85, 247, 0.08) 100%);
+}
+
+/* Card shimmer overlay */
+.shimmer-overlay {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  border-radius: 24px;
+  pointer-events: none;
+}
+
+.shimmer-wave {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0.05) 50%,
+    transparent 100%
+  );
+  transform: translateX(-100%);
+  animation: shimmerMove 3s infinite;
+}
+
+@keyframes shimmerMove {
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+/* ==========================================================================
+   HackerRank Custom Card Content Balancing
+   ========================================================================== */
+
+.hackerrank-card-content {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  z-index: 2;
+  position: relative;
+  box-sizing: border-box;
+}
+
+.hackerrank-header {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 16px;
+  flex-shrink: 0;
+}
+
+.hr-logo-bg {
+  padding: 12px;
+  background: rgba(34, 197, 94, 0.1);
+  color: #22c55e;
+  border-radius: 16px;
+  border: 1px solid rgba(34, 197, 94, 0.2);
+  transition: all 0.3s ease;
+}
+
+.stat-card.hackerrank:hover .hr-logo-bg {
+  transform: scale(1.1) rotate(6deg);
+  background: rgba(34, 197, 94, 0.2);
+}
+
+.hr-header-text h3 {
+  font-size: 20px;
+  font-weight: 700;
+  color: #f3f4f6;
+  margin: 0;
+  line-height: 1.2;
+}
+
+.hr-header-text p.hr-username {
+  font-size: 14px;
+  color: #00ea64;
+  font-weight: 600;
+  margin: 2px 0 0;
+}
+
+/* 2x2 Subgrid Flex Layout Extensions */
+.hackerrank-subgrid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+  width: 100%;
+  margin-top: 4px;
+  flex-grow: 1; /* Instructs subgrid space allocation matching with Left panel */
+}
+
+/* Individual Sub-card Balanced Dimension rules */
+.hr-subcard {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 16px;
+  padding: 14px 12px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center; /* Centers items vertically inside equal space blocks */
+  text-align: center;
+  gap: 4px;
+  transition: all 0.3s ease;
+  box-sizing: border-box;
+}
+
+.hr-subcard:hover {
+  background: rgba(255, 255, 255, 0.06);
+  border-color: rgba(34, 197, 94, 0.3);
+  transform: translateY(-2px);
+}
+
+.hr-subcard h4 {
+  font-size: 15px;
+  font-weight: 700;
+  color: #f3f4f6;
+  margin: 0;
+}
+
+.hr-badge {
+  font-size: 10px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin: 2px 0 0;
+}
+
+.hr-badge.gold {
+  color: #fbbf24;
+}
+
+.hr-badge.silver {
+  color: #94a3b8;
+}
+
+.hr-stars-row {
+  font-size: 12px;
+  color: #fbbf24;
+  display: flex;
+  justify-content: center;
+  gap: 1px;
+}
+
+.hr-solves {
+  font-size: 11px;
+  font-weight: 600;
+  color: #94a3b8;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  margin-top: 2px;
+}
+
+/* ==========================================================================
+   Action Controls Panel
+   ========================================================================== */
+
+.action-controls {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  justify-content: center;
+  width: 100%;
+  max-width: 512px;
+  margin: 0 auto 48px;
+  z-index: 10;
+  position: relative;
+}
+
+@media (min-width: 640px) {
+  .action-controls {
+    flex-direction: row;
+  }
+}
+
+.control-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: #e5e7eb;
+  padding: 14px 28px;
+  border-radius: 12px;
+  font-weight: 600;
+  font-size: 15px;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  width: 100%;
+}
+
+@media (min-width: 640px) {
+  .control-btn {
+    width: auto;
+  }
+}
+
+.control-btn:hover {
+  background: rgba(255, 255, 255, 0.1);
+  transform: translateY(-2px);
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+}
+
+.control-btn.active {
+  background: linear-gradient(135deg, #7c3aed 0%, #2563eb 100%);
+  border-color: rgba(168, 85, 247, 0.3);
+  color: white;
+  box-shadow: 0 10px 20px rgba(124, 58, 237, 0.3);
+}
+
+.control-btn.active:hover {
+  box-shadow: 0 12px 24px rgba(124, 58, 237, 0.45);
+}
+
+.btn-icon {
+  transition: transform 0.3s ease;
+}
+
+.control-btn:hover .btn-icon {
+  transform: scale(1.15);
+}
+
+/* ==========================================================================
+   Infinite Scroll Scrolling Marquee Component
+   ========================================================================== */
+
+.marquee-container-wrapper {
+  width: 100%;
+  overflow: hidden;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  z-index: 10;
+}
+
+/* Gradient Mask overlay for fading edges */
+.marquee-container-wrapper::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  width: 80px;
+  background: linear-gradient(to right, #000205, transparent);
+  z-index: 12;
+  pointer-events: none;
+}
+
+.marquee-container-wrapper::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  width: 80px;
+  background: linear-gradient(to left, #000205, transparent);
+  z-index: 12;
+  pointer-events: none;
+}
+
+.marquee-track-container {
+  display: flex;
+  width: 100%;
+  overflow: hidden;
+  padding: 8px 0;
+}
+
+.marquee-track {
+  display: flex;
+  gap: 24px;
+  width: max-content;
+  will-change: transform;
+}
+
+/* Marquee Loop Durations and Keyframes */
+.marquee-track.direction-left {
+  animation: marqueeLeft 55s linear infinite;
+}
+
+.marquee-track.direction-right {
+  animation: marqueeRight 55s linear infinite;
+}
+
+/* Pause scroll on hover */
+.marquee-track-container:hover .marquee-track {
+  animation-play-state: paused;
+}
+
+@keyframes marqueeLeft {
+  0% {
+    transform: translateX(0%);
+  }
+  100% {
+    transform: translateX(-25%);
+  }
+}
+
+@keyframes marqueeRight {
+  0% {
+    transform: translateX(-25%);
+  }
+  100% {
+    transform: translateX(0%);
+  }
+}
+
+/* ==========================================================================
+   Achievement Cards styling
+   ========================================================================== */
+
+.achievement-card {
+  position: relative;
+  width: 290px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  padding: 24px;
+  border-radius: 24px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+  user-select: none;
+}
+
+@media (min-width: 768px) {
+  .achievement-card {
+    width: 350px;
+    padding: 28px;
+  }
+}
+
+.achievement-card:hover {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(168, 85, 247, 0.5);
+  transform: translateY(-8px);
+  box-shadow: 0 20px 40px rgba(168, 85, 247, 0.15);
+}
+
+/* ==========================================================================
+   New Premium Inline Oval Pill Badges
+   ========================================================================== */
+
+/* Header alignment layer */
+.ach-card-header-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 16px;
+  width: 100%;
+  margin-bottom: 16px;
+}
+
+/* Override ach-card-top margins so it scales nicely side-by-side with the badge */
+.ach-card-top {
+  margin-bottom: 0 !important;
+  flex: 1;
+}
+
+/* Beautiful Oval Pill Shape Base */
+.achievement-pill-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 5px 12px;
+  border-radius: 9999px; /* This creates the perfect oval capsule rim shape */
+  font-size: 11px;
+  font-weight: 800;
+  text-transform: capitalize;
+  white-space: nowrap;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+  border: 1px solid transparent;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+/* Inner badge icon rules */
+.achievement-pill-badge svg {
+  width: 12px;
+  height: 12px;
+  flex-shrink: 0;
+}
+
+/* Gold Variant (e.g., 1st Prize) */
+.achievement-pill-badge.gold {
+  background: linear-gradient(135deg, #fbbf24 0%, #d97706 100%);
+  border-color: rgba(253, 230, 138, 0.4);
+  color: #000000; /* Dark text for legibility on gold background */
+}
+
+/* Silver Variant (e.g., 2nd Prize) */
+.achievement-pill-badge.silver {
+  background: linear-gradient(135deg, #94a3b8 0%, #475569 100%);
+  border-color: rgba(226, 232, 240, 0.3);
+  color: #ffffff;
+}
+
+/* Top 4 Variant (Matches your deep amethyst theme highlights) */
+.achievement-pill-badge.top4 {
+  background: linear-gradient(135deg, #a855f7 0%, #7c3aed 100%);
+  border-color: rgba(216, 180, 254, 0.4);
+  color: #ffffff;
+}
+
+.achievement-badge.gold {
+  background: linear-gradient(135deg, #fbbf24 0%, #d97706 100%);
+  border-color: rgba(253, 230, 138, 0.5);
+  color: #000;
+  box-shadow: 0 4px 10px rgba(217, 119, 6, 0.3);
+}
+
+.achievement-badge.silver {
+  background: linear-gradient(135deg, #94a3b8 0%, #475569 100%);
+  border-color: rgba(226, 232, 240, 0.5);
+  color: white;
+  box-shadow: 0 4px 10px rgba(71, 85, 105, 0.3);
+}
+
+/* Main Card Content */
+.ach-card-top {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  margin-bottom: 16px;
+}
+
+.ach-icon-wrapper {
+  padding: 12px;
+  background: rgba(168, 85, 247, 0.08);
+  color: #c084fc;
+  border-radius: 16px;
+  transition: all 0.3s ease;
+  flex-shrink: 0;
+}
+
+.achievement-card:hover .ach-icon-wrapper {
+  transform: scale(1.1) rotate(6deg);
+  background: rgba(168, 85, 247, 0.15);
+  color: #d8b4fe;
+}
+
+.ach-icon-wrapper.gold {
+  background: rgba(251, 191, 36, 0.08);
+  color: #fcd34d;
+}
+
+.achievement-card:hover .ach-icon-wrapper.gold {
+  background: rgba(251, 191, 36, 0.15);
+  color: #fde047;
+}
+
+.ach-header-details {
+  flex: 1;
+}
+
+.ach-card-title {
+  font-size: 16px;
+  font-weight: 700;
+  color: #f3f4f6;
+  line-height: 1.3;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  transition: color 0.3s ease;
+}
+
+@media (min-width: 768px) {
+  .ach-card-title {
+    font-size: 18px;
+  }
+}
+
+.achievement-card:hover .ach-card-title {
+  color: #e9d5ff;
+}
+
+.ach-card-date {
+  font-size: 12px;
+  color: #6b7280;
+  margin-top: 6px;
+  font-weight: 500;
+}
+
+.ach-card-desc {
+  font-size: 14px;
+  color: #9ca3af;
+  line-height: 1.6;
+  margin-bottom: 20px;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  height: 68px;
+}
+
+/* Card Footer */
+.ach-card-footer {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(0, 0, 0, 0.4);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  padding: 10px 14px;
+  border-radius: 12px;
+  font-size: 12px;
+  color: #d1d5db;
+  margin-top: auto;
+  max-width: 100%;
+}
+
+.ach-card-footer svg {
+  color: #c084fc;
+  flex-shrink: 0;
+}
+
+.ach-card-footer span {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-weight: 500;
+}
+
+/* ==========================================================================
+   Static Grid layout when 'Show All' is toggled
+   ========================================================================== */
+
+.achievements-static-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 28px;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 16px 0;
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeInUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  z-index: 10;
+  position: relative;
+}
+
+@media (min-width: 768px) {
+  .achievements-static-grid {
+    grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+  }
+}
+
+.achievements-static-grid .achievement-card {
+  width: 100%;
+}
+
+@keyframes fadeInUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ==========================================================================
+   Event Photos Lightbox Component
+   ========================================================================== */
+
+.photos-gallery-container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeInUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  z-index: 10;
+  position: relative;
+}
+
+.photos-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 24px;
+}
+
+@media (min-width: 640px) {
+  .photos-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1024px) {
+  .photos-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.photo-item {
+  position: relative;
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 20px;
+  overflow: hidden;
+  aspect-ratio: 4 / 3;
+  cursor: pointer;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  transition: all 0.4s ease;
+}
+
+.photo-item:hover {
+  transform: translateY(-6px);
+  border-color: rgba(168, 85, 247, 0.4);
+  box-shadow: 0 20px 25px -5px rgba(168, 85, 247, 0.1), 
+              0 10px 10px -5px rgba(0, 0, 0, 0.04);
+}
+
+.photo-img-wrapper {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  background: #020617;
+}
+
+.photo-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.photo-item:hover .photo-img {
+  transform: scale(1.08);
+}
+
+.photo-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to top,
+    rgba(10, 5, 26, 0.95) 0%,
+    rgba(10, 5, 26, 0.4) 50%,
+    transparent 100%
+  );
+  opacity: 0.85;
+  transition: opacity 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 20px;
+}
+
+.photo-item:hover .photo-overlay {
+  opacity: 0.95;
+}
+
+.photo-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  background: rgba(168, 85, 247, 0.2);
+  border: 1px solid rgba(168, 85, 247, 0.3);
+  color: #d8b4fe;
+  font-size: 11px;
+  font-weight: 700;
+  padding: 2px 8px;
+  border-radius: 9999px;
+  width: max-content;
+  margin-bottom: 8px;
+}
+
+.photo-title {
+  font-size: 15px;
+  font-weight: 700;
+  color: white;
+  margin-bottom: 4px;
+}
+
+.photo-desc {
+  font-size: 12px;
+  color: #9ca3af;
+  margin: 0;
+  line-height: 1.4;
+}
+
+/* Empty gallery state */
+.gallery-empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 60px 20px;
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px dashed rgba(255, 255, 255, 0.1);
+  border-radius: 24px;
+  color: #9ca3af;
+  text-align: center;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.gallery-empty svg {
+  color: #a855f7;
+  margin-bottom: 16px;
+  opacity: 0.7;
+}
+
+.gallery-empty h3 {
+  color: #f3f4f6;
+  font-size: 18px;
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+
+.gallery-empty p {
+  font-size: 14px;
+  margin: 0;
+  max-width: 320px;
+}
+
+/* ==========================================================================
+   Responsiveness Adjustments
+   ========================================================================== */
+
+@media (max-width: 768px) {
+  .achievements-section {
+    padding: 100px 6% 60px;
+  }
+  
+  .achievements-title {
+    font-size: 32px;
+  }
+}

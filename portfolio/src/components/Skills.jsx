@@ -125,14 +125,6 @@ export default function Skills() {
 
       </div>
 
-      <h2 className="skills-subtitle">Certifications</h2>
-      <ul className="cert-list">
-        <li>Java – HackerRank (2025)</li>
-        <li>Problem Solving – HackerRank (2025)</li>
-        <li>Programming Foundations with JavaScript, HTML & CSS by Duke University – Coursera (2025)</li>
-        <li>Crash Course on Python by Google – Coursera (2025)</li>
-      </ul>
-
     </section>
   );
 }

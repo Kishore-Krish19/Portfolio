@@ -2,7 +2,7 @@
   position: relative;
   min-height: 100vh;
   color: white;
-  padding: 80px 5% 60px;
+  padding: 80px 10% 60px;
   z-index: 10;
 }
 
@@ -27,81 +27,24 @@
 }
 
 /* ==========================================
-   Slideshow Framework Configurations
+   Flexible Multi-Card Rows (Smart Alignment)
    ========================================== */
-
-.projects-carousel-wrapper {
-  position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 100%;
-  max-width: 1400px;
-  margin: 0 auto;
-  padding: 0 70px;
-  box-sizing: border-box;
-}
 
 .projects-flex-container {
   display: flex;
-  gap: 20px;
-  flex: 1;
+  gap: 16px;
+  width: 95%;
+  max-width: 1600px;
+  margin: 0 auto;
   height: 620px;
   align-items: stretch;
   justify-content: center;
 }
 
-/* Carousel Navigator Action Controls */
-.projects-carousel-wrapper .carousel-nav-btn {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  background: rgba(10, 5, 26, 0.75);
-  border: 1px solid rgba(124, 58, 237, 0.3);
-  color: #c7d2fe;
-  width: 56px;
-  height: 56px;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  font-size: 20px;
-  transition: all 0.4s cubic-bezier(0.25, 1, 0.2, 1);
-  z-index: 30;
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4), 0 0 15px rgba(124, 58, 237, 0.1);
-}
-
-.projects-carousel-wrapper .carousel-nav-btn:hover {
-  background: #7c3aed;
-  border-color: #7c3aed;
-  color: white;
-  transform: translateY(-50%) scale(1.12);
-  box-shadow: 0 0 30px rgba(124, 58, 237, 0.6), 0 4px 15px rgba(0, 0, 0, 0.3);
-}
-
-.projects-carousel-wrapper .carousel-nav-btn:active {
-  transform: translateY(-50%) scale(0.95);
-}
-
-.projects-carousel-wrapper .prev-btn {
-  left: 0;
-}
-
-.projects-carousel-wrapper .next-btn {
-  right: 0;
-}
-
-/* ==========================================
-   Flexible Multi-Card Structural Transforms
-   ========================================== */
-
 .project-card-wrapper {
   position: relative;
-  flex: 0 1 150px;
-  min-width: 130px;
+  flex: 0 1 70px;
+  min-width: 60px;
   border-radius: 24px;
   transition: flex 0.8s cubic-bezier(0.25, 1, 0.2, 1), transform 0.3s ease;
   will-change: flex, transform;
@@ -110,8 +53,7 @@
 }
 
 .project-card-wrapper.expanded {
-  flex: 4 1 850px;
-  max-width: 900px;
+  flex: 5 1 100%;
 }
 
 .project-card-wrapper:hover:not(.expanded) {
@@ -138,10 +80,25 @@
   transition: border-color 0.4s ease, box-shadow 0.4s ease, background-color 0.4s ease, padding 0.8s cubic-bezier(0.25, 1, 0.2, 1);
 }
 
-.project-card.java-theme { --theme-color: #f89820; --theme-rgb: 248, 152, 32; }
-.project-card.ai-theme { --theme-color: #a855f7; --theme-rgb: 168, 85, 247; }
-.project-card.game-theme { --theme-color: #ef4444; --theme-rgb: 239, 68, 68; }
-.project-card.web-theme { --theme-color: #06b6d4; --theme-rgb: 6, 182, 212; }
+.project-card.java-theme {
+  --theme-color: #f89820;
+  --theme-rgb: 248, 152, 32;
+}
+
+.project-card.ai-theme {
+  --theme-color: #a855f7;
+  --theme-rgb: 168, 85, 247;
+}
+
+.project-card.game-theme {
+  --theme-color: #ef4444;
+  --theme-rgb: 239, 68, 68;
+}
+
+.project-card.web-theme {
+  --theme-color: #06b6d4;
+  --theme-rgb: 6, 182, 212;
+}
 
 .project-card-wrapper:hover .project-card {
   border-color: rgba(var(--theme-rgb), 0.35);
@@ -170,6 +127,7 @@
   padding: 35px 0;
   opacity: 1;
   transform: scale(1);
+  /* COLLAPSING: Delay the vertical title fade-in until the card has shrunk */
   transition: opacity 0.5s cubic-bezier(0.25, 1, 0.2, 1), transform 0.6s cubic-bezier(0.25, 1, 0.2, 1);
   transition-delay: 0.35s;
   pointer-events: auto;
@@ -178,6 +136,7 @@
 .project-card-wrapper.expanded .project-vertical-title-view {
   opacity: 0;
   transform: scale(0.9);
+  /* EXPANDING: Fade out the vertical title instantly */
   transition-delay: 0s;
   pointer-events: none;
 }
@@ -241,6 +200,7 @@
   opacity: 0;
   transform: translateY(15px);
   pointer-events: none;
+  /* COLLAPSING: Fade out the details instantly when the card shrinks */
   transition: opacity 0.3s cubic-bezier(0.25, 1, 0.2, 1), transform 0.4s cubic-bezier(0.25, 1, 0.2, 1);
   transition-delay: 0s;
 }
@@ -248,6 +208,7 @@
 .project-card-wrapper.expanded .project-expanded-view {
   opacity: 1;
   transform: translateY(0);
+  /* EXPANDING: Delay the fade-in of details until the card has opened wide */
   transition: opacity 0.6s cubic-bezier(0.25, 1, 0.2, 1), transform 0.6s cubic-bezier(0.25, 1, 0.2, 1);
   transition-delay: 0.35s;
   pointer-events: auto;
@@ -272,6 +233,7 @@
   color: #ffffff;
 }
 
+/* Vector Artwork Wrapper Box */
 .project-graphic-wrapper {
   width: 64px;
   height: 64px;
@@ -305,6 +267,7 @@
   align-items: center;
   gap: 8px;
   background: #060919;
+  /* Seamless background match with skill components */
   border: 1px solid rgba(255, 255, 255, 0.08);
   padding: 9px 14px;
   border-radius: 99px;
@@ -330,6 +293,7 @@
   background: #090d22;
 }
 
+/* Description Lists definitions */
 .project-desc-wrapper {
   margin-top: 24px;
   flex-grow: 1;
@@ -345,6 +309,7 @@
   line-height: 1.6;
 }
 
+/* Actions Links blocks */
 .project-footer {
   margin-top: auto;
   width: 100%;
@@ -406,96 +371,29 @@
 }
 
 /* ==========================================
-   Full Gallery Grid Layout Styling
+   Adaptive Stack System for Tablets/Mobile
    ========================================== */
-
-.projects-grid-container {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(420px, 1fr));
-  gap: 30px;
-  width: 95%;
-  max-width: 1600px;
-  margin: 0 auto;
-}
-
-.project-card-wrapper.grid-card {
-  flex: none;
-  width: 100%;
-  height: 480px;
-}
-
-.project-card-wrapper.grid-card .project-card {
-  position: relative;
-  height: 100%;
-  padding: 36px 40px;
-}
-
-/* ==========================================
-   View Toggle Controls Box Layout
-   ========================================== */
-
-.toggle-view-container {
-  display: flex;
-  justify-content: center;
-  margin-top: 60px;
-}
-
-.view-toggle-btn {
-  display: inline-flex;
-  align-items: center;
-  gap: 10px;
-  background: rgba(124, 58, 237, 0.08);
-  border: 1px solid rgba(124, 58, 237, 0.3);
-  color: #c7d2fe;
-  padding: 14px 32px;
-  border-radius: 99px;
-  font-size: 15px;
-  font-weight: 700;
-  cursor: pointer;
-  transition: all 0.3s cubic-bezier(0.25, 1, 0.2, 1);
-}
-
-.view-toggle-btn:hover {
-  background: #7c3aed;
-  color: white;
-  border-color: #7c3aed;
-  box-shadow: 0 0 25px rgba(124, 58, 237, 0.45);
-  transform: translateY(-2px);
-}
-
-.btn-icon {
-  font-size: 14px;
-}
-
-/* Adaptive Media Query System */
 @media (max-width: 868px) {
-  .projects-carousel-wrapper {
-    gap: 12px;
-    padding: 0;
-  }
-  .projects-carousel-wrapper .carousel-nav-btn {
-    display: none;
-  }
   .projects-flex-container {
     flex-direction: column;
     height: auto;
   }
+
   .project-card-wrapper {
     flex: 1 1 auto;
     min-height: 190px;
-    max-width: none;
   }
+
   .project-card {
     position: relative;
   }
+
   .project-vertical-title-view {
     display: none !important;
   }
+
   .project-expanded-view {
     opacity: 1;
     pointer-events: auto;
-  }
-  .projects-grid-container {
-    grid-template-columns: 1fr;
   }
 }

@@ -1,11 +1,11 @@
 import { useState, useEffect } from "react";
 import "./Projects.css";
 
+
 // React Icons matching your exact Skills module ecosystem
 import {
   FaHtml5, FaCss3Alt, FaJs, FaReact, FaPython, FaJava,
-  FaBrain, FaSitemap, FaNodeJs, FaLightbulb, FaGithub, FaExternalLinkAlt,
-  FaChevronLeft, FaChevronRight, FaTh
+  FaBrain, FaSitemap, FaNodeJs, FaLightbulb, FaGithub, FaExternalLinkAlt
 } from "react-icons/fa";
 import {
   SiSpringboot, SiMysql, SiTailwindcss, SiHuggingface,
@@ -14,10 +14,10 @@ import {
 
 // Re-using your exact CustomPythonIcon path from Skills.jsx
 const CustomPythonIcon = () => (
-  <svg
-    xmlns="http://www.w3.org/2000/svg"
+  <svg 
+    xmlns="http://www.w3.org/2000/svg" 
     viewBox="0 0 48 48" width="16px" height="16px" style={{ transform: 'scale(1.2)' }}>
-    <path fill="#0277BD" d="M24.047,5c-1.555,0.005-2.633,0.142-3.936,0.367c-3.848,0.67-4.549,2.077-4.549,4.67V14h9v2H15.22h-4.35c-2.636,0-4.943,1.242-5.674,4.219c-0.826,3.417-0.863,5.557,0,9.125C5.851,32.005,7.294,34,9.931,34h3.632v-5.104c0-2.966,2.686-5.896,5.764-5.896h7.236c2.523,0,5-1.862,5-4.377v-8.586c0-2.439-1.759-4.263-4.218-4.672C27.406,5.359,25.589,4.994,24.047,5z M19.063,9c0.821,0,1.5,0.677,1.5,1.502c0,0.833-0.679,1.498-1.5,1.498c-0.837,0-1.5-0.664-1.5-1.498C17.563,9.68,18.226,9,19.063,9z" /><path fill="#FFC107" d="M23.078,43c1.555-0.005,2.633-0.142,3.936-0.367c3.848-0.67,4.549-2.077,4.549-4.67V34h-9v-2h9.343h4.35c2.636,0,4.943-1.242,5.674-4.219c0.826-3.417,0.863-5.557,0-9.125C41.274,15.995,39.831,14,37.194,14h-3.632v5.104c0,2.966-2.686,5.896-5.764,5.896h-7.236c-2.523,0-5,1.862-5,4.377v8.586c0,2.439,1.759,4.263,4.218,4.672C19.719,42.641,21.536,43.006,23.078,43z M28.063,39c-0.821,0-1.5-0.677-1.5-1.502c0-0.833,0.679-1.498,1.5-1.498c0.837,0,1.5,0.664,1.5,1.498C29.563,38.32,28.899,39,28.063,39z" />
+    <path fill="#0277BD" d="M24.047,5c-1.555,0.005-2.633,0.142-3.936,0.367c-3.848,0.67-4.549,2.077-4.549,4.67V14h9v2H15.22h-4.35c-2.636,0-4.943,1.242-5.674,4.219c-0.826,3.417-0.863,5.557,0,9.125C5.851,32.005,7.294,34,9.931,34h3.632v-5.104c0-2.966,2.686-5.896,5.764-5.896h7.236c2.523,0,5-1.862,5-4.377v-8.586c0-2.439-1.759-4.263-4.218-4.672C27.406,5.359,25.589,4.994,24.047,5z M19.063,9c0.821,0,1.5,0.677,1.5,1.502c0,0.833-0.679,1.498-1.5,1.498c-0.837,0-1.5-0.664-1.5-1.498C17.563,9.68,18.226,9,19.063,9z"/><path fill="#FFC107" d="M23.078,43c1.555-0.005,2.633-0.142,3.936-0.367c3.848-0.67,4.549-2.077,4.549-4.67V34h-9v-2h9.343h4.35c2.636,0,4.943-1.242,5.674-4.219c0.826-3.417,0.863-5.557,0-9.125C41.274,15.995,39.831,14,37.194,14h-3.632v5.104c0,2.966-2.686,5.896-5.764,5.896h-7.236c-2.523,0-5,1.862-5,4.377v8.586c0,2.439,1.759,4.263,4.218,4.672C19.719,42.641,21.536,43.006,23.078,43z M28.063,39c-0.821,0-1.5-0.677-1.5-1.502c0-0.833,0.679-1.498,1.5-1.498c0.837,0,1.5,0.664,1.5,1.498C29.563,38.32,28.899,39,28.063,39z"/>
   </svg>
 );
 
@@ -43,8 +43,9 @@ const ProjectTechMap = {
   "Vite": { icon: <SiVite />, color: "#646CFF" }
 };
 
-function ProjectCard({ project, themeClass, renderIcon, isExpanded, onExpand, isGridMode }) {
+function ProjectCard({ project, themeClass, renderIcon, isExpanded, onExpand }) {
   const handleCardClick = (e) => {
+    // Keep link paths clickable without triggering state changes
     if (e.target.closest('.project-links') || e.target.closest('a')) {
       return;
     }
@@ -53,75 +54,72 @@ function ProjectCard({ project, themeClass, renderIcon, isExpanded, onExpand, is
 
   return (
     <div
-      className={`project-card-wrapper ${isExpanded ? "expanded" : ""} ${isGridMode ? "grid-card" : ""}`}
+      className={`project-card-wrapper ${isExpanded ? "expanded" : ""}`}
       onClick={handleCardClick}
     >
       <div className={`project-card ${themeClass}`}>
+        
+        {/* COLLAPSED STATE: Renders vertical titles & project icon at the bottom */}
+        <div className="project-vertical-title-view">
+          <h2 className="vertical-title">{project.title}</h2>
+          <div className="vertical-icon-wrapper">
+            {renderIcon()}
+          </div>
+        </div>
 
-        {/* COLLAPSED STATE */}
-        {(!isExpanded || isGridMode) && (
-          <div className="project-vertical-title-view">
-            <h2 className="vertical-title">{project.title}</h2>
-            <div className="vertical-icon-wrapper">
+        {/* EXPANDED REVEAL STATE */}
+        <div className="project-expanded-view">
+          <div className="project-header">
+            <div className="project-title-container">
+              <h2 className="project-title">{project.title} ({project.year})</h2>
+              
+              {/* Dynamic Tech Badges rendering brand icons and names */}
+              <div className="project-tech-badges">
+                {project.tech.map((techName, idx) => {
+                  const techMeta = ProjectTechMap[techName] || { icon: null, color: "inherit" };
+                  return (
+                    <span key={idx} className="tech-badge">
+                      <span className="tech-badge-icon" style={{ color: techMeta.color }}>
+                        {techMeta.icon}
+                      </span>
+                      <span className="tech-badge-name">{techName}</span>
+                    </span>
+                  );
+                })}
+              </div>
+            </div>
+            
+            <div className="project-graphic-wrapper">
               {renderIcon()}
             </div>
           </div>
-        )}
 
-        {/* EXPANDED REVEAL STATE */}
-        {(isExpanded || isGridMode) && (
-          <div className="project-expanded-view">
-            <div className="project-header">
-              <div className="project-title-container">
-                <h2 className="project-title">{project.title} ({project.year})</h2>
+          <div className="project-desc-wrapper">
+            <ul className="project-desc">
+              {project.desc.map((item, i) => (
+                <li key={i} className="project-desc-item">
+                  {item}
+                </li>
+              ))}
+            </ul>
+          </div>
 
-                <div className="project-tech-badges">
-                  {project.tech.map((techName, idx) => {
-                    const techMeta = ProjectTechMap[techName] || { icon: null, color: "inherit" };
-                    return (
-                      <span key={idx} className="tech-badge">
-                        <span className="tech-badge-icon" style={{ color: techMeta.color }}>
-                          {techMeta.icon}
-                        </span>
-                        <span className="tech-badge-name">{techName}</span>
-                      </span>
-                    );
-                  })}
-                </div>
-              </div>
+          <div className="project-footer">
+            <div className="project-links">
+              <a href={project.github} target="_blank" rel="noreferrer" className="project-btn github-btn">
+                <FaGithub className="btn-icon" />
+                <span>GitHub</span>
+              </a>
 
-              <div className="project-graphic-wrapper">
-                {renderIcon()}
-              </div>
-            </div>
-
-            <div className="project-desc-wrapper">
-              <ul className="project-desc">
-                {project.desc.map((item, i) => (
-                  <li key={i} className="project-desc-item">
-                    {item}
-                  </li>
-                ))}
-              </ul>
-            </div>
-
-            <div className="project-footer">
-              <div className="project-links">
-                <a href={project.github} target="_blank" rel="noreferrer" className="project-btn github-btn">
-                  <FaGithub className="btn-icon" />
-                  <span>GitHub</span>
+              {project.demo && (
+                <a href={project.demo} target="_blank" rel="noreferrer" className="project-btn demo-btn">
+                  <FaExternalLinkAlt className="btn-icon" />
+                  <span>Live Demo</span>
                 </a>
-
-                {project.demo && (
-                  <a href={project.demo} target="_blank" rel="noreferrer" className="project-btn demo-btn">
-                    <FaExternalLinkAlt className="btn-icon" />
-                    <span>Live Demo</span>
-                  </a>
-                )}
-              </div>
+              )}
             </div>
           </div>
-        )}
+        </div>
 
       </div>
     </div>
@@ -129,8 +127,8 @@ function ProjectCard({ project, themeClass, renderIcon, isExpanded, onExpand, is
 }
 
 export default function Projects() {
-  const [isGridMode, setIsGridMode] = useState(false);
-  const [currentSlide, setCurrentSlide] = useState(0);
+  // Start with the first project card beautifully expanded
+  const [expandedIndex, setExpandedIndex] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
 
   const projects = [
@@ -383,37 +381,18 @@ export default function Projects() {
     }
   ];
 
-  const totalProjects = projects.length;
-
-  const prevSlide = () => {
-    setCurrentSlide((prev) => (prev === 0 ? totalProjects - 1 : prev - 1));
-    setIsPaused(true);
-  };
-
-  const nextSlide = () => {
-    setCurrentSlide((prev) => (prev === totalProjects - 1 ? 0 : prev + 1));
-    setIsPaused(true);
-  };
-
-  // Get index parameters for exactly 3 sequential cards
-  const getVisibleIndices = () => {
-    const leftIndex = (currentSlide - 1 + totalProjects) % totalProjects;
-    const middleIndex = currentSlide;
-    const rightIndex = (currentSlide + 1) % totalProjects;
-    return [leftIndex, middleIndex, rightIndex];
-  };
-
-  const visibleIndices = getVisibleIndices();
-
   useEffect(() => {
-    if (isPaused || isGridMode) return;
+    if (isPaused) return;
 
     const interval = setInterval(() => {
-      setCurrentSlide((prev) => (prev + 1) % totalProjects);
+      setExpandedIndex((prev) => {
+        if (prev === null) return 0;
+        return (prev + 1) % projects.length;
+      });
     }, 5000);
 
     return () => clearInterval(interval);
-  }, [isPaused, isGridMode, totalProjects]);
+  }, [isPaused, projects.length]);
 
   return (
     <section id="projects" className="projects-section">
@@ -421,66 +400,25 @@ export default function Projects() {
         <h1 className="projects-title">Projects</h1>
         <div className="projects-subtitle-underline"></div>
 
-        {!isGridMode ? (
-          /* LOOP CAROUSEL CONTAINER SLIDESHOW MODE */
-          <div className="projects-carousel-wrapper">
-            <button className="carousel-nav-btn prev-btn" onClick={prevSlide} aria-label="Previous Project">
-              <FaChevronLeft />
-            </button>
-
-            <div
-              className="projects-flex-container"
-              onMouseEnter={() => setIsPaused(true)}
-              onMouseLeave={() => setIsPaused(false)}
-            >
-              {visibleIndices.map((projectIndex, positionIdx) => {
-                const p = projects[projectIndex];
-                const isMiddle = positionIdx === 1;
-
-                return (
-                  <ProjectCard
-                    key={projectIndex}
-                    project={p}
-                    themeClass={p.themeClass}
-                    renderIcon={p.renderIcon}
-                    isExpanded={isMiddle}
-                    onExpand={() => {
-                      if (positionIdx === 0) prevSlide();
-                      if (positionIdx === 2) nextSlide();
-                    }}
-                    isGridMode={false}
-                  />
-                );
-              })}
-            </div>
-
-            <button className="carousel-nav-btn next-btn" onClick={nextSlide} aria-label="Next Project">
-              <FaChevronRight />
-            </button>
-          </div>
-        ) : (
-          /* GRID LAYOUT GALLERY ALL PROJECTS SHOW MODE */
-          <div className="projects-grid-container">
-            {projects.map((p, index) => (
-              <ProjectCard
-                key={index}
-                project={p}
-                themeClass={p.themeClass}
-                renderIcon={p.renderIcon}
-                isExpanded={true}
-                onExpand={() => { }}
-                isGridMode={true}
-              />
-            ))}
-          </div>
-        )}
-
-        {/* CONTROLS DISPLAY OVERVIEW SWITCHER TOGGLE LINK */}
-        <div className="toggle-view-container">
-          <button className="view-toggle-btn" onClick={() => setIsGridMode(!isGridMode)}>
-            <FaTh className="btn-icon" />
-            <span>{isGridMode ? "Show Slideshow" : "Show All Projects"}</span>
-          </button>
+        <div 
+          className="projects-flex-container"
+          onMouseEnter={() => setIsPaused(true)}
+          onMouseLeave={() => setIsPaused(false)}
+        >
+          {projects.map((p, index) => (
+            <ProjectCard 
+              key={index} 
+              project={p} 
+              themeClass={p.themeClass}
+              renderIcon={p.renderIcon}
+              isExpanded={expandedIndex === index}
+              onExpand={() => {
+                setExpandedIndex(expandedIndex === index ? null : index);
+                // Lock pause state when user clicks directly
+                setIsPaused(true);
+              }}
+            />
+          ))}
         </div>
       </div>
     </section>

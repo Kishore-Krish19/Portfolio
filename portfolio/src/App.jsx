@@ -1,5 +1,7 @@
 import Home from "./components/Home";
 import Projects from "./components/Projects";
+import Achievements from "./components/Achievements";
+import Certifications from "./components/Certifications";
 import Resume from "./components/Resume";
 import Contact from "./components/Contact";
 import Navbar from "./components/Navbar";
@@ -66,6 +68,8 @@ function App() {
         <About />
         <Skills />
         <Projects />
+        <Achievements />
+        <Certifications />
         {/* <Resume /> */}
         <Contact />
       </div>
