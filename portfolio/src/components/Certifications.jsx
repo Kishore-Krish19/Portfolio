@@ -4,29 +4,34 @@ import "./Certifications.css";
 // 1. Update this array with your imported PNG paths
 const certificates = [
   {
-    title: "Java (Basic) Certificate",
-    imgSrc: "src/assets/certificates/java.png", 
-    verifyUrl: "https://www.hackerrank.com/certificates/verify"
-  },
-  {
-    title: "Problem Solving (Basic) Certificate",
-    imgSrc: "src/assets/certificates/problem_solving.png", 
-    verifyUrl: "https://www.hackerrank.com/certificates/verify"
+    title: "Crash Course on Python",
+    imgSrc: "src/assets/certificates/crash_course_python.png", 
+    verifyUrl: "https://coursera.org/verify/Q5TEVDD6Z39G"
   },
   {
     title: "Programming Foundations with JS, HTML & CSS",
     imgSrc: "src/assets/certificates/html.png", 
-    verifyUrl: "https://www.coursera.org/verify"
+    verifyUrl: "https://coursera.org/verify/JZSWFKQYYKC3"
+  },
+  {
+    title: "Python (Basic) Certificate",
+    imgSrc: "src/assets/certificates/python.png", 
+    verifyUrl: "https://www.hackerrank.com/certificates/iframe/3d706f71c414"
   },
   {
     title: " C Programming",
     imgSrc: "src/assets/certificates/c_progrgamming.png", 
-    verifyUrl: "https://www.coursera.org/verify"
+    verifyUrl: "https://coursera.org/verify/UCOSLQZ7D9SD"
   },
   {
-    title: "Crash Course on Python",
-    imgSrc: "src/assets/certificates/python.png", 
-    verifyUrl: "https://www.coursera.org/verify"
+    title: "Problem Solving (Basic) Certificate",
+    imgSrc: "src/assets/certificates/problem_solving.png", 
+    verifyUrl: "https://www.hackerrank.com/certificates/iframe/16e99e49dd76"
+  },
+  {
+    title: "Java (Basic) Certificate",
+    imgSrc: "src/assets/certificates/java.png", 
+    verifyUrl: "https://www.hackerrank.com/certificates/iframe/11644eb3634e"
   }
 ];
 
