@@ -228,31 +228,9 @@ export default function Home() {
                                 <a href="https://linkedin.com" target="_blank" rel="noreferrer">LinkedIn</a>
                             </div>
                         </div>
-
                     </div>
-
                 </div>
-
-                {/* Left Intro */}
-                <div className="home-left-intro hidden-mobile">
-                    <h3 className="text-glow">Hi! I'm Kishore</h3>
-                    <p>A developer who enjoys turning logic, creativity, and problem-solving into real-world applications using Java, Web Technologies, and AI/ML.</p>
-                </div>
-
-                {/* Right Skills */}
-                <div className="home-right-skills hidden-mobile">
-                    <h3 className="text-glow">Currently I'm</h3>
-                    <ul>
-                        <li>• Problem Solver</li>
-                        <li>• Software Developer</li>
-                        <li>• Tech Explorer</li>
-                        <li>• Cloud & AI</li>
-                    </ul>
-                </div>
-
             </div>
-
-
         </section>
     );
 }

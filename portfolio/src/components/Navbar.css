@@ -1,138 +1,190 @@
 /* ===============================
-   Navbar
-================================ */
+   Navbar (Dynamic Island Style)
+ ================================ */
 
 .navbar {
   position: fixed;
-  /* top: -80px; */
-  left: 0;
-  right: 0;
-  width: 100%;
-  height: 70px;
+  top: 20px;
+  left: 50%;
+  transform: translate(-50%, -150%);
+  width: auto;
+  max-width: 92%;
+  height: 64px;
 
-  background: rgba(2, 6, 23, 0.9);
-  backdrop-filter: blur(10px);
+  /* Glassmorphic Space Capsule */
+  background: rgba(2, 6, 23, 0.5);
+  backdrop-filter: blur(16px) saturate(180%);
+  -webkit-backdrop-filter: blur(16px) saturate(180%);
+  
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 9999px;
 
   display: flex;
   justify-content: space-between;
   align-items: center;
+  gap: 32px;
 
-  padding: 0 130px;
-
+  padding: 0 28px;
   color: white;
   z-index: 9999;
-
-  top: 0;
-  transform: translateY(-100%);
-  transition: transform 0.4s ease;
 
   box-sizing: border-box;
   transform-style: flat;
   backface-visibility: hidden;
-  will-change: transform;
+  will-change: transform, background, border-color, box-shadow;
+
+  /* Double Glass Aura Shadow */
+  box-shadow: 
+    0 4px 6px -1px rgba(0, 0, 0, 0.1),
+    0 20px 40px -15px rgba(0, 0, 0, 0.6),
+    0 0 0 1px rgba(255, 255, 255, 0.04) inset;
+  
+  /* Smooth fluid spring transition */
+  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1), 
+              background 0.3s ease, 
+              border-color 0.3s ease, 
+              box-shadow 0.3s ease;
 }
 
 .navbar.show {
-  transform: translateY(0);
+  transform: translate(-50%, 0);
+}
+
+/* Hovering Glow Shift for the Island when active */
+.navbar.show:hover {
+  background: rgba(2, 6, 23, 0.65);
+  border-color: rgba(24, 217, 224, 0.2);
+  box-shadow: 
+    0 4px 12px -2px rgba(24, 217, 224, 0.1),
+    0 20px 40px -15px rgba(0, 0, 0, 0.7),
+    0 0 0 1px rgba(255, 255, 255, 0.06) inset;
 }
 
 /* ===============================
    Logo
-================================ */
+ ================================ */
 
-.logo {
-  font-weight: 700;
-  letter-spacing: 1px;
+.navbar .logo {
+  font-family: 'Orbitron', 'Syncopate', sans-serif;
+  font-size: 22px;
+  font-weight: 800;
+  letter-spacing: 4px;
+  text-transform: uppercase;
   white-space: nowrap;
+  
+  /* Space-based color matching cosmic gradient */
+  background: linear-gradient(
+    90deg,
+    #18d9e0 0%,
+    #3b82f6 30%,
+    #9333ea 60%,
+    #18d9e0 100%
+  );
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  
+  /* Cosmic nebula aura glow */
+  filter: drop-shadow(0 0 5px rgba(24, 217, 224, 0.4));
+  
+  cursor: pointer;
+  transition: letter-spacing 0.3s cubic-bezier(0.2, 0.8, 0.2, 1), 
+              filter 0.3s ease, 
+              transform 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
+  
+  /* Base state before entrance */
+  opacity: 0;
+  transform: translateY(-10px) scale(0.95);
+}
+
+.navbar .logo:hover {
+  filter: drop-shadow(0 0 12px rgba(24, 217, 224, 0.8)) 
+          drop-shadow(0 0 25px rgba(147, 51, 234, 0.5));
+  letter-spacing: 6px;
+  transform: scale(1.04);
 }
 
 /* ===============================
    Nav Links Container
-================================ */
+ ================================ */
 
 .nav-links {
   display: flex;
   align-items: center;
-
-  gap: 20px;
-
-  flex-wrap: wrap;
-  justify-content: flex-end;
-
-  max-width: 70%;
+  gap: 6px;
+  flex-wrap: nowrap;
 }
 
 /* ===============================
    Nav Buttons (Icon + Text)
-================================ */
+ ================================ */
 
 .nav-links button {
-  display: flex;
+  display: inline-flex;
   align-items: center;
   justify-content: center;
+  gap: 6px;
 
-  gap: 4px;
-  /* Space between icon & text */
+  background: transparent;
+  border: 1px solid transparent;
 
-  background: none;
-  border: none;
+  color: #94a3b8; /* Elegant slate grey */
 
-  color: white;
-
-  font-size: 16px;
+  font-size: 14px;
   font-weight: 500;
 
   cursor: pointer;
-
-  padding: 6px 8px;
-
+  padding: 6px 12px;
+  border-radius: 9999px;
   white-space: nowrap;
 
-  transition: all 0.25s ease;
+  transition: all 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
 }
 
 /* ===============================
    Icons
-================================ */
+ ================================ */
 
 .nav-links button svg {
-  width: 15px;
-  height: 15px;
-
+  width: 14px;
+  height: 14px;
   stroke: currentColor;
-
-  transition: 0.25s ease;
+  transition: stroke 0.3s ease, transform 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
 }
 
 /* ===============================
-   Hover Effect
-================================ */
+   Hover & Active Effects
+ ================================ */
 
 .nav-links button:hover {
-  color: #3b82f6;
-  transform: scale(1.15);
+  color: #18d9e0; /* Matches space cyan */
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(255, 255, 255, 0.05);
+  transform: translateY(-1px);
 }
 
 .nav-links button:hover svg {
-  stroke: #3b82f6;
+  stroke: #18d9e0;
+  transform: translateY(-0.5px);
 }
 
-/* ===============================
-   Active Link (Optional)
-================================ */
-
+/* Active Link Capsule style */
 .nav-links button.active {
-  color: #22c55e;
+  background: rgba(24, 217, 224, 0.1);
+  border-color: rgba(24, 217, 224, 0.2);
+  color: #18d9e0;
+  box-shadow: 0 0 12px rgba(24, 217, 224, 0.12);
 }
 
 .nav-links button.active svg {
-  stroke: #22c55e;
+  stroke: #18d9e0;
 }
 
 /* ===============================
    Bounce-in Text Animation
-================================ */
-/* Hide text before navbar shows */
+ ================================ */
+/* Hide elements before active show */
 .navbar .logo,
 .navbar .nav-links button {
   opacity: 0;
@@ -156,62 +208,80 @@
   }
 }
 
-.navbar.show .logo,
+@keyframes cosmicFlow {
+  0% {
+    background-position: 0% center;
+  }
+  100% {
+    background-position: 200% center;
+  }
+}
+
+.navbar.show .logo {
+  animation: bounceIn 0.45s ease-out forwards, cosmicFlow 6s linear infinite;
+}
+
 .navbar.show .nav-links button {
   animation: bounceIn 0.45s ease-out forwards;
 }
 
-.navbar.show .nav-links button:nth-child(1) {
-  animation-delay: 0.5s;
-}
+.navbar.show .nav-links button:nth-child(1) { animation-delay: 0.5s; }
+.navbar.show .nav-links button:nth-child(2) { animation-delay: 0.65s; }
+.navbar.show .nav-links button:nth-child(3) { animation-delay: 0.7s; }
+.navbar.show .nav-links button:nth-child(4) { animation-delay: 0.75s; }
+.navbar.show .nav-links button:nth-child(5) { animation-delay: 0.8s; }
+.navbar.show .nav-links button:nth-child(6) { animation-delay: 0.85s; }
+.navbar.show .nav-links button:nth-child(7) { animation-delay: 0.9s; }
 
-.navbar.show .nav-links button:nth-child(2) {
-  animation-delay: 0.65s;
-}
 
-.navbar.show .nav-links button:nth-child(3) {
-  animation-delay: 0.7s;
-}
+/* ===============================  
+   Mobile & Tablet Responsiveness
+ ================================ */
 
-.navbar.show .nav-links button:nth-child(4) {
-  animation-delay: 0.75s;
-}
-
-.navbar.show .nav-links button:nth-child(5) {
-  animation-delay: 0.8s;
-}
-
-.navbar.show .nav-links button:nth-child(6) {
-  animation-delay: 0.85s;
-}
-
-/* ===============================
-   Mobile
-================================ */
-
-@media (max-width: 768px) {
+@media (max-width: 900px) {
   .navbar {
+    top: 12px;
+    width: 94%;
     height: auto;
-    padding: 10px 15px;
-
+    padding: 12px 20px;
+    border-radius: 24px;
     flex-direction: column;
-    gap: 8px;
+    gap: 12px;
+  }
+
+  .navbar .logo {
+    font-size: 20px;
+    letter-spacing: 3px;
   }
 
   .nav-links {
     max-width: 100%;
+    width: 100%;
     justify-content: center;
     flex-wrap: wrap;
+    gap: 6px;
+  }
+
+  .nav-links button {
+    font-size: 12px;
+    padding: 6px 12px;
+    gap: 4px;
+  }
+
+  .nav-links button svg {
+    width: 13px;
+    height: 13px;
   }
 }
+
+/* ===============================
+   Reduced Motion
+ ================================ */
 
 @media (prefers-reduced-motion: reduce) {
   .navbar {
     transition: none;
   }
-}
-
-@media (prefers-reduced-motion: reduce) {
 
   .navbar .logo,
   .navbar .nav-links button {

@@ -60,10 +60,8 @@ function App() {
       <div className="space-layer mid" id="layer-mid"></div>
       <div className="space-layer near" id="layer-near"></div>
 
-      {/* Navbar */}
       <Navbar />
       <div className="page-3d">
-        {/* Wrapped sections */}
         <Home />
         <About />
         <Skills />
@@ -74,7 +72,6 @@ function App() {
         <Contact />
       </div>
 
-      {/* Footer */}
       <Footer />
 
     </>
