@@ -309,12 +309,26 @@ export default function Achievements() {
                 <div className="shimmer-wave"></div>
               </div>
 
+              {/* Terminal-like Header for LeetCode */}
+              <div className="lc-terminal-header z-10 w-full flex items-center justify-between mb-2 pb-2 border-b border-white/5">
+                <div className="flex items-center gap-2">
+                  <span className="w-2 h-2 rounded-full bg-red-500/80 shadow-[0_0_8px_#ef4444]"></span>
+                  <span className="w-2 h-2 rounded-full bg-yellow-500/80 shadow-[0_0_8px_#eab308]"></span>
+                  <span className="w-2 h-2 rounded-full bg-green-500/80 shadow-[0_0_8px_#22c55e]"></span>
+                  <span className="ml-2 text-[10px] tracking-wider text-gray-500 font-mono">leetcode_profile.sh</span>
+                </div>
+                <div className="flex items-center gap-1.5 font-mono text-[9px] text-orange-500/80">
+                  <span className="w-1.5 h-1.5 rounded-full bg-orange-500 animate-ping"></span>
+                  <span>SYNCING LIVE</span>
+                </div>
+              </div>
+
               {/* Dynamic LeetCode heat map card */}
               <div className="relative w-full h-full flex items-center justify-center z-10">
                 <img
                   src="https://leetcard.jacoblin.cool/Kishore__E?theme=dark&font=Inter&ext=heatmap"
                   alt="LeetCode Heatmap Card"
-                  className="w-full h-full object-contain p-2"
+                  className="w-full h-full object-contain p-1"
                   onError={(e) => {
                     // Fallback to logo display if leetcard API fails
                     e.target.style.display = "none";
@@ -355,13 +369,15 @@ export default function Achievements() {
               {/* Premium customized content matching 2x2 grid mockup */}
               <div className="hackerrank-card-content">
                 <div className="hackerrank-header">
-                  <div className="hr-logo-bg">
+                  <div className="hr-logo-bg relative">
+                    <span className="absolute inset-0 rounded-2xl bg-emerald-500/20 animate-ping"></span>
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       viewBox="0 0 24 24"
                       width="36"
                       height="36"
                       fill="currentColor"
+                      className="relative z-10"
                     >
                       <path d="M0 0v24h24V0zm9.95 8.002h1.805c.061 0 .111.05.111.111v7.767c0 .061-.05.111-.11.111H9.95c-.061 0-.111-.05-.111-.11v-2.87H7.894v2.87c0 .06-.05.11-.11.11H5.976a.11.11 0 01-.11-.11V8.112c0-.06.05-.11.11-.11h1.806c.061 0 .11.05.11.11v2.869H9.84v-2.87c0-.06.05-.11.11-.11zm2.999 0h5.778c.061 0 .111.05.111.11v7.767a.11.11 0 01-.11.112h-5.78a.11.11 0 01-.11-.11V8.111c0-.06.05-.11.11-.11z" />
                     </svg>
@@ -370,13 +386,18 @@ export default function Achievements() {
                     <h3>HackerRank</h3>
                     <p className="hr-username">@Kishore_krish_19</p>
                   </div>
+                  {/* Glowing Sync Badge */}
+                  <div className="ml-auto flex items-center gap-1.5 font-mono text-[9px] text-emerald-400/80">
+                    <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
+                    <span>VERIFIED</span>
+                  </div>
                 </div>
 
                 {/* 2x2 Sub-cards Grid */}
                 <div className="hackerrank-subgrid">
 
                   {/* Sub-card 2: Java */}
-                  <div className="hr-subcard">
+                  <div className="hr-subcard gold">
                     <h4>Java</h4>
                     <span className="hr-badge gold">5 Star Gold</span>
                     <div className="hr-stars-row">{"★".repeat(5)}</div>
@@ -384,21 +405,21 @@ export default function Achievements() {
                   </div>
 
                   {/* Sub-card 4: C */}
-                  <div className="hr-subcard">
+                  <div className="hr-subcard gold">
                     <h4>C</h4>
                     <span className="hr-badge gold">5 Star Gold</span>
                     <div className="hr-stars-row">{"★".repeat(5)}</div>
                     <span className="hr-solves">23 Solved</span>
                   </div>
                   {/* Sub-card 3: Problem Solving */}
-                  <div className="hr-subcard">
+                  <div className="hr-subcard gold">
                     <h4>SQL</h4>
                     <span className="hr-badge gold">5 Star Gold</span>
                     <div className="hr-stars-row">{"★".repeat(5)}</div>
                     <span className="hr-solves">48 Solved</span>
                   </div>
                   {/* Sub-card 1: Python */}
-                  <div className="hr-subcard">
+                  <div className="hr-subcard silver">
                     <h4>Python</h4>
                     <span className="hr-badge silver">4 Star Silver</span>
                     <div className="hr-stars-row">{"★".repeat(4)}</div>

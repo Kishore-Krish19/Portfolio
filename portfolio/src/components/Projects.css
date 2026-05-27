@@ -2,7 +2,7 @@
   position: relative;
   min-height: 100vh;
   color: white;
-  padding: 80px 5% 60px;
+  padding: 45px 5% 60px;
   z-index: 10;
 }
 
@@ -10,7 +10,7 @@
   text-align: center;
   font-size: 40px;
   font-weight: 800;
-  margin-bottom: 30px;
+  margin-bottom: 20px;
   letter-spacing: -0.02em;
   background: linear-gradient(135deg, #ffffff 0%, #a5b4fc 100%);
   -webkit-background-clip: text;
@@ -21,7 +21,7 @@
   width: 70px;
   height: 4px;
   background: linear-gradient(90deg, #7c3aed 0%, #2563eb 100%);
-  margin: -20px auto 50px;
+  margin: -20px auto 10px;
   border-radius: 99px;
   box-shadow: 0 0 10px rgba(124, 58, 237, 0.5);
 }
@@ -38,7 +38,7 @@
   width: 100%;
   max-width: 1400px;
   margin: 0 auto;
-  padding: 0 70px;
+  padding: 0 70px;  
   box-sizing: border-box;
 }
 
@@ -436,8 +436,9 @@
 
 .toggle-view-container {
   display: flex;
-  justify-content: center;
-  margin-top: 60px;
+  justify-content: right;
+  margin-top: 20px;
+  padding-bottom: 20px;
 }
 
 .view-toggle-btn {
@@ -449,7 +450,7 @@
   color: #c7d2fe;
   padding: 14px 32px;
   border-radius: 99px;
-  font-size: 15px;
+  font-size: 13px;
   font-weight: 700;
   cursor: pointer;
   transition: all 0.3s cubic-bezier(0.25, 1, 0.2, 1);
@@ -464,7 +465,7 @@
 }
 
 .btn-icon {
-  font-size: 14px;
+  font-size: 15px;
 }
 
 /* Adaptive Media Query System */

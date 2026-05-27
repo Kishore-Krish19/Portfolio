@@ -420,6 +420,14 @@ export default function Projects() {
       <div className="content-layer">
         <h1 className="projects-title">Projects</h1>
         <div className="projects-subtitle-underline"></div>
+        
+        {/* CONTROLS DISPLAY OVERVIEW SWITCHER TOGGLE LINK */}
+        <div className="toggle-view-container">
+          <button className="view-toggle-btn" onClick={() => setIsGridMode(!isGridMode)}>
+            <FaTh className="btn-icon" />
+            <span>{isGridMode ? "Show Slideshow" : "Show All Projects"}</span>
+          </button>
+        </div>
 
         {!isGridMode ? (
           /* LOOP CAROUSEL CONTAINER SLIDESHOW MODE */
@@ -474,14 +482,6 @@ export default function Projects() {
             ))}
           </div>
         )}
-
-        {/* CONTROLS DISPLAY OVERVIEW SWITCHER TOGGLE LINK */}
-        <div className="toggle-view-container">
-          <button className="view-toggle-btn" onClick={() => setIsGridMode(!isGridMode)}>
-            <FaTh className="btn-icon" />
-            <span>{isGridMode ? "Show Slideshow" : "Show All Projects"}</span>
-          </button>
-        </div>
       </div>
     </section>
   );
