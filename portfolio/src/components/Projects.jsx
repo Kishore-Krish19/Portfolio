@@ -359,7 +359,7 @@ export default function Projects() {
       ],
       github: "https://github.com/Kishore-Krish19/AI-Data-Analyst-Agent",
       demo: null,
-      videoDemo: "/Data-Analyst-agent-demo.mp4",
+      videoDemo: "videos/Data-Analyst-agent-demo.mp4",
       themeClass: "ai-theme",
       renderIcon: () => (
         <svg className="project-graphic-svg" viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg" fill="none">
