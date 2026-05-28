@@ -35,12 +35,12 @@ function App() {
     <>
       <div style={{ position: 'fixed', inset: 0, zIndex: 1, pointerEvents: 'none' }}>
         <Antigravity
-          count={500}
-          magnetRadius={5}
+          count={700}
+          magnetRadius={6}
           ringRadius={3}
           waveSpeed={0.4}
           waveAmplitude={1}
-          particleSize={0.4}
+          particleSize={0.25}
           lerpSpeed={0.08}
           color="#08defd"
           autoAnimate

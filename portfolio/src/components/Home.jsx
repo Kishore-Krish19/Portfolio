@@ -1,5 +1,7 @@
 import { useState, useEffect } from "react";
 import "./Home.css";
+import TextType from "./TextType";
+import RotatingText from "./RotatingText";
 
 // Images
 import aboutImg from "../assets/about.jpg";
@@ -8,9 +10,21 @@ import projectsImg from "../assets/projects.jpg";
 import contactImg from "../assets/contact.jpg";
 import defaultImg from "../assets/default.jpg";
 
+// Corner brackets helper rendered inside every glow-btn
+function BtnCorners() {
+    return (
+        <>
+            <span className="btn-corner tl" />
+            <span className="btn-corner tr" />
+            <span className="btn-corner bl" />
+            <span className="btn-corner br" />
+        </>
+    );
+}
+
 export default function Home() {
     const [image, setImage] = useState(defaultImg);
-    const [label, setLabel] = useState("Welcome to my Portfolio");
+    const [label, setLabel] = useState("Welcome to My Digital Space");
     const [fade, setFade] = useState(false);
 
     const [isInitialAnimationComplete, setIsInitialAnimationComplete] = useState(false);
@@ -65,7 +79,7 @@ export default function Home() {
 
     // Reset to default
     const resetPreview = () => {
-        updatePreview(defaultImg, "Welcome to my Portfolio", null);
+        updatePreview(defaultImg, "Welcome to My Digital Space", null);
     };
 
     // Desktop hover
@@ -107,104 +121,185 @@ export default function Home() {
                     if (isMobile) resetPreview();
                 }}
             >
-                {/* Buttons Layer */}
+                {/* LEFT SIDE OVERLAY */}
+                <div className="home-left-intro">
+                    <h2 className="intro-title"> Hi, I'm</h2>
+                    <h1 className="intro-name">Kishore</h1>
+                    <p className="intro-subtitle">
+                        <TextType
+                            as="span"
+                            text={['_ Dynamic', '_ Creative', '_ Passionate', '_ Hardworking', '_ Skilled', '_ Professional']}
+                            typingSpeed={50}
+                            deletingSpeed={45}
+                            pauseDuration={2700}
+                            showCursor={true}
+                            cursorCharacter="|"
+                            cursorClassName="intro-cursor"
+                            loop={true}
+                        />
+                    </p>
+                    <p className="intro-designation">
+                        <TextType
+                            as="span"
+                            text={['Software Developer', 'Web Developer', 'Problem Solver', 'Backend Developer', 'Frontend Developer', 'MERN Stack Developer']}
+                            typingSpeed={80}
+                            deletingSpeed={45}
+                            pauseDuration={2200}
+                            initialDelay={500}
+                            showCursor={true}
+                            cursorCharacter="|"
+                            cursorClassName="intro-cursor designation-cursor"
+                            loop={true}
+                        />
+                    </p>
+                </div>
+
+                {/* RIGHT SIDE OVERLAY */}
+                <div className="home-right-skills">
+                    {/* LOVE TAGLINE */}
+                    <div className="love-tagline">
+                        <span className="love-static">I Love to</span>
+                        <RotatingText
+                            texts={['Design', 'Code', 'Innovate', 'Explore']}
+                            splitBy="characters"
+                            staggerFrom="first"
+                            initial={{ y: '100%', opacity: 0 }}
+                            animate={{ y: 0, opacity: 1 }}
+                            exit={{ y: '-120%', opacity: 0 }}
+                            staggerDuration={0.03}
+                            splitLevelClassName="overflow-hidden"
+                            transition={{ type: 'spring', damping: 28, stiffness: 380 }}
+                            rotationInterval={2000}
+                            mainClassName="love-rotating"
+                            elementLevelClassName="love-rotating-char"
+                        />
+                    </div>
+                    <div className="social-icons-row">
+                        {/* LinkedIn */}
+                        <div className="home-iso-pro linkedin-item">
+                            <span /><span /><span />
+                            <a href="https://linkedin.com" target="_blank" rel="noreferrer" className="icon-link linkedin">
+                                <i className="fab fa-linkedin-in"></i>
+                            </a>
+                            <div className="home-iso-tooltip">LinkedIn</div>
+                        </div>
+                        {/* GitHub */}
+                        <div className="home-iso-pro github-item">
+                            <span /><span /><span />
+                            <a href="https://github.com" target="_blank" rel="noreferrer" className="icon-link github">
+                                <i className="fab fa-github"></i>
+                            </a>
+                            <div className="home-iso-tooltip">GitHub</div>
+                        </div>
+                        {/* LeetCode */}
+                        <div className="home-iso-pro leetcode-item">
+                            <span /><span /><span />
+                            <a href="#" className="icon-link leetcode">
+                                <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M13.483 0a1.374 1.374 0 0 0-.961.438L7.116 6.226l-3.854 4.126a5.266 5.266 0 0 0-1.209 2.104 5.35 5.35 0 0 0-.125.513 5.527 5.527 0 0 0 .062 2.362 5.83 5.83 0 0 0 .349 1.017 5.938 5.938 0 0 0 1.271 1.818l4.277 4.193.039.038c2.248 2.165 5.852 2.133 8.063-.074l2.396-2.392c.54-.54.54-1.414.003-1.955a1.378 1.378 0 0 0-1.951-.003l-2.396 2.392a3.021 3.021 0 0 1-4.205.038l-.02-.019-4.276-4.193c-.652-.64-.972-1.469-.948-2.263a2.68 2.68 0 0 1 .066-.523 2.545 2.545 0 0 1 .619-1.164L9.13 8.114c1.058-1.134 3.204-1.27 4.43-.278l3.501 2.831c.593.48 1.461.387 1.94-.207a1.384 1.384 0 0 0-.207-1.943l-3.5-2.831c-.8-.647-1.766-1.045-2.774-1.202l2.015-2.158A1.384 1.384 0 0 0 13.483 0zm-2.866 12.815a1.38 1.38 0 0 0-1.38 1.382 1.38 1.38 0 0 0 1.38 1.382H20.79a1.38 1.38 0 0 0 1.38-1.382 1.38 1.38 0 0 0-1.38-1.382z" />
+                                </svg>
+                            </a>
+                            <div className="home-iso-tooltip">LeetCode</div>
+                        </div>
+                        {/* HackerRank */}
+                        <div className="home-iso-pro hackerrank-item">
+                            <span /><span /><span />
+                            <a href="#" className="icon-link hackerrank">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16" fill="currentColor">
+                                    <path d="M0 0v24h24V0zm9.95 8.002h1.805c.061 0 .111.05.111.111v7.767c0 .061-.05.111-.11.111H9.95c-.061 0-.111-.05-.111-.11v-2.87H7.894v2.87c0 .06-.05.11-.11.11H5.976a.11.11 0 0 1-.11-.11V8.112c0-.06.05-.11.11-.11h1.806c.061 0 .11.05.11.11v2.869H9.84v-2.87c0-.06.05-.11.11-.11zm2.999 0h5.778c.061 0 .111.05.111.11v7.767a.11.11 0 0 1-.11.112h-5.78a.11.11 0 0 1-.11-.11V8.111c0-.06.05-.11.11-.11z" />
+                                </svg>
+                            </a>
+                            <div className="home-iso-tooltip">HackerRank</div>
+                        </div>
+                        {/* Email */}
+                        <div className="home-iso-pro email-item">
+                            <span /><span /><span />
+                            <a href="mailto:example@domain.com" className="icon-link email">
+                                <i className="fas fa-envelope"></i>
+                            </a>
+                            <div className="home-iso-tooltip">Email</div>
+                        </div>
+                    </div>
+                    <div className="action-buttons-row">
+                        <div className="home-iso-pro resume-item">
+                            <span /><span /><span />
+                            <button className="btn-action btn-get-resume">
+                                GET RESUME &nbsp;<i className="fas fa-download"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                {/* NAV BUTTONS */}
                 <div className="home-buttons">
 
                     {/* ABOUT */}
                     <button
-                        className={`home-btn glow-btn top-left ${activeBtn === "about" ? "active" : ""
-                            }`}
-                        onMouseEnter={() =>
-                            handleHover(aboutImg, "Know About Me", "about")
-                        }
+                        className={`home-btn glow-btn top-left ${activeBtn === "about" ? "active" : ""}`}
+                        onMouseEnter={() => handleHover(aboutImg, "Meet the Developer", "about")}
                         onMouseLeave={!isMobile ? resetPreview : null}
                         onClick={(e) => {
                             e.stopPropagation();
-                            handleTap(aboutImg, "Know About Me", "about", "about");
+                            handleTap(aboutImg, "Meet the Developer", "about", "about");
                         }}
                     >
+                        <BtnCorners />
                         About
                     </button>
 
                     {/* SKILLS */}
                     <button
-                        className={`home-btn glow-btn top-right ${activeBtn === "skills" ? "active" : ""
-                            }`}
-                        onMouseEnter={() =>
-                            handleHover(skillsImg, "Click to know about my Skills", "skills")
-                        }
+                        className={`home-btn glow-btn top-right ${activeBtn === "skills" ? "active" : ""}`}
+                        onMouseEnter={() => handleHover(skillsImg, "Skills Behind the Code", "skills")}
                         onMouseLeave={!isMobile ? resetPreview : null}
                         onClick={(e) => {
                             e.stopPropagation();
-                            handleTap(
-                                skillsImg,
-                                "Click to know about my Skills",
-                                "skills",
-                                "skills"
-                            );
+                            handleTap(skillsImg, "Skills Behind the Code", "skills", "skills");
                         }}
                     >
+                        <BtnCorners />
                         Skills
                     </button>
 
                     {/* PROJECTS */}
                     <button
-                        className={`home-btn glow-btn bottom-left ${activeBtn === "projects" ? "active" : ""
-                            }`}
-                        onMouseEnter={() =>
-                            handleHover(projectsImg, "Click to see my Projects", "projects")
-                        }
+                        className={`home-btn glow-btn bottom-left ${activeBtn === "projects" ? "active" : ""}`}
+                        onMouseEnter={() => handleHover(projectsImg, "Crafted with Code", "projects")}
                         onMouseLeave={!isMobile ? resetPreview : null}
                         onClick={(e) => {
                             e.stopPropagation();
-                            handleTap(
-                                projectsImg,
-                                "Click to see my Projects",
-                                "projects",
-                                "projects"
-                            );
+                            handleTap(projectsImg, "Crafted with Code", "projects", "projects");
                         }}
                     >
+                        <BtnCorners />
                         Projects
                     </button>
 
                     {/* CONTACT */}
                     <button
-                        className={`home-btn glow-btn bottom-right ${activeBtn === "contact" ? "active" : ""
-                            }`}
-                        onMouseEnter={() =>
-                            handleHover(
-                                contactImg,
-                                "Click for Contact Details",
-                                "contact"
-                            )
-                        }
+                        className={`home-btn glow-btn bottom-right ${activeBtn === "contact" ? "active" : ""}`}
+                        onMouseEnter={() => handleHover(contactImg, "Let's Get in Touch", "contact")}
                         onMouseLeave={!isMobile ? resetPreview : null}
                         onClick={(e) => {
                             e.stopPropagation();
-                            handleTap(
-                                contactImg,
-                                "Click for Contact Details",
-                                "contact",
-                                "contact"
-                            );
+                            handleTap(contactImg, "Let's Get in Touch", "contact", "contact");
                         }}
                     >
+                        <BtnCorners />
                         Contact
                     </button>
 
                 </div>
 
-                {/* Center Content */}
+                {/* CENTER CONTENT */}
                 <div className="home-center">
                     {/* Label */}
                     <div className={`home-label home-initial-label ${fade ? "fade" : ""} ${isInitialAnimationComplete ? "visible" : ""}`}>
                         {label}
                     </div>
 
-                    {/* Stage for Rising Animation */}
+                    {/* Rising Animation Stage */}
                     <div className="rising-stage">
-                        {/* Mask */}
                         <div className="image-mask">
                             <div className={`image-glow-wrapper ${isInitialAnimationComplete ? "rise" : ""}`}>
                                 <img
@@ -213,21 +308,38 @@ export default function Home() {
                                     className={`home-image ${fade ? "fade" : ""}`}
                                 />
                             </div>
-                            {/* Glowing Line */}
+                            {/* Thruster line */}
                             <div className={`glowing-line ${isInitialAnimationComplete ? "expand" : ""}`}></div>
                         </div>
 
-                        {/* Bottom Action Area (Moved inside center for vertical stacking) */}
-                        <div className="home-bottom-action">
-                            <a href="/Resume.pdf" download className="resume-btn glow-btn">
+                        {/* Bottom Action Area (commented out as in original) */}
+                        {/* <div className="home-bottom-action">
+                            <button
+                                className="resume-btn glow-btn"
+                                onClick={() => {
+                                    const link = document.createElement("a");
+                                    link.href = "/resume.pdf";
+                                    link.download = "Kishore_E_Resume.pdf";
+                                    document.body.appendChild(link);
+                                    link.click();
+                                    document.body.removeChild(link);
+                                }}
+                            >
                                 Download Resume
-                            </a>
+                            </button>
                             <div className="social-links">
                                 <a href="https://github.com" target="_blank" rel="noreferrer">GitHub</a>
                                 <span className="dot-separator">•</span>
                                 <a href="https://linkedin.com" target="_blank" rel="noreferrer">LinkedIn</a>
                             </div>
-                        </div>
+                        </div> */}
+                    </div>
+
+                    {/* Hover hint */}
+                    <div className={`home-hover-hint ${isInitialAnimationComplete ? "visible" : ""}`}>
+                        <span className="hint-arrow">↑</span>
+                        Hover over the buttons to explore
+                        <span className="hint-arrow">↑</span>
                     </div>
                 </div>
             </div>
