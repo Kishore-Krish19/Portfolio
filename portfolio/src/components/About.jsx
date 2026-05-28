@@ -1,9 +1,65 @@
-import { useState, useMemo } from "react";
+import { useState, useMemo, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import "./About.css";
 
 export default function About() {
   const [hoveredPlanet, setHoveredPlanet] = useState(null);
+  const [scrollProgress, setScrollProgress] = useState(0);
+  const [activeNode, setActiveNode] = useState(-1);
+  const timelineRef = useRef(null);
+  const rafRef = useRef(null);
+  const targetProgress = useRef(0);
+  const currentProgress = useRef(0);
+
+  useEffect(() => {
+    const lerp = (a, b, t) => a + (b - a) * t;
+
+    const handleScroll = () => {
+      if (!timelineRef.current) return;
+      
+      const rect = timelineRef.current.getBoundingClientRect();
+      const windowH = window.innerHeight;
+      
+      // Calculate active progress strictly within the bounds of the timeline block
+      const totalHeight = rect.height;
+      const entryPoint = windowH * 0.6; // Laser starts lighting up when timeline is 60% down the screen
+      const scrolledIntoTimeline = entryPoint - rect.top;
+      
+      const progress = Math.min(1, Math.max(0, scrolledIntoTimeline / totalHeight));
+      targetProgress.current = progress;
+
+      // Precision active node detection based on physical node elements
+      const nodes = timelineRef.current.querySelectorAll(".edu-node");
+      let newActive = -1;
+      nodes.forEach((node, i) => {
+        const nodeTop = node.getBoundingClientRect().top;
+        if (nodeTop < windowH * 0.65) {
+          newActive = i;
+        }
+      });
+      setActiveNode(newActive);
+    };
+
+    const animate = () => {
+      currentProgress.current = lerp(currentProgress.current, targetProgress.current, 0.1);
+      
+      if (Math.abs(currentProgress.current - scrollProgress) > 0.0001) {
+        setScrollProgress(currentProgress.current);
+      }
+      rafRef.current = requestAnimationFrame(animate);
+    };
+
+    rafRef.current = requestAnimationFrame(animate);
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    
+    // Initial calculation jumpstart
+    setTimeout(handleScroll, 100);
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+      if (rafRef.current) cancelAnimationFrame(rafRef.current);
+    };
+  }, [scrollProgress]);
 
   const twinklingStars = useMemo(() => {
     return Array.from({ length: 28 }).map((_, i) => ({
@@ -215,18 +271,25 @@ export default function About() {
 
           {/* BUTTON */}
           <motion.div className="about-buttons" variants={itemVariants}>
-            <motion.a
-              href="/Resume.pdf" download
+            <motion.button
               className="primary-btn"
               whileHover={{ y: -3 }}
               whileTap={{ scale: 0.97 }}
+              onClick={() => {
+                const link = document.createElement("a");
+                link.href = "/resume.pdf";
+                link.download = "Kishore_E_Resume.pdf";
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+              }}
             >
               VIEW RESUME
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" style={{ marginLeft: 8 }}>
                 <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
                 <polyline points="7 10 12 15 17 10" /><line x1="12" y1="15" x2="12" y2="3" />
               </svg>
-            </motion.a>
+            </motion.button>
           </motion.div>
         </motion.div>
 
@@ -435,172 +498,163 @@ export default function About() {
         </motion.div>
       </div>
 
-      {/* Education Timeline */}
-      <h2 className="about-subtitle">
-          Education
-      </h2>
+      {/* ===== EDUCATION TIMELINE ===== */}
+      <div className="edu-section-wrapper">
+        {/* Section heading */}
+        <motion.div
+          className="edu-heading-wrapper"
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.7 }}
+          viewport={{ once: true }}
+        >
+          <span className="edu-eyebrow">// MISSION LOG</span>
+          <h2 className="edu-title">
+            Academic <span className="gradient-text">Journey</span>
+          </h2>
+          <p className="edu-subtitle-text">Tracing the trajectory through the cosmos of knowledge</p>
+          <div className="edu-title-bar" />
+        </motion.div>
 
-      <div className="timeline-container">
-          {/* Decorative Timeline lines */}
-          <div className="timeline-line-bg"></div>
-          <div className="timeline-line-active"></div>
+        {/* Timeline */}
+        <div className="edu-timeline-outer" ref={timelineRef}>
+          {/* Scroll-driven laser beam track */}
+          <div className="edu-track-bg" />
+          <div
+            className="edu-track-beam"
+            style={{ height: `${scrollProgress * 100}%` }}
+          />
+          {/* Glowing travel head */}
+          <div
+            className="edu-travel-head"
+            style={{ top: `calc(${scrollProgress * 100}% - 6px)` }}
+          />
 
-          {/* College Education (Node 1) */}
-          <div className="timeline-item">
-              <div className="timeline-icon-box">
-                  <div className="timeline-icon-circle">
-                      <div className="timeline-icon-inner grad-purple-blue">
-                          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                              <path d="M21.42 10.922a1 1 0 0 0-.019-1.838L12.83 5.18a2 2 0 0 0-1.66 0L2.6 9.08a1 1 0 0 0 0 1.832l8.57 3.908a2 2 0 0 0 1.66 0z" />
-                              <path d="M22 10v6" />
-                              <path d="M6 12.5V16a6 3 0 0 0 12 0v-3.5" />
-                          </svg>
-                      </div>
+          {/* ── Node 1 — B.E. CSE ── */}
+          <div className={`edu-node ${activeNode >= 0 ? "edu-node--active" : ""}`}>
+            <div className="edu-node-dot edu-dot--purple">
+              <span className="edu-dot-pulse edu-pulse--purple" />
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M21.42 10.922a1 1 0 0 0-.019-1.838L12.83 5.18a2 2 0 0 0-1.66 0L2.6 9.08a1 1 0 0 0 0 1.832l8.57 3.908a2 2 0 0 0 1.66 0z" />
+                <path d="M22 10v6" /><path d="M6 12.5V16a6 3 0 0 0 12 0v-3.5" />
+              </svg>
+            </div>
+            <motion.div
+              className="edu-card edu-card--purple"
+              initial={{ opacity: 0, x: 40 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.65, ease: [0.16, 1, 0.3, 1] }}
+              viewport={{ once: true, margin: "-80px" }}
+            >
+              <div className="edu-card-glow edu-glow--purple" />
+              <div className="edu-card-inner">
+                <div className="edu-card-top">
+                  <div>
+                    <div className="edu-card-badge edu-badge--purple">CURRENT MISSION</div>
+                    <h3 className="edu-card-title">B.E. Computer Science &amp; Engineering</h3>
                   </div>
+                  <div className="edu-card-year edu-year--purple">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg>
+                    2023 – Present
+                  </div>
+                </div>
+                <div className="edu-card-divider" />
+                <div className="edu-card-detail">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><rect x="4" y="2" width="16" height="20" rx="2"/><path d="M9 22v-3a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v3"/></svg>
+                  <span>Government College of Engineering, Erode</span>
+                </div>
+                <div className="edu-card-award edu-award--purple">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="m15.477 12.89 1.515 8.526a.5.5 0 0 1-.81.47l-3.58-2.687a1 1 0 0 0-1.197 0l-3.586 2.686a.5.5 0 0 1-.81-.469l1.514-8.526"/><circle cx="12" cy="8" r="6"/></svg>
+                  CGPA: 8.45 &nbsp;·&nbsp; Till 5th Semester
+                </div>
               </div>
-              <div className="timeline-card">
-                  <div className="timeline-card-header">
-                      <h3 className="timeline-card-title">B.E. Computer Science and Engineering</h3>
-                      <span className="timeline-card-date">
-                          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                              <path d="M8 2v4" />
-                              <path d="M16 2v4" />
-                              <rect width="18" height="18" x="3" y="4" rx="2" />
-                              <path d="M3 10h18" />
-                          </svg>
-                          2023 - Present
-                      </span>
-                  </div>
-                  <div className="timeline-detail-row">
-                      <svg className="timeline-detail-icon building-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                          <path d="M12 10h.01" />
-                          <path d="M12 14h.01" />
-                          <path d="M12 6h.01" />
-                          <path d="M16 10h.01" />
-                          <path d="M16 14h.01" />
-                          <path d="M16 6h.01" />
-                          <path d="M8 10h.01" />
-                          <path d="M8 14h.01" />
-                          <path d="M8 6h.01" />
-                          <path d="M9 22v-3a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v3" />
-                          <rect x="4" y="2" width="16" height="20" rx="2" />
-                      </svg>
-                      <p>Government College of Engineering, Erode</p>
-                  </div>
-                  <div className="timeline-award-badge">
-                      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                          <path d="m15.477 12.89 1.515 8.526a.5.5 0 0 1-.81.47l-3.58-2.687a1 1 0 0 0-1.197 0l-3.586 2.686a.5.5 0 0 1-.81-.469l1.514-8.526" />
-                          <circle cx="12" cy="8" r="6" />
-                      </svg>
-                      <span>CGPA: 8.45 (Till 5th semester)</span>
-                  </div>
-              </div>
+            </motion.div>
           </div>
 
-          {/* Schooling 12th Std (Node 2) */}
-          <div className="timeline-item">
-              <div className="timeline-icon-box">
-                  <div className="timeline-icon-circle">
-                      <div className="timeline-icon-inner grad-blue-cyan">
-                          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                              <path d="M21.42 10.922a1 1 0 0 0-.019-1.838L12.83 5.18a2 2 0 0 0-1.66 0L2.6 9.08a1 1 0 0 0 0 1.832l8.57 3.908a2 2 0 0 0 1.66 0z" />
-                              <path d="M22 10v6" />
-                              <path d="M6 12.5V16a6 3 0 0 0 12 0v-3.5" />
-                          </svg>
-                      </div>
+          {/* ── Node 2 — 12th Std ── */}
+          <div className={`edu-node ${activeNode >= 1 ? "edu-node--active" : ""}`}>
+            <div className="edu-node-dot edu-dot--cyan">
+              <span className="edu-dot-pulse edu-pulse--cyan" />
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M21.42 10.922a1 1 0 0 0-.019-1.838L12.83 5.18a2 2 0 0 0-1.66 0L2.6 9.08a1 1 0 0 0 0 1.832l8.57 3.908a2 2 0 0 0 1.66 0z" />
+                <path d="M22 10v6" /><path d="M6 12.5V16a6 3 0 0 0 12 0v-3.5" />
+              </svg>
+            </div>
+            <motion.div
+              className="edu-card edu-card--cyan"
+              initial={{ opacity: 0, x: 40 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.65, ease: [0.16, 1, 0.3, 1], delay: 0.1 }}
+              viewport={{ once: true, margin: "-80px" }}
+            >
+              <div className="edu-card-glow edu-glow--cyan" />
+              <div className="edu-card-inner">
+                <div className="edu-card-top">
+                  <div>
+                    <div className="edu-card-badge edu-badge--cyan">ORBIT ACHIEVED</div>
+                    <h3 className="edu-card-title">Higher Secondary — 12th Standard</h3>
                   </div>
+                  <div className="edu-card-year edu-year--cyan">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg>
+                    Completed 2023
+                  </div>
+                </div>
+                <div className="edu-card-divider" />
+                <div className="edu-card-detail">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><rect x="4" y="2" width="16" height="20" rx="2"/><path d="M9 22v-3a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v3"/></svg>
+                  <span>Dharmapuri District Government Model School, Dharmapuri</span>
+                </div>
+                <div className="edu-card-award edu-award--cyan">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="m15.477 12.89 1.515 8.526a.5.5 0 0 1-.81.47l-3.58-2.687a1 1 0 0 0-1.197 0l-3.586 2.686a.5.5 0 0 1-.81-.469l1.514-8.526"/><circle cx="12" cy="8" r="6"/></svg>
+                  Percentage: 87.5%
+                </div>
               </div>
-              <div className="timeline-card">
-                  <div className="timeline-card-header">
-                      <h3 className="timeline-card-title">Higher Secondary Second Year (12th Standard)</h3>
-                      <span className="timeline-card-date">
-                          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                              <path d="M8 2v4" />
-                              <path d="M16 2v4" />
-                              <rect width="18" height="18" x="3" y="4" rx="2" />
-                              <path d="M3 10h18" />
-                          </svg>
-                          Completed in 2023
-                      </span>
-                  </div>
-                  <div className="timeline-detail-row">
-                      <svg className="timeline-detail-icon building-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                          <path d="M12 10h.01" />
-                          <path d="M12 14h.01" />
-                          <path d="M12 6h.01" />
-                          <path d="M16 10h.01" />
-                          <path d="M16 14h.01" />
-                          <path d="M16 6h.01" />
-                          <path d="M8 10h.01" />
-                          <path d="M8 14h.01" />
-                          <path d="M8 6h.01" />
-                          <path d="M9 22v-3a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v3" />
-                          <rect x="4" y="2" width="16" height="20" rx="2" />
-                      </svg>
-                      <p>Dharmapuri District Government Model School, Dharmapuri</p>
-                  </div>
-                  <div className="timeline-award-badge">
-                      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                          <path d="m15.477 12.89 1.515 8.526a.5.5 0 0 1-.81.47l-3.58-2.687a1 1 0 0 0-1.197 0l-3.586 2.686a.5.5 0 0 1-.81-.469l1.514-8.526" />
-                          <circle cx="12" cy="8" r="6" />
-                      </svg>
-                      <span>Percentage: 87.5%</span>
-                  </div>
-              </div>
+            </motion.div>
           </div>
 
-          {/* Schooling 10th Std (Node 3) */}
-          <div className="timeline-item">
-              <div className="timeline-icon-box">
-                  <div className="timeline-icon-circle">
-                      <div className="timeline-icon-inner grad-emerald-teal">
-                          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                              <path d="M21.42 10.922a1 1 0 0 0-.019-1.838L12.83 5.18a2 2 0 0 0-1.66 0L2.6 9.08a1 1 0 0 0 0 1.832l8.57 3.908a2 2 0 0 0 1.66 0z" />
-                              <path d="M22 10v6" />
-                              <path d="M6 12.5V16a6 3 0 0 0 12 0v-3.5" />
-                          </svg>
-                      </div>
+          {/* ── Node 3 — 10th Std ── */}
+          <div className={`edu-node ${activeNode >= 2 ? "edu-node--active" : ""}`}>
+            <div className="edu-node-dot edu-dot--emerald">
+              <span className="edu-dot-pulse edu-pulse--emerald" />
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M21.42 10.922a1 1 0 0 0-.019-1.838L12.83 5.18a2 2 0 0 0-1.66 0L2.6 9.08a1 1 0 0 0 0 1.832l8.57 3.908a2 2 0 0 0 1.66 0z" />
+                <path d="M22 10v6" /><path d="M6 12.5V16a6 3 0 0 0 12 0v-3.5" />
+              </svg>
+            </div>
+            <motion.div
+              className="edu-card edu-card--emerald"
+              initial={{ opacity: 0, x: 40 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.65, ease: [0.16, 1, 0.3, 1], delay: 0.2 }}
+              viewport={{ once: true, margin: "-80px" }}
+            >
+              <div className="edu-card-glow edu-glow--emerald" />
+              <div className="edu-card-inner">
+                <div className="edu-card-top">
+                  <div>
+                    <div className="edu-card-badge edu-badge--emerald">LAUNCH POINT</div>
+                    <h3 className="edu-card-title">Secondary School — 10th Standard</h3>
                   </div>
+                  <div className="edu-card-year edu-year--emerald">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg>
+                    Completed 2021
+                  </div>
+                </div>
+                <div className="edu-card-divider" />
+                <div className="edu-card-detail">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><rect x="4" y="2" width="16" height="20" rx="2"/><path d="M9 22v-3a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v3"/></svg>
+                  <span>Government Boys Higher Secondary School, Kaveripattinam</span>
+                </div>
+                <div className="edu-card-award edu-award--emerald">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="m15.477 12.89 1.515 8.526a.5.5 0 0 1-.81.47l-3.58-2.687a1 1 0 0 0-1.197 0l-3.586 2.686a.5.5 0 0 1-.81-.469l1.514-8.526"/><circle cx="12" cy="8" r="6"/></svg>
+                  Percentage: 90%
+                </div>
               </div>
-              <div className="timeline-card">
-                  <div className="timeline-card-header">
-                      <h3 className="timeline-card-title">Secondary School (10th Standard)</h3>
-                      <span className="timeline-card-date">
-                          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                              <path d="M8 2v4" />
-                              <path d="M16 2v4" />
-                              <rect width="18" height="18" x="3" y="4" rx="2" />
-                              <path d="M3 10h18" />
-                          </svg>
-                          Completed in 2021
-                      </span>
-                  </div>
-                  <div className="timeline-detail-row">
-                      <svg className="timeline-detail-icon building-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                          <path d="M12 10h.01" />
-                          <path d="M12 14h.01" />
-                          <path d="M12 6h.01" />
-                          <path d="M16 10h.01" />
-                          <path d="M16 14h.01" />
-                          <path d="M16 6h.01" />
-                          <path d="M8 10h.01" />
-                          <path d="M8 14h.01" />
-                          <path d="M8 6h.01" />
-                          <path d="M9 22v-3a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v3" />
-                          <rect x="4" y="2" width="16" height="20" rx="2" />
-                      </svg>
-                      <p>Government Boys Higher Secondary School, Kaveripattinam</p>
-                  </div>
-                  <div className="timeline-award-badge">
-                      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                          <path d="m15.477 12.89 1.515 8.526a.5.5 0 0 1-.81.47l-3.58-2.687a1 1 0 0 0-1.197 0l-3.586 2.686a.5.5 0 0 1-.81-.469l1.514-8.526" />
-                          <circle cx="12" cy="8" r="6" />
-                      </svg>
-                      <span>Percentage: 90%</span>
-                  </div>
-              </div>
+            </motion.div>
           </div>
-      </div>
+
+        </div>{/* end edu-timeline-outer */}
+      </div>{/* end edu-section-wrapper */}
     </section>
   );
 }
