@@ -8,7 +8,8 @@ export default function Resume() {
     return (
         <section id="resume" className="section resume-section">
 
-            <h1>My Resume</h1>
+            <h1 className="section-heading">My <span className="heading-gradient">Resume</span></h1>
+            <div className="section-heading-bar" />
 
             <p>
                 View or download my resume below.

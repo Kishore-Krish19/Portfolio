@@ -1,4 +1,5 @@
-import { useRef } from "react";
+import { useRef, useState } from "react";
+import { motion } from "framer-motion";
 import "./Skills.css";
 
 import {
@@ -48,11 +49,26 @@ const skillsData = [
   { name: "Problem Solving", icon: <FaLightbulb />, color: "#FFD700" }
 ];
 
-// ... (Keep all your imports and the skillsData array exactly the same) ...
+// 8 directional origins for the scatter pop-in effect
+const directions = [
+  { x: 0, y: -80 },    // top
+  { x: 0, y: 80 },     // bottom
+  { x: -100, y: 0 },   // left
+  { x: 100, y: 0 },    // right
+  { x: -80, y: -70 },  // top-left
+  { x: 80, y: -70 },   // top-right
+  { x: -80, y: 70 },   // bottom-left
+  { x: 80, y: 70 },    // bottom-right
+];
 
-// Interactive Card Component with animation delay prop added
-const SkillCard = ({ name, icon, color, delay }) => {
+// Deterministic but varied direction per index (so it's consistent across re-renders)
+const getDirection = (index) => directions[index % directions.length];
+
+// Interactive Card Component with directional pop-in
+const SkillCard = ({ name, icon, color, index }) => {
   const cardRef = useRef(null);
+  const [landed, setLanded] = useState(false);
+  const dir = getDirection(index);
 
   // Mouse tracking logic for the hover glow
   const handleMouseMove = (e) => {
@@ -65,11 +81,35 @@ const SkillCard = ({ name, icon, color, delay }) => {
   };
 
   return (
-    <div 
-      className="skill-card-wrapper pop-animate" 
-      style={{ animationDelay: `${delay}s` }} // Staggers the pop-up effect
-      ref={cardRef} 
+    <motion.div
+      className={`skill-card-wrapper ${landed ? "pop-animate" : ""}`}
+      style={landed ? { animationDelay: `${(index % 8) * 0.5}s` } : undefined}
+      ref={cardRef}
       onMouseMove={handleMouseMove}
+      initial={{
+        opacity: 0,
+        x: dir.x,
+        y: dir.y,
+        scale: 0.5,
+        rotate: (dir.x > 0 ? 1 : -1) * (8 + (index % 3) * 4),
+      }}
+      whileInView={{
+        opacity: 1,
+        x: 0,
+        y: 0,
+        scale: 1,
+        rotate: 0,
+      }}
+      transition={{
+        type: "spring",
+        stiffness: 120,
+        damping: 18,
+        mass: 0.8,
+        delay: index * 0.07,
+      }}
+      viewport={{ once: false, amount: 0.1 }}
+      onAnimationComplete={() => setLanded(true)}
+      onViewportLeave={() => setLanded(false)}
     >
       <div className="skill-card-content">
         <div className="skill-icon" style={{ color: color }}>
@@ -77,12 +117,11 @@ const SkillCard = ({ name, icon, color, delay }) => {
         </div>
         <span className="skill-name">{name}</span>
       </div>
-    </div>
+    </motion.div>
   );
 };
 
 export default function Skills() {
-  // Split the skills array exactly in half to force 2 lines
   const half = Math.ceil(skillsData.length / 2);
   const topRow = skillsData.slice(0, half);
   const bottomRow = skillsData.slice(half);
@@ -90,9 +129,17 @@ export default function Skills() {
   return (
     <section id="skills" className="section skills-section">
       
-      <h1 className="skills-header">
-        Technical <span className="highlight-text">Expertise</span>
-      </h1>
+      <motion.div
+        initial={{ opacity: 0, y: 30 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.7 }}
+        viewport={{ once: false, amount: 0.2 }}
+      >
+        <h1 className="skills-header section-heading">
+          Technical <span className="heading-gradient">Expertise</span>
+        </h1>
+        <div className="section-heading-bar"></div>
+      </motion.div>
 
       {/* Two Stacked Lines Layout */}
       <div className="skills-stack-container">
@@ -101,11 +148,11 @@ export default function Skills() {
         <div className="skills-line">
           {topRow.map((skill, index) => (
             <SkillCard 
-              key={`top-${index}`} 
+              key={skill.name} 
               name={skill.name} 
               icon={skill.icon} 
               color={skill.color}
-              delay={index * 0.2} // 0.2s delay cascade
+              index={index}
             />
           ))}
         </div>
@@ -114,11 +161,11 @@ export default function Skills() {
         <div className="skills-line">
           {bottomRow.map((skill, index) => (
             <SkillCard 
-              key={`bottom-${index}`} 
+              key={skill.name} 
               name={skill.name} 
               icon={skill.icon} 
               color={skill.color}
-              delay={(index * 0.2) + 0.1} // Offset slightly from the top row
+              index={half + index}
             />
           ))}
         </div>

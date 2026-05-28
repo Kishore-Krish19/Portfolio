@@ -1,3 +1,4 @@
+import { motion } from "framer-motion";
 import "./Experience.css";
 
 const experiences = [
@@ -106,20 +107,50 @@ const renderIcon = (icon) => {
 };
 
 export default function Experience() {
+  const cardVariants = {
+    hidden: { opacity: 0, y: 40 },
+    visible: (i) => ({
+      opacity: 1,
+      y: 0,
+      transition: { duration: 0.6, delay: i * 0.12, ease: [0.16, 1, 0.3, 1] },
+    }),
+  };
+
   return (
     <section id="experience" className="section experience-section scroll-3d">
       <div className="content-layer">
         {/* Header */}
-        <h1 className="exp-title">Developer Journey</h1>
-        <div className="exp-subtitle-underline" />
-        <p className="exp-subtitle-text">
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.7 }}
+          viewport={{ once: false, amount: 0.2 }}
+        >
+          <h1 className="exp-title section-heading">Developer <span className="heading-gradient">Journey</span></h1>
+          <div className="exp-subtitle-underline section-heading-bar" />
+        </motion.div>
+        <motion.p
+          className="exp-subtitle-text"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.1 }}
+          viewport={{ once: false, amount: 0.2 }}
+        >
           A snapshot of key experiences that shaped my technical and leadership journey.
-        </p>
+        </motion.p>
 
         {/* Cards */}
         <div className="exp-cards-grid">
-          {experiences.map((exp) => (
-            <div key={exp.id} className={`exp-card exp-card--${exp.gradient}`}>
+          {experiences.map((exp, i) => (
+            <motion.div
+              key={exp.id}
+              className={`exp-card exp-card--${exp.gradient}`}
+              variants={cardVariants}
+              initial="hidden"
+              whileInView="visible"
+              custom={i}
+              viewport={{ once: false, amount: 0.15 }}
+            >
               {/* Glow */}
               <div className="exp-card-glow" />
 
@@ -154,7 +185,7 @@ export default function Experience() {
                   <span key={tag} className={`exp-tag exp-tag--${exp.gradient}`}>{tag}</span>
                 ))}
               </div>
-            </div>
+            </motion.div>
           ))}
         </div>
       </div>

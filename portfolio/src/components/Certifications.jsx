@@ -1,4 +1,5 @@
 import { useState, useRef, useEffect } from "react";
+import { motion } from "framer-motion";
 import "./Certifications.css";
 
 // 1. Update this array with your imported PNG paths
@@ -146,11 +147,22 @@ export default function Certifications() {
     <section id="certifications" className="section certifications-section scroll-3d">
       <div className="content-layer">
         
-        {/* Title */}
-        <h1 className="certifications-title">Verified Expertise</h1>
-        <div className="certifications-subtitle-underline"></div>
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.7 }}
+          viewport={{ once: false, amount: 0.2 }}
+        >
+          <h1 className="certifications-title section-heading">Verified <span className="heading-gradient">Expertise</span></h1>
+          <div className="certifications-subtitle-underline section-heading-bar"></div>
+        </motion.div>
 
-        {/* Carousel Container (pauses slideshow on hover) */}
+        <motion.div
+          initial={{ opacity: 0, y: 40 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.7, delay: 0.1 }}
+          viewport={{ once: false, amount: 0.15 }}
+        >
         <div 
           className="carousel-container"
           onMouseEnter={() => setIsPaused(true)}
@@ -211,9 +223,16 @@ export default function Certifications() {
           </div>
 
         </div>
+        </motion.div>
 
         {/* Carousel indicator dots */}
-        <div className="carousel-dots-container">
+        <motion.div
+          className="carousel-dots-container"
+          initial={{ opacity: 0, y: 15 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.2 }}
+          viewport={{ once: false, amount: 0.2 }}
+        >
           {certificates.map((_, index) => (
             <button
               key={index}
@@ -222,7 +241,7 @@ export default function Certifications() {
               aria-label={`Go to certificate ${index + 1}`}
             ></button>
           ))}
-        </div>
+        </motion.div>
 
       </div>
     </section>

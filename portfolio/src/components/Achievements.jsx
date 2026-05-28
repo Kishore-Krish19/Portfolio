@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { motion } from "framer-motion";
 import "./Achievements.css";
 
 // Unique achievements data
@@ -234,12 +235,24 @@ export default function Achievements() {
   return (
     <section id="achievements" className="section achievements-section scroll-3d">
       <div className="content-layer">
-        {/* Title */}
-        <h1 className="achievements-title">Elite Highlights</h1>
-        <div className="achievements-subtitle-underline"></div>
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.7 }}
+          viewport={{ once: false, amount: 0.2 }}
+        >
+          <h1 className="achievements-title section-heading">Elite <span className="heading-gradient">Highlights</span></h1>
+          <div className="achievements-subtitle-underline section-heading-bar"></div>
+        </motion.div>
 
         {/* ==================== TOP CODING PROFILE CARDS ==================== */}
-        <div className="stats-grid">
+        <motion.div
+          className="stats-grid"
+          initial={{ opacity: 0, y: 40 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.7, delay: 0.1 }}
+          viewport={{ once: false, amount: 0.15 }}
+        >
           {/* LeetCode stats card */}
           <div className="stat-card-wrapper">
             <a
@@ -376,10 +389,16 @@ export default function Achievements() {
               </div>
             </a>
           </div>
-        </div>
+        </motion.div>
 
         {/* ==================== CONTROL CONTROLLER PANEL ==================== */}
-        <div className="action-controls">
+        <motion.div
+          className="action-controls"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.15 }}
+          viewport={{ once: false, amount: 0.2 }}
+        >
           <button
             onClick={() => setViewMode(viewMode === "marquee" ? "grid" : "marquee")}
             className={`control-btn ${viewMode === "grid" ? "active" : ""}`}
@@ -404,7 +423,7 @@ export default function Achievements() {
             {viewMode === "grid" ? "Infinite Scroll Carousel" : "Show All Achievements"}
           </button>
 
-        </div>
+        </motion.div>
 
         {/* ==================== MAIN DISPLAY INTERACTIVE CONTENT ==================== */}
 

@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { motion } from "framer-motion";
 import { createPortal } from "react-dom";
 import "./Projects.css";
 
@@ -486,16 +487,29 @@ export default function Projects() {
   return (
     <section id="projects" className="projects-section">
       <div className="content-layer">
-        <h1 className="projects-title">Code Showcase</h1>
-        <div className="projects-subtitle-underline"></div>
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.7 }}
+          viewport={{ once: false, amount: 0.2 }}
+        >
+          <h1 className="projects-title section-heading">Code <span className="heading-gradient">Showcase</span></h1>
+          <div className="projects-subtitle-underline section-heading-bar"></div>
+        </motion.div>
         
         {/* CONTROLS DISPLAY OVERVIEW SWITCHER TOGGLE LINK */}
-        <div className="toggle-view-container">
+        <motion.div
+          className="toggle-view-container"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.1 }}
+          viewport={{ once: false, amount: 0.2 }}
+        >
           <button className="view-toggle-btn" onClick={() => setIsGridMode(!isGridMode)}>
             <FaTh className="btn-icon" />
             <span>{isGridMode ? "Show Slideshow" : "Show All Projects"}</span>
           </button>
-        </div>
+        </motion.div>
 
         {!isGridMode ? (
           /* LOOP CAROUSEL CONTAINER SLIDESHOW MODE */

@@ -14,19 +14,9 @@
 }
 
 .certifications-title {
-  text-align: center;
-  font-size: 40px;
-  margin-bottom: 8px;
-  font-weight: 800;
-  letter-spacing: -0.025em;
 }
 
 .certifications-subtitle-underline {
-  width: 80px;
-  height: 4px;
-  background: linear-gradient(to right, #a855f7, #06b6d4);
-  margin: 0 auto 40px;
-  border-radius: 9999px;
 }
 
 /* ==========================================================================

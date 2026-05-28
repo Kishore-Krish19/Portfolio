@@ -20,29 +20,9 @@
 }
 
 .contact-title {
-  font-size: 42px;
-  font-weight: 800;
-  margin-bottom: 25px;
-  letter-spacing: -0.02em;
-  background: linear-gradient(135deg, #ffffff 0%, #cbd5e1 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  text-align: center;
-}
-
-.contact-title .gradient-text {
-  background: linear-gradient(135deg, #a855f7 0%, #3b82f6 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
 }
 
 .contact-subtitle-underline {
-  width: 70px;
-  height: 4px;
-  background: linear-gradient(90deg, #7c3aed 0%, #2563eb 100%);
-  margin: -15px auto 55px;
-  border-radius: 99px;
-  box-shadow: 0 0 12px rgba(124, 58, 237, 0.5);
 }
 
 /* ==========================================

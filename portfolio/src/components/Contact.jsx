@@ -1,4 +1,5 @@
 import { useState, useRef } from "react";
+import { motion } from "framer-motion";
 import emailjs from "emailjs-com";
 import "./Contact.css";
 
@@ -46,12 +47,25 @@ export default function Contact() {
     return (
         <section id="contact" className="section contact-section">
             <div className="content-layer">
-                <h1 className="contact-title">Get In <span className="gradient-text">Touch</span></h1>
-                <div className="contact-subtitle-underline"></div>
+                <motion.div
+                    initial={{ opacity: 0, y: 30 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.7 }}
+                    viewport={{ once: false, amount: 0.2 }}
+                >
+                    <h1 className="contact-title section-heading">Get In <span className="heading-gradient">Touch</span></h1>
+                    <div className="contact-subtitle-underline section-heading-bar"></div>
+                </motion.div>
 
                 <div className="contact-grid">
                     {/* Left Column: Connect Info Panel */}
-                    <div className="contact-info-panel">
+                    <motion.div
+                        className="contact-info-panel"
+                        initial={{ opacity: 0, x: -40 }}
+                        whileInView={{ opacity: 1, x: 0 }}
+                        transition={{ duration: 0.7, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
+                        viewport={{ once: false, amount: 0.2 }}
+                    >
                         <h2 className="panel-title">Let's Connect</h2>
                         <p className="panel-desc">
                             Prefer reaching out directly? You can drop me an email or send a quick message on WhatsApp. I'm highly responsive on both!
@@ -191,10 +205,17 @@ export default function Contact() {
                                 </li>
                             </ul>
                         </div>
-                    </div>
+                    </motion.div>
 
                     {/* Right Column: Contact Form Panel */}
-                    <form className="contact-form-panel" onSubmit={sendEmail}>
+                    <motion.form
+                        className="contact-form-panel"
+                        onSubmit={sendEmail}
+                        initial={{ opacity: 0, x: 40 }}
+                        whileInView={{ opacity: 1, x: 0 }}
+                        transition={{ duration: 0.7, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
+                        viewport={{ once: false, amount: 0.2 }}
+                    >
                         <div className="form-row-two-col">
                             <div className="form-group">
                                 <label htmlFor="name" className="form-label">Your Name</label>
@@ -259,7 +280,7 @@ export default function Contact() {
                         </button>
 
                         {status && <p className="status">{status}</p>}
-                    </form>
+                    </motion.form>
                 </div>
             </div>
         </section>

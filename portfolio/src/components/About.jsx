@@ -185,10 +185,10 @@ export default function About() {
         initial={{ opacity: 0, y: 30 }}
         whileInView={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.7 }}
-        viewport={{ once: true }}
+        viewport={{ once: false, amount: 0.2 }}
       >
-        <h1 className="about-headline">Personal <span className="gradient-text">Overview</span></h1>
-        <div className="about-headline-bar" />
+        <h1 className="about-headline section-heading">Personal <span className="heading-gradient">Overview</span></h1>
+        <div className="about-headline-bar section-heading-bar" />
       </motion.div>
 
       {/* ===== MAIN LAYOUT ===== */}
@@ -200,7 +200,7 @@ export default function About() {
           variants={containerVariants}
           initial="hidden"
           whileInView="visible"
-          viewport={{ once: true }}
+          viewport={{ once: false, amount: 0.15 }}
         >
           <motion.h2 className="about-name" variants={itemVariants}>
             Hi, I'm <span className="gradient-text">Kishore E</span>
@@ -299,7 +299,7 @@ export default function About() {
           initial={{ opacity: 0, x: 30 }}
           whileInView={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-          viewport={{ once: true }}
+          viewport={{ once: false, amount: 0.2 }}
         >
           <div className="constellation-container">
 
@@ -506,11 +506,11 @@ export default function About() {
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7 }}
-          viewport={{ once: true }}
+          viewport={{ once: false, amount: 0.2 }}
         >
           <span className="edu-eyebrow">// MISSION LOG</span>
-          <h2 className="edu-title">
-            Academic <span className="gradient-text">Journey</span>
+          <h2 className="edu-title section-heading">
+            Academic <span className="heading-gradient">Journey</span>
           </h2>
           <p className="edu-subtitle-text">Tracing the trajectory through the cosmos of knowledge</p>
           <div className="edu-title-bar" />
@@ -544,7 +544,7 @@ export default function About() {
               initial={{ opacity: 0, x: 40 }}
               whileInView={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.65, ease: [0.16, 1, 0.3, 1] }}
-              viewport={{ once: true, margin: "-80px" }}
+              viewport={{ once: false, margin: "-80px" }}
             >
               <div className="edu-card-glow edu-glow--purple" />
               <div className="edu-card-inner">
@@ -585,7 +585,7 @@ export default function About() {
               initial={{ opacity: 0, x: 40 }}
               whileInView={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.65, ease: [0.16, 1, 0.3, 1], delay: 0.1 }}
-              viewport={{ once: true, margin: "-80px" }}
+              viewport={{ once: false, margin: "-80px" }}
             >
               <div className="edu-card-glow edu-glow--cyan" />
               <div className="edu-card-inner">
@@ -626,7 +626,7 @@ export default function About() {
               initial={{ opacity: 0, x: 40 }}
               whileInView={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.65, ease: [0.16, 1, 0.3, 1], delay: 0.2 }}
-              viewport={{ once: true, margin: "-80px" }}
+              viewport={{ once: false, margin: "-80px" }}
             >
               <div className="edu-card-glow edu-glow--emerald" />
               <div className="edu-card-inner">
