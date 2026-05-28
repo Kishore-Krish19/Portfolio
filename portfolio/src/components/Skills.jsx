@@ -91,7 +91,7 @@ export default function Skills() {
     <section id="skills" className="section skills-section">
       
       <h1 className="skills-header">
-        My <span className="highlight-text">Skills</span>
+        Technical <span className="highlight-text">Expertise</span>
       </h1>
 
       {/* Two Stacked Lines Layout */}

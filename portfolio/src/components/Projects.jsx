@@ -1,11 +1,12 @@
 import { useState, useEffect } from "react";
+import { createPortal } from "react-dom";
 import "./Projects.css";
 
 // React Icons matching your exact Skills module ecosystem
 import {
   FaHtml5, FaCss3Alt, FaJs, FaReact, FaPython, FaJava,
   FaBrain, FaSitemap, FaNodeJs, FaLightbulb, FaGithub, FaExternalLinkAlt,
-  FaChevronLeft, FaChevronRight, FaTh
+  FaChevronLeft, FaChevronRight, FaTh, FaPlay, FaTimes
 } from "react-icons/fa";
 import {
   SiSpringboot, SiMysql, SiTailwindcss, SiHuggingface,
@@ -43,9 +44,9 @@ const ProjectTechMap = {
   "Vite": { icon: <SiVite />, color: "#646CFF" }
 };
 
-function ProjectCard({ project, themeClass, renderIcon, isExpanded, onExpand, isGridMode }) {
+function ProjectCard({ project, themeClass, renderIcon, isExpanded, onExpand, isGridMode, onPlayDemo }) {
   const handleCardClick = (e) => {
-    if (e.target.closest('.project-links') || e.target.closest('a')) {
+    if (e.target.closest('.project-links') || e.target.closest('a') || e.target.closest('button')) {
       return;
     }
     onExpand();
@@ -118,6 +119,16 @@ function ProjectCard({ project, themeClass, renderIcon, isExpanded, onExpand, is
                     <span>Live Demo</span>
                   </a>
                 )}
+
+                {project.videoDemo && (
+                  <button
+                    className="project-btn play-demo-btn"
+                    onClick={(e) => { e.stopPropagation(); onPlayDemo(project.videoDemo); }}
+                  >
+                    <FaPlay className="btn-icon" />
+                    <span>Watch Demo</span>
+                  </button>
+                )}
               </div>
             </div>
           </div>
@@ -130,13 +141,24 @@ function ProjectCard({ project, themeClass, renderIcon, isExpanded, onExpand, is
 
 export default function Projects() {
   const [isGridMode, setIsGridMode] = useState(false);
+  const [activeVideo, setActiveVideo] = useState(null);
+
+  const openVideo = (src) => setActiveVideo(src);
+  const closeVideo = () => setActiveVideo(null);
+
+  // Close modal on Escape key
+  useEffect(() => {
+    const handleKey = (e) => { if (e.key === "Escape") closeVideo(); };
+    window.addEventListener("keydown", handleKey);
+    return () => window.removeEventListener("keydown", handleKey);
+  }, []);
   const [currentSlide, setCurrentSlide] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
 
   const projects = [
     {
       title: "AI Puzzle Lab",
-      year: "2026",
+      year: "March 2026",
       tech: ["React.js", "TypeScript", "Tailwind CSS", "Gemini AI"],
       desc: [
         "Interactive multi-game lab featuring classic puzzles with intelligent AI hint generation and automated solving",
@@ -144,7 +166,7 @@ export default function Projects() {
         "Engaging animations and responsive UI built with Tailwind CSS, Framer Motion, and Canvas Confetti"
       ],
       github: "https://github.com/Kishore-Krish19/AI_Puzzle_lab",
-      demo: "https://ai-puzzle-lab.vercel.app/",
+      demo: "https://ai-puzzle-lab.vercel.app",
       themeClass: "ai-theme",
       renderIcon: () => (
         <svg className="project-graphic-svg" viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg" fill="none">
@@ -163,7 +185,7 @@ export default function Projects() {
     },
     {
       title: "Prompt Forge AI",
-      year: "2025",
+      year: "March 2026",
       tech: ["React.js", "Python", "NLP", "Machine Learning"],
       desc: [
         "Advanced prompt engineering platform for creating and optimizing complex AI prompts",
@@ -171,7 +193,7 @@ export default function Projects() {
         "Seamless history and iteration tracking for multi-agent orchestrations"
       ],
       github: "https://github.com/Kishore-Krish19/Prompt_Forge_AI",
-      demo: "https://prompt-forge.vercel.app",
+      demo: "https://prompt-forge-ai-nu.vercel.app",
       themeClass: "ai-theme",
       renderIcon: () => (
         <svg className="project-graphic-svg" viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg" fill="none">
@@ -182,8 +204,30 @@ export default function Projects() {
       )
     },
     {
+      title: "ChatBot Project",
+      year: "December 2025",
+      tech: ["Python", "React.js", "NLP", "Machine Learning"],
+      desc: [
+        "Full-stack intent-based chatbot using a TensorFlow/Keras neural network with NLTK preprocessing for NLP",
+        "Flask REST API backend serving a ChatGPT-style React (Vite) frontend with markdown support and dark/light theme toggle",
+        "Single-service production deployment on Render with FAQ quick-prompts and Git LFS for large ML model files"
+      ],
+      github: "https://github.com/Kishore-Krish19/ChatBot-Project",
+      demo: "https://chatbot-001-xyz.onrender.com",
+      themeClass: "ai-theme",
+      renderIcon: () => (
+        <svg className="project-graphic-svg" viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg" fill="none">
+          <rect x="20" y="28" width="68" height="48" rx="12" stroke="currentColor" strokeWidth="2" />
+          <path d="M30 76l8 14 8-14" stroke="currentColor" strokeWidth="2" strokeLinejoin="round" />
+          <path d="M36 48h36M36 60h22" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" />
+          <circle cx="88" cy="38" r="12" stroke="currentColor" strokeWidth="2" />
+          <path d="M84 38h8M88 34v8" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
+        </svg>
+      )
+    },
+    {
       title: "EFFICACY website",
-      year: "2024",
+      year: "February 2026",
       tech: ["React.js", "HTML", "CSS", "JavaScript"],
       desc: [
         "Dynamic workflow analyzer visualising task stats and tracking daily efficiency indices",
@@ -191,7 +235,7 @@ export default function Projects() {
         "Optimized layout ensuring 100% responsiveness and fluid transitions"
       ],
       github: "https://github.com/Kishore-Krish19/EFFICACY_website",
-      demo: "https://efficacy-track.vercel.app",
+      demo: "https://gcee-efficacy26.vercel.app",
       themeClass: "web-theme",
       renderIcon: () => (
         <svg className="project-graphic-svg" viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg" fill="none">
@@ -201,8 +245,8 @@ export default function Projects() {
       )
     },
     {
-      title: "Social Media Management",
-      year: "2025",
+      title: "Social Media Monitor",
+      year: "March 2026",
       tech: ["Java", "Spring Boot", "MySQL", "React.js"],
       desc: [
         "Java Enterprise core back-end managing scheduled multi-platform postings",
@@ -224,7 +268,7 @@ export default function Projects() {
     },
     {
       title: "Hanoi Arena",
-      year: "2025",
+      year: "January 2026",
       tech: ["Java", "React.js", "Data Structures", "Recursion"],
       desc: [
         "Dynamic mathematical arena visualizing solving iterations of Towers of Hanoi",
@@ -246,7 +290,7 @@ export default function Projects() {
     },
     {
       title: "GCEE Website Redesign",
-      year: "2024",
+      year: "March 2026",
       tech: ["HTML", "CSS", "JavaScript", "React.js"],
       desc: [
         "A premium visual facelift redesign of the Government College of Engineering web portal",
@@ -254,7 +298,7 @@ export default function Projects() {
         "Optimized SEO tags, meta-descriptors and accessibility indices"
       ],
       github: "https://github.com/Kishore-Krish19/gcee.ac.in",
-      demo: "https://gcee-redesign.vercel.app",
+      demo: "https://gcee-ac-in-web.vercel.app",
       themeClass: "web-theme",
       renderIcon: () => (
         <svg className="project-graphic-svg" viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg" fill="none">
@@ -266,7 +310,7 @@ export default function Projects() {
     },
     {
       title: "TripSync",
-      year: "2025",
+      year: "April 2026",
       tech: ["React.js", "Python", "Node.js", "MySQL"],
       desc: [
         "Collaborative social trip scheduling engine syncing group travel plans seamlessly",
@@ -274,7 +318,7 @@ export default function Projects() {
         "Interactive travel itinerary timelines with robust automated routing recommendations"
       ],
       github: "https://github.com/Muhammed-umer/TripSync",
-      demo: "https://tripsync-app.vercel.app",
+      demo: "https://tripsync-college-trip.web.app",
       themeClass: "web-theme",
       renderIcon: () => (
         <svg className="project-graphic-svg" viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg" fill="none">
@@ -286,7 +330,7 @@ export default function Projects() {
     },
     {
       title: "Standup Formatter",
-      year: "2026",
+      year: "May 2026",
       tech: ["React.js", "JavaScript", "Node.js"],
       desc: [
         "Tailored developer tool formatting unstructured notes into sleek, bulleted standup formats",
@@ -305,7 +349,7 @@ export default function Projects() {
     },
     {
       title: "AI Data Analyst Agent",
-      year: "2026",
+      year: "March 2026",
       tech: ["Python", "Machine Learning", "NLP", "React.js"],
       desc: [
         "Autonomous analytical pipeline parsing dataset sheets to yield insight trends",
@@ -314,6 +358,7 @@ export default function Projects() {
       ],
       github: "https://github.com/Kishore-Krish19/AI-Data-Analyst-Agent",
       demo: null,
+      videoDemo: "/Data-Analyst-agent-demo.mp4",
       themeClass: "ai-theme",
       renderIcon: () => (
         <svg className="project-graphic-svg" viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg" fill="none">
@@ -324,14 +369,14 @@ export default function Projects() {
     },
     {
       title: "Student Management Application",
-      year: "2025",
+      year: "June 2025",
       tech: ["Java", "JavaFX", "Spring Boot", "MySQL"],
       desc: [
         "JavaFX-based desktop application using MVC architecture",
         "Spring Boot REST APIs with full CRUD operations",
         "Secure integration between frontend and backend with remote database access"
       ],
-      github: "https://github.com/yourusername/student-management",
+      github: "https://github.com/Kishore-Krish19/Form",
       demo: null,
       themeClass: "java-theme",
       renderIcon: () => (
@@ -344,14 +389,14 @@ export default function Projects() {
     },
     {
       title: "Mini Web Projects",
-      year: "2024",
+      year: "March 2025",
       tech: ["HTML", "CSS", "JavaScript"],
       desc: [
         "Built multiple mini web applications",
         "Focused on responsive and user-friendly UI design"
       ],
-      github: "https://github.com/yourusername/mini-projects",
-      demo: "https://your-live-link.com/web-projects",
+      github: "https://github.com/Kishore-Krish19/Mini_Projects_with_HTML_CSS_JS",
+      demo: " https://kishore-krish19.github.io/Mini_Projects_with_HTML_CSS_JS",
       themeClass: "web-theme",
       renderIcon: () => (
         <svg className="project-graphic-svg" viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg" fill="none">
@@ -362,7 +407,7 @@ export default function Projects() {
     },
     {
       title: "Towers of Hanoi Solver",
-      year: "2025",
+      year: "December 2025",
       tech: ["Java", "React.js", "Data Structures", "Recursion"],
       desc: [
         "Console and graphical visualizer for mathematical Hanoi puzzles",
@@ -370,7 +415,7 @@ export default function Projects() {
         "Interactive peg and disk configurations for custom puzzle levels"
       ],
       github: "https://github.com/Kishore-Krish19/TowersOfHanoi",
-      demo: "https://hanoi-visualizer.vercel.app",
+      demo: "https://towers-of-hanoi-game.vercel.app",
       themeClass: "game-theme",
       renderIcon: () => (
         <svg className="project-graphic-svg" viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg" fill="none">
@@ -378,6 +423,29 @@ export default function Projects() {
           <line x1="60" y1="42" x2="60" y2="90" stroke="currentColor" strokeWidth="3" strokeLinecap="round" />
           <line x1="90" y1="42" x2="90" y2="90" stroke="currentColor" strokeWidth="3" strokeLinecap="round" />
           <path d="M20 90h80" stroke="currentColor" strokeWidth="3" strokeLinecap="round" />
+        </svg>
+      )
+    },
+    {
+      title: "My Website",
+      year: "August 2024",
+      tech: ["HTML", "CSS"],
+      desc: [
+        "Personal portfolio website built from scratch using pure HTML and CSS",
+        "Clean and structured layout showcasing projects, skills, and contact information",
+        "Deployed via GitHub Pages with a responsive and accessible design"
+      ],
+      github: "https://github.com/Kishore-Krish19/My_website",
+      demo: "https://kishore-krish19.github.io/My_website/",
+      themeClass: "web-theme",
+      renderIcon: () => (
+        <svg className="project-graphic-svg" viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg" fill="none">
+          <rect x="20" y="25" width="80" height="70" rx="8" stroke="currentColor" strokeWidth="2" />
+          <line x1="20" y1="40" x2="100" y2="40" stroke="currentColor" strokeWidth="1.5" />
+          <circle cx="32" cy="32" r="3" fill="currentColor" fillOpacity="0.6" />
+          <circle cx="44" cy="32" r="3" fill="currentColor" fillOpacity="0.6" />
+          <circle cx="56" cy="32" r="3" fill="currentColor" fillOpacity="0.6" />
+          <path d="M35 58h50M35 70h35M35 82h20" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
         </svg>
       )
     }
@@ -418,7 +486,7 @@ export default function Projects() {
   return (
     <section id="projects" className="projects-section">
       <div className="content-layer">
-        <h1 className="projects-title">Projects</h1>
+        <h1 className="projects-title">Code Showcase</h1>
         <div className="projects-subtitle-underline"></div>
         
         {/* CONTROLS DISPLAY OVERVIEW SWITCHER TOGGLE LINK */}
@@ -457,6 +525,7 @@ export default function Projects() {
                       if (positionIdx === 2) nextSlide();
                     }}
                     isGridMode={false}
+                    onPlayDemo={openVideo}
                   />
                 );
               })}
@@ -478,11 +547,31 @@ export default function Projects() {
                 isExpanded={true}
                 onExpand={() => { }}
                 isGridMode={true}
+                onPlayDemo={openVideo}
               />
             ))}
           </div>
         )}
       </div>
+
+      {/* ── VIDEO DEMO MODAL (Portal → document.body) ── */}
+      {activeVideo && createPortal(
+        <div className="video-modal-backdrop" onClick={closeVideo}>
+          <div className="video-modal-container" onClick={(e) => e.stopPropagation()}>
+            <button className="video-modal-close" onClick={closeVideo} aria-label="Close video">
+              <FaTimes />
+            </button>
+            <video
+              className="video-modal-player"
+              src={activeVideo}
+              controls
+              autoPlay
+              playsInline
+            />
+          </div>
+        </div>,
+        document.body
+      )}
     </section>
   );
 }

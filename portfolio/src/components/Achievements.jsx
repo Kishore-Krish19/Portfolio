@@ -289,7 +289,7 @@ export default function Achievements() {
     <section id="achievements" className="section achievements-section scroll-3d">
       <div className="content-layer">
         {/* Title */}
-        <h1 className="achievements-title">Achievements</h1>
+        <h1 className="achievements-title">Elite Highlights</h1>
         <div className="achievements-subtitle-underline"></div>
 
         {/* ==================== TOP CODING PROFILE CARDS ==================== */}

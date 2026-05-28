@@ -147,7 +147,7 @@ export default function Certifications() {
       <div className="content-layer">
         
         {/* Title */}
-        <h1 className="certifications-title">Certificates</h1>
+        <h1 className="certifications-title">Verified Expertise</h1>
         <div className="certifications-subtitle-underline"></div>
 
         {/* Carousel Container (pauses slideshow on hover) */}

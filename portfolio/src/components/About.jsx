@@ -187,7 +187,7 @@ export default function About() {
         transition={{ duration: 0.7 }}
         viewport={{ once: true }}
       >
-        <h1 className="about-headline">About <span className="gradient-text">Me</span></h1>
+        <h1 className="about-headline">Personal <span className="gradient-text">Overview</span></h1>
         <div className="about-headline-bar" />
       </motion.div>
 
