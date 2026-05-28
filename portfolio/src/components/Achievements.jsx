@@ -2,72 +2,34 @@ import { useState } from "react";
 import "./Achievements.css";
 
 // Unique achievements data
+
 const track1Unique = [
   {
-    title: "Top 4th team among 30+ teams (Project Expo)",
-    date: "March 2026",
-    desc: "Built a fully proctored placement management system and secured Top 4th position among 30 plus teams in AgentVerse AI Project Expo.",
-    badge: "Top 4",
+    title: "1st Prize in Budget Battle",
+    date: "September 2025",
+    desc: "Secured 1st prize in budget battle.",
+    badge: "1st Prize",
+    badgeType: "gold",
+    icon: "medal",
+    location: "Government College Of Engineering Erode"
+  },
+  {
+    title: "2nt Prize in Technical Game",
+    date: "November 2024",
+    desc: "Secured 2nd prize in technical game.",
+    badge: "2nd Prize",
     badgeType: "silver",
-    icon: "trophy",
+    icon: "medal",
     location: "Government College Of Engineering Erode"
   },
-  {
-    title: "1st Prize in CodeQuest",
+   {
+    title: "2nd Prize in The Trust Chain",
     date: "Feb 2026",
-    desc: "Secured 1st Prize among 50+ participants from various colleges in the coding contest.",
-    badge: "1st Prize",
-    badgeType: "gold",
+    desc: "Secured 2nd Prize among 50+ participants from various colleges.",
+    badge: "2nd Prize",
+    badgeType: "silver",
     icon: "medal",
-    location: "Government College of Technology, Coimbatore"
-  },
-  {
-    title: "1st Prize in Inferno",
-    date: "Feb 2026",
-    desc: "Secured 1st Prize for 'Code from the Output' among 50+ participants from various colleges.",
-    badge: "1st Prize",
-    badgeType: "gold",
-    icon: "medal",
-    location: "Government College of Technology, Coimbatore"
-  },
-  {
-    title: "1st Prize in CrackNCode",
-    date: "Feb 2026",
-    desc: "Secured 1st Prize among 25+ teams in a multiple-level coding contest.",
-    badge: "1st Prize",
-    badgeType: "gold",
-    icon: "star",
-    location: "PSG Institute of Technology and Applied Research"
-  },
-  {
-    title: "1st Prize in Blind Coding",
-    date: "March 2026",
-    desc: "Secured 1st prize in blind coding contest in GUSTO 2026 over 50+ participants.",
-    badge: "1st Prize",
-    badgeType: "gold",
-    icon: "medal",
-    location: "Government College Of Engineering Erode"
-  }
-];
-
-const track2Unique = [
-  {
-    title: "1st Prize in Code Debugging",
-    date: "March 2026",
-    desc: "Secured 1st prize in code debugging in GUSTO 2026 over 50+ participants.",
-    badge: "1st Prize",
-    badgeType: "gold",
-    icon: "medal",
-    location: "Government College Of Engineering Erode"
-  },
-  {
-    title: "1st Prize in Code Debugging (GUSTO 2025)",
-    date: "April 2025",
-    desc: "Secured 1st prize in code debugging in GUSTO 2025 over 50+ participants.",
-    badge: "1st Prize",
-    badgeType: "gold",
-    icon: "medal",
-    location: "Government College Of Engineering Erode"
+    location: "Kongu Engineering College"
   },
   {
     title: "2nd Prize in Inter College Coding Contest",
@@ -77,6 +39,15 @@ const track2Unique = [
     badgeType: "silver",
     icon: "medal",
     location: "Kongu Engineering College"
+  },
+  {
+    title: "Top 5th team among 30+ teams (Project Expo)",
+    date: "March 2026",
+    desc: "Participated in hackathon with my team and secured 5th position among 30 plus teams in AgentVerse AI Project Expo.",
+    badge: "5th Place",
+    badgeType: "silver",
+    icon: "trophy",
+    location: "Government College Of Engineering Erode"
   },
   {
     title: "2nd Prize Paper Presentation",
@@ -90,35 +61,10 @@ const track2Unique = [
 ];
 
 // All combined unique achievements for the 'Show All' grid view
-const allUniqueAchievements = [...track1Unique, ...track2Unique];
-
-// Event Photos dataset
-const eventPhotos = [
-  {
-    title: "AgentVerse AI Project Expo Showcase",
-    date: "March 2026",
-    category: "Hackathon Showcase",
-    desc: "Secured 4th position presenting our Placement Management System among 30+ teams.",
-    color: "from-purple-500/20 to-indigo-500/20"
-  },
-  {
-    title: "1st Prize Ceremony - CodeQuest & Inferno",
-    date: "Feb 2026",
-    category: "Coding Champions",
-    desc: "Standing on top place at Government College of Technology, Coimbatore coding symposium.",
-    color: "from-yellow-500/20 to-orange-500/20"
-  },
-  {
-    title: "GUSTO 2026 Blind Coding Victory",
-    date: "March 2026",
-    category: "Symposium Winners",
-    desc: "First place finish in blind coding and debugging contests at Government College of Engineering, Erode.",
-    color: "from-emerald-500/20 to-cyan-500/20"
-  }
-];
+const allUniqueAchievements = [...track1Unique];
 
 export default function Achievements() {
-  const [viewMode, setViewMode] = useState("marquee"); // "marquee" | "grid" | "photos"
+  const [viewMode, setViewMode] = useState("marquee"); // "marquee" | "grid"
 
   // Helper to render inline SVG icons dynamically
   const renderIcon = (iconName, badgeType) => {
@@ -458,28 +404,6 @@ export default function Achievements() {
             {viewMode === "grid" ? "Infinite Scroll Carousel" : "Show All Achievements"}
           </button>
 
-          <button
-            onClick={() => setViewMode(viewMode === "photos" ? "marquee" : "photos")}
-            className={`control-btn ${viewMode === "photos" ? "active" : ""}`}
-          >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="18"
-              height="18"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              className="btn-icon"
-            >
-              <rect x="3" y="3" width="18" height="18" rx="2" ry="2" />
-              <circle cx="8.5" cy="8.5" r="1.5" />
-              <polyline points="21 15 16 10 5 21" />
-            </svg>
-            {viewMode === "photos" ? "Show Achievements" : "Event Photos Gallery"}
-          </button>
         </div>
 
         {/* ==================== MAIN DISPLAY INTERACTIVE CONTENT ==================== */}
@@ -497,15 +421,7 @@ export default function Achievements() {
               </div>
             </div>
 
-            {/* Track 2: Rightward Infinite Marquee */}
-            <div className="marquee-track-container">
-              <div className="marquee-track direction-right">
-                {/* 4 identical loops render total of 16 elements for a seamless 45s loop */}
-                {[...track2Unique, ...track2Unique, ...track2Unique, ...track2Unique].map((ach, idx) =>
-                  renderCard(ach, `t2-${idx}`)
-                )}
-              </div>
-            </div>
+
           </div>
         )}
 
@@ -518,61 +434,7 @@ export default function Achievements() {
           </div>
         )}
 
-        {/* VIEW MODE 3: Premium visual gallery showcasing placeholder event snapshots */}
-        {viewMode === "photos" && (
-          <div className="photos-gallery-container">
-            <div className="photos-grid">
-              {eventPhotos.map((photo, idx) => (
-                <div key={idx} className="photo-item">
-                  <div className="photo-img-wrapper">
-                    {/* Visual Card Representation without real images using premium CSS vector designs */}
-                    <div
-                      className={`w-full h-full bg-gradient-to-br ${photo.color} flex flex-col items-center justify-center p-8`}
-                      style={{ height: "100%" }}
-                    >
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        width="48"
-                        height="48"
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        stroke="currentColor"
-                        strokeWidth="1.5"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        style={{ color: "rgba(255, 255, 255, 0.4)", marginBottom: "16px" }}
-                      >
-                        <rect x="3" y="3" width="18" height="18" rx="2" ry="2" />
-                        <circle cx="8.5" cy="8.5" r="1.5" />
-                        <polyline points="21 15 16 10 5 21" />
-                      </svg>
-                      <span
-                        style={{
-                          fontSize: "12px",
-                          fontWeight: "bold",
-                          textTransform: "uppercase",
-                          letterSpacing: "0.1em",
-                          color: "rgba(255, 255, 255, 0.6)"
-                        }}
-                      >
-                        {photo.category}
-                      </span>
-                    </div>
-                  </div>
 
-                  <div className="photo-overlay">
-                    <span className="photo-tag">
-                      <svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" /><circle cx="12" cy="7" r="4" /></svg>
-                      {photo.date}
-                    </span>
-                    <h4 className="photo-title">{photo.title}</h4>
-                    <p className="photo-desc">{photo.desc}</p>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-        )}
       </div>
     </section>
   );

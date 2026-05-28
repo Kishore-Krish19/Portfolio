@@ -9,35 +9,35 @@
   transform: translate(-50%, -150%);
   width: auto;
   max-width: 92%;
-  height: 64px;
+  height: 60px;
 
   /* Glassmorphic Space Capsule */
-  background: rgba(2, 6, 23, 0.5);
-  backdrop-filter: blur(16px) saturate(180%);
-  -webkit-backdrop-filter: blur(16px) saturate(180%);
+  background: rgba(2, 6, 23, 0.55);
+  backdrop-filter: blur(20px) saturate(200%);
+  -webkit-backdrop-filter: blur(20px) saturate(200%);
   
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(24, 217, 224, 0.12);
   border-radius: 9999px;
 
   display: flex;
   justify-content: space-between;
   align-items: center;
-  gap: 32px;
+  gap: 20px;
 
-  padding: 0 28px;
+  padding: 0 24px;
   color: white;
   z-index: 9999;
 
   box-sizing: border-box;
-  transform-style: flat;
   backface-visibility: hidden;
   will-change: transform, background, border-color, box-shadow;
 
-  /* Double Glass Aura Shadow */
+  /* Cosmic aura shadow */
   box-shadow: 
     0 4px 6px -1px rgba(0, 0, 0, 0.1),
     0 20px 40px -15px rgba(0, 0, 0, 0.6),
-    0 0 0 1px rgba(255, 255, 255, 0.04) inset;
+    0 0 0 1px rgba(255, 255, 255, 0.04) inset,
+    0 0 20px -8px rgba(24, 217, 224, 0.08);
   
   /* Smooth fluid spring transition */
   transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1), 
@@ -52,12 +52,13 @@
 
 /* Hovering Glow Shift for the Island when active */
 .navbar.show:hover {
-  background: rgba(2, 6, 23, 0.65);
-  border-color: rgba(24, 217, 224, 0.2);
+  background: rgba(2, 6, 23, 0.70);
+  border-color: rgba(24, 217, 224, 0.22);
   box-shadow: 
-    0 4px 12px -2px rgba(24, 217, 224, 0.1),
+    0 4px 12px -2px rgba(24, 217, 224, 0.12),
     0 20px 40px -15px rgba(0, 0, 0, 0.7),
-    0 0 0 1px rgba(255, 255, 255, 0.06) inset;
+    0 0 0 1px rgba(255, 255, 255, 0.06) inset,
+    0 0 30px -10px rgba(24, 217, 224, 0.15);
 }
 
 /* ===============================
@@ -66,13 +67,12 @@
 
 .navbar .logo {
   font-family: 'Orbitron', 'Syncopate', sans-serif;
-  font-size: 22px;
+  font-size: 20px;
   font-weight: 800;
   letter-spacing: 4px;
   text-transform: uppercase;
   white-space: nowrap;
   
-  /* Space-based color matching cosmic gradient */
   background: linear-gradient(
     90deg,
     #18d9e0 0%,
@@ -85,7 +85,6 @@
   -webkit-text-fill-color: transparent;
   background-clip: text;
   
-  /* Cosmic nebula aura glow */
   filter: drop-shadow(0 0 5px rgba(24, 217, 224, 0.4));
   
   cursor: pointer;
@@ -93,7 +92,6 @@
               filter 0.3s ease, 
               transform 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
   
-  /* Base state before entrance */
   opacity: 0;
   transform: translateY(-10px) scale(0.95);
 }
@@ -112,81 +110,145 @@
 .nav-links {
   display: flex;
   align-items: center;
-  gap: 6px;
+  gap: 2px;
   flex-wrap: nowrap;
 }
 
 /* ===============================
-   Nav Buttons (Icon + Text)
+   Nav Buttons — Icon Only + Tooltip
  ================================ */
 
-.nav-links button {
+.nav-btn {
+  position: relative;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 6px;
 
   background: transparent;
   border: 1px solid transparent;
-
-  color: #94a3b8; /* Elegant slate grey */
-
-  font-size: 14px;
-  font-weight: 500;
+  color: #64748b;
 
   cursor: pointer;
-  padding: 6px 12px;
+  padding: 8px 10px;
   border-radius: 9999px;
   white-space: nowrap;
 
-  transition: all 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
+  transition: all 0.25s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+/* Icon wrapper */
+.nav-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 0;
+  transition: transform 0.25s cubic-bezier(0.2, 0.8, 0.2, 1),
+              color 0.25s ease;
+}
+
+.nav-icon svg {
+  width: 16px;
+  height: 16px;
+  stroke: currentColor;
+  transition: stroke 0.25s ease, transform 0.25s cubic-bezier(0.2, 0.8, 0.2, 1);
 }
 
 /* ===============================
-   Icons
+   Tooltip Label (visible on hover)
  ================================ */
 
-.nav-links button svg {
-  width: 14px;
-  height: 14px;
-  stroke: currentColor;
-  transition: stroke 0.3s ease, transform 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
+.nav-tooltip {
+  position: absolute;
+  top: calc(100% + 10px);
+  left: 50%;
+  transform: translateX(-50%) translateY(-4px);
+
+  /* Space-themed capsule pill */
+  background: rgba(2, 6, 23, 0.92);
+  border: 1px solid rgba(24, 217, 224, 0.3);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+
+  color: #18d9e0;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  white-space: nowrap;
+
+  padding: 4px 10px;
+  border-radius: 9999px;
+
+  /* Cosmic glow */
+  box-shadow: 
+    0 0 12px rgba(24, 217, 224, 0.2),
+    0 4px 12px rgba(0, 0, 0, 0.4);
+
+  /* Hidden by default */
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s ease, transform 0.2s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+/* Tooltip arrow — points upward */
+.nav-tooltip::after {
+  content: "";
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  border: 5px solid transparent;
+  border-bottom-color: rgba(24, 217, 224, 0.3);
 }
 
 /* ===============================
    Hover & Active Effects
  ================================ */
 
-.nav-links button:hover {
-  color: #18d9e0; /* Matches space cyan */
-  background: rgba(255, 255, 255, 0.08);
-  border-color: rgba(255, 255, 255, 0.05);
+.nav-btn:hover {
+  color: #18d9e0;
+  background: rgba(24, 217, 224, 0.08);
+  border-color: rgba(24, 217, 224, 0.15);
+}
+
+.nav-btn:hover .nav-icon {
   transform: translateY(-1px);
 }
 
-.nav-links button:hover svg {
+.nav-btn:hover .nav-icon svg {
   stroke: #18d9e0;
-  transform: translateY(-0.5px);
+  filter: drop-shadow(0 0 4px rgba(24, 217, 224, 0.5));
 }
 
-/* Active Link Capsule style */
-.nav-links button.active {
+/* Show tooltip on hover */
+.nav-btn:hover .nav-tooltip {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
+
+/* Ensure navbar doesn't clip the tooltip */
+.navbar {
+  overflow: visible;
+}
+
+/* Active state */
+.nav-btn.active {
   background: rgba(24, 217, 224, 0.1);
-  border-color: rgba(24, 217, 224, 0.2);
+  border-color: rgba(24, 217, 224, 0.25);
   color: #18d9e0;
-  box-shadow: 0 0 12px rgba(24, 217, 224, 0.12);
+  box-shadow: 0 0 14px rgba(24, 217, 224, 0.15);
 }
 
-.nav-links button.active svg {
+.nav-btn.active .nav-icon svg {
   stroke: #18d9e0;
 }
 
 /* ===============================
-   Bounce-in Text Animation
+   Bounce-in Entrance Animation
  ================================ */
-/* Hide elements before active show */
+
 .navbar .logo,
-.navbar .nav-links button {
+.navbar .nav-btn {
   opacity: 0;
   transform: translateY(-10px) scale(0.95);
 }
@@ -196,12 +258,10 @@
     opacity: 0;
     transform: translateY(-10px) scale(0.95);
   }
-
   60% {
     opacity: 1;
-    transform: translateY(4px) scale(1.05);
+    transform: translateY(3px) scale(1.04);
   }
-
   100% {
     opacity: 1;
     transform: translateY(0) scale(1);
@@ -209,32 +269,19 @@
 }
 
 @keyframes cosmicFlow {
-  0% {
-    background-position: 0% center;
-  }
-  100% {
-    background-position: 200% center;
-  }
+  0%   { background-position: 0% center; }
+  100% { background-position: 200% center; }
 }
 
 .navbar.show .logo {
   animation: bounceIn 0.45s ease-out forwards, cosmicFlow 6s linear infinite;
 }
 
-.navbar.show .nav-links button {
+.navbar.show .nav-btn {
   animation: bounceIn 0.45s ease-out forwards;
 }
 
-.navbar.show .nav-links button:nth-child(1) { animation-delay: 0.5s; }
-.navbar.show .nav-links button:nth-child(2) { animation-delay: 0.65s; }
-.navbar.show .nav-links button:nth-child(3) { animation-delay: 0.7s; }
-.navbar.show .nav-links button:nth-child(4) { animation-delay: 0.75s; }
-.navbar.show .nav-links button:nth-child(5) { animation-delay: 0.8s; }
-.navbar.show .nav-links button:nth-child(6) { animation-delay: 0.85s; }
-.navbar.show .nav-links button:nth-child(7) { animation-delay: 0.9s; }
-
-
-/* ===============================  
+/* ===============================
    Mobile & Tablet Responsiveness
  ================================ */
 
@@ -243,14 +290,14 @@
     top: 12px;
     width: 94%;
     height: auto;
-    padding: 12px 20px;
+    padding: 12px 18px;
     border-radius: 24px;
     flex-direction: column;
-    gap: 12px;
+    gap: 10px;
   }
 
   .navbar .logo {
-    font-size: 20px;
+    font-size: 18px;
     letter-spacing: 3px;
   }
 
@@ -259,18 +306,26 @@
     width: 100%;
     justify-content: center;
     flex-wrap: wrap;
-    gap: 6px;
-  }
-
-  .nav-links button {
-    font-size: 12px;
-    padding: 6px 12px;
     gap: 4px;
   }
 
-  .nav-links button svg {
-    width: 13px;
-    height: 13px;
+  .nav-btn {
+    padding: 7px 9px;
+  }
+
+  .nav-icon svg {
+    width: 15px;
+    height: 15px;
+  }
+
+  /* Tooltip stays below on mobile too */
+  .nav-tooltip {
+    top: calc(100% + 8px);
+    transform: translateX(-50%) translateY(-4px);
+  }
+
+  .nav-btn:hover .nav-tooltip {
+    transform: translateX(-50%) translateY(0);
   }
 }
 
@@ -284,7 +339,7 @@
   }
 
   .navbar .logo,
-  .navbar .nav-links button {
+  .navbar .nav-btn {
     opacity: 1;
     transform: none;
     animation: none;

@@ -1,6 +1,7 @@
 import Home from "./components/Home";
 import Projects from "./components/Projects";
 import Achievements from "./components/Achievements";
+import Experience from "./components/Experience";
 import Certifications from "./components/Certifications";
 import Resume from "./components/Resume";
 import Contact from "./components/Contact";
@@ -66,6 +67,7 @@ function App() {
         <About />
         <Skills />
         <Projects />
+        <Experience />
         <Achievements />
         <Certifications />
         {/* <Resume /> */}
