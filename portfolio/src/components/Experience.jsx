@@ -2,33 +2,33 @@ import { motion } from "framer-motion";
 import "./Experience.css";
 
 const experiences = [
-  {
+    {
     id: "exp-1",
-    role: "Event Coordinator",
-    category: "Leadership & Management",
-    icon: "event",
-    gradient: "violet",
-    date: "2024 – Present",
+    role: "AI Prompt Optimizer Extension",
+    category: "Open-Source & AI Product",
+    icon: "aiprompt",
+    gradient: "sky",
+    date: "May 2026",
     highlights: [
-      "Organised and coordinated technical & cultural events for inter-college competitions",
-      "Managed end-to-end logistics, registrations, and team scheduling",
-      "Led cross-functional volunteer teams to ensure seamless execution",
+      "Designed and published an AI-powered browser extension on the Microsoft Edge Add-ons Store",
+      "Built a system that transforms rough prompts into structured, high-quality AI prompts",
+      "Successfully completed public deployment and live publishing on the Edge Add-ons platform",
     ],
-    tags: ["Planning", "Leadership", "Coordination"],
+    tags: ["AI Tools", "Edge Extension", "Prompt Engineering", "JavaScript"],
   },
   {
     id: "exp-2",
-    role: "Published Browser Extension",
-    category: "Open-Source & Product",
-    icon: "extension",
-    gradient: "cyan",
-    date: "2025",
+    role: "AgentVerse 2026 – Project Expo Coordinator",
+    category: "Experience & Leadership",
+    icon: "agentverse",
+    gradient: "rose",
+    date: "March 2026",
     highlights: [
-      "Designed, developed and shipped a browser extension to the Chrome Web Store",
-      "Built with JavaScript, HTML & CSS following Manifest V3 standards",
-      "Achieved live publication accessible to public users worldwide",
+      "Coordinated and managed AgentVerse 2026, a college-level project expo featuring 30+ participating teams",
+      "Handled complete event execution including team coordination, scheduling, registrations, and stage management",
+      "Participated as a project presenter while simultaneously managing core event responsibilities",
     ],
-    tags: ["Chrome Extension", "JavaScript", "MV3"],
+    tags: ["AgentVerse", "Event Management", "Leadership", "Coordination"],
   },
   {
     id: "exp-3",
@@ -96,12 +96,39 @@ const IconSeminar = () => (
   </svg>
 );
 
+const IconAgentVerse = () => (
+  <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" viewBox="0 0 24 24"
+    fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+    <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
+    <circle cx="9" cy="7" r="4" />
+    <path d="M23 21v-2a4 4 0 0 0-3-3.87" />
+    <path d="M16 3.13a4 4 0 0 1 0 7.75" />
+  </svg>
+);
+
+const IconAIPrompt = () => (
+  <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" viewBox="0 0 24 24"
+    fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+    <path d="M12 2a4 4 0 0 1 4 4c0 1.95-1.4 3.57-3.25 3.92" />
+    <path d="M8.56 13.44a4 4 0 0 0 6.88 0" />
+    <path d="M12 18v4" />
+    <path d="M7 22h10" />
+    <circle cx="12" cy="10" r="1" />
+    <path d="M4.93 4.93l1.41 1.41" />
+    <path d="M17.66 6.34l1.41-1.41" />
+    <line x1="2" y1="12" x2="4" y2="12" />
+    <line x1="20" y1="12" x2="22" y2="12" />
+  </svg>
+);
+
 const renderIcon = (icon) => {
   switch (icon) {
     case "event": return <IconEvent />;
     case "extension": return <IconExtension />;
     case "cloud": return <IconCloud />;
     case "seminar": return <IconSeminar />;
+    case "agentverse": return <IconAgentVerse />;
+    case "aiprompt": return <IconAIPrompt />;
     default: return <IconEvent />;
   }
 };

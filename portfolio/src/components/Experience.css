@@ -144,6 +144,30 @@
   opacity: 1;
 }
 
+/* Rose card hover */
+.exp-card--rose:hover {
+  box-shadow: 0 22px 48px rgba(244, 63, 94, 0.18),
+              0 0 30px rgba(244, 63, 94, 0.06);
+  border-color: rgba(244, 63, 94, 0.25);
+}
+
+.exp-card--rose:hover::before {
+  background: linear-gradient(135deg, #f43f5e 0%, rgba(225, 29, 72, 0.2) 100%);
+  opacity: 1;
+}
+
+/* Sky card hover */
+.exp-card--sky:hover {
+  box-shadow: 0 22px 48px rgba(56, 189, 248, 0.18),
+              0 0 30px rgba(56, 189, 248, 0.06);
+  border-color: rgba(56, 189, 248, 0.25);
+}
+
+.exp-card--sky:hover::before {
+  background: linear-gradient(135deg, #38bdf8 0%, rgba(14, 165, 233, 0.2) 100%);
+  opacity: 1;
+}
+
 /* ---------- Ambient Glow ---------- */
 
 .exp-card-glow {
@@ -174,6 +198,14 @@
 
 .exp-card--orange .exp-card-glow {
   background: radial-gradient(circle, rgba(249, 115, 22, 0.2) 0%, transparent 70%);
+}
+
+.exp-card--rose .exp-card-glow {
+  background: radial-gradient(circle, rgba(244, 63, 94, 0.2) 0%, transparent 70%);
+}
+
+.exp-card--sky .exp-card-glow {
+  background: radial-gradient(circle, rgba(56, 189, 248, 0.2) 0%, transparent 70%);
 }
 
 .exp-card:hover .exp-card-glow {
@@ -251,6 +283,28 @@
   box-shadow: 0 0 18px rgba(249, 115, 22, 0.25);
 }
 
+.exp-icon--rose {
+  background: rgba(244, 63, 94, 0.1);
+  color: #fb7185;
+  border: 1px solid rgba(244, 63, 94, 0.15);
+}
+
+.exp-card--rose:hover .exp-icon--rose {
+  background: rgba(244, 63, 94, 0.18);
+  box-shadow: 0 0 18px rgba(244, 63, 94, 0.25);
+}
+
+.exp-icon--sky {
+  background: rgba(56, 189, 248, 0.1);
+  color: #7dd3fc;
+  border: 1px solid rgba(56, 189, 248, 0.15);
+}
+
+.exp-card--sky:hover .exp-icon--sky {
+  background: rgba(56, 189, 248, 0.18);
+  box-shadow: 0 0 18px rgba(56, 189, 248, 0.25);
+}
+
 .exp-header-text {
   flex: 1;
   min-width: 0;
@@ -302,6 +356,8 @@
 .exp-divider--cyan    { background: linear-gradient(to right, rgba(6, 182, 212, 0.4), transparent); }
 .exp-divider--emerald { background: linear-gradient(to right, rgba(16, 185, 129, 0.4), transparent); }
 .exp-divider--orange  { background: linear-gradient(to right, rgba(249, 115, 22, 0.4), transparent); }
+.exp-divider--rose    { background: linear-gradient(to right, rgba(244, 63, 94, 0.4), transparent); }
+.exp-divider--sky     { background: linear-gradient(to right, rgba(56, 189, 248, 0.4), transparent); }
 
 /* ---------- Highlights ---------- */
 
@@ -343,6 +399,8 @@
 .exp-bullet--cyan    { background: #06b6d4; box-shadow: 0 0 6px rgba(6, 182, 212, 0.6); }
 .exp-bullet--emerald { background: #10b981; box-shadow: 0 0 6px rgba(16, 185, 129, 0.6); }
 .exp-bullet--orange  { background: #f97316; box-shadow: 0 0 6px rgba(249, 115, 22, 0.6); }
+.exp-bullet--rose    { background: #f43f5e; box-shadow: 0 0 6px rgba(244, 63, 94, 0.6); }
+.exp-bullet--sky     { background: #38bdf8; box-shadow: 0 0 6px rgba(56, 189, 248, 0.6); }
 
 /* ---------- Tags ---------- */
 
@@ -386,4 +444,16 @@
   color: #fb923c;
   background: rgba(249, 115, 22, 0.08);
   border-color: rgba(249, 115, 22, 0.2);
+}
+
+.exp-tag--rose {
+  color: #fb7185;
+  background: rgba(244, 63, 94, 0.08);
+  border-color: rgba(244, 63, 94, 0.2);
+}
+
+.exp-tag--sky {
+  color: #7dd3fc;
+  background: rgba(56, 189, 248, 0.08);
+  border-color: rgba(56, 189, 248, 0.2);
 }
