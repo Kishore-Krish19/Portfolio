@@ -194,7 +194,7 @@ export default function Projects() {
         "Multilingual speech-to-text input with real-time prompt enhancement and feedback"
       ],
       github: "https://github.com/Kishore-Krish19/Prompt_Forge_AI",
-      demo: "https://prompt-forge-ai-nu.vercel.app",
+      demo: "https://prompt-forge-ai-v1.vercel.app",
       themeClass: "ai-theme",
       renderIcon: () => (
         <svg className="project-graphic-svg" viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg" fill="none">
@@ -497,7 +497,7 @@ export default function Projects() {
           <h1 className="projects-title section-heading">Code <span className="heading-gradient">Showcase</span></h1>
           <div className="projects-subtitle-underline section-heading-bar"></div>
         </motion.div>
-        
+
         {/* CONTROLS DISPLAY OVERVIEW SWITCHER TOGGLE LINK */}
         <motion.div
           className="toggle-view-container"
