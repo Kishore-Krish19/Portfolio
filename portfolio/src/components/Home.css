@@ -942,23 +942,50 @@
    Mobile Responsiveness
 ================================ */
 @media (max-width: 900px) {
+  /* Hide right side panel */
   .home-right-skills {
     display: none !important;
   }
 
+  /* Container — column flex for mobile, everything in flow */
+  .home-container {
+    overflow-x: hidden;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 0;
+    padding: 80px 0 70px;
+    box-sizing: border-box;
+  }
+
+  /* Intro text — IN FLOW, not absolute on mobile */
   .home-left-intro {
-    position: absolute;
-    top: 22%;
-    left: 50%;
-    transform: translateX(-50%);
+    position: static !important;
+    left: auto;
+    top: auto;
+    transform: translateY(-20px) !important;
     text-align: center;
-    width: 85%;
-    max-width: 320px;
+    width: 90%;
+    max-width: 360px;
     display: block !important;
+    z-index: 6;
+    margin-bottom: 12px;
+    /* Override the entrance animation for mobile */
+    opacity: 0;
+    transition: opacity 0.8s cubic-bezier(0.25, 1, 0.5, 1),
+                transform 0.8s cubic-bezier(0.25, 1, 0.5, 1);
+  }
+
+  .home-left-intro.visible {
+    opacity: 1;
+    transform: translateY(0) !important;
   }
 
   .home-left-intro .intro-name {
-    font-size: 2rem;
+    font-size: 2.2rem;
+    letter-spacing: 2px;
+    word-break: normal;
+    overflow-wrap: normal;
   }
 
   .home-left-intro .intro-designation {
@@ -970,28 +997,46 @@
     font-size: 0.75rem;
   }
 
+  /* Center content area — no longer needs full height */
   .home-center {
-    gap: 20px;
+    gap: 10px;
+    height: auto;
+    justify-content: center;
+    flex-shrink: 0;
   }
 
+  /* Label above image */
   .home-label {
-    font-size: 10px;
-    letter-spacing: 3px;
-    margin-bottom: 70px;
+    font-size: 12px;
+    letter-spacing: 2px;
+    margin-bottom: 0;
+    padding: 0 10px;
   }
 
+  .home-label-container {
+    min-height: 28px;
+  }
+
+  /* Image sizing for mobile */
   .image-glow-wrapper,
   .home-image-crossfade,
   .home-image {
-    width: 200px;             /* <-change for image size */
-    height: 240px;
+    width: 220px;
+    height: 260px;
   }
 
-  .top-left { top: 30px; left: 20px; }
-  .top-right { top: 30px; right: 20px; }
-  .bottom-left { bottom: 30px; left: 20px; }
-  .bottom-right { bottom: 30px; right: 20px; }
+  /* Glowing line */
+  .glowing-line {
+    width: 280px !important;
+  }
 
+  /* Button positions — corners of the viewport with notch protection */
+  .top-left { top: max(24px, env(safe-area-inset-top)); left: max(16px, env(safe-area-inset-left)); }
+  .top-right { top: max(24px, env(safe-area-inset-top)); right: max(16px, env(safe-area-inset-right)); }
+  .bottom-left { bottom: max(24px, env(safe-area-inset-bottom)); left: max(16px, env(safe-area-inset-left)); }
+  .bottom-right { bottom: max(24px, env(safe-area-inset-bottom)); right: max(16px, env(safe-area-inset-right)); }
+
+  /* Button sizing */
   .home-btn {
     font-size: 9px;
     padding: 12px 18px;
@@ -1000,9 +1045,83 @@
     letter-spacing: 2px;
   }
 
-  .glowing-line {       /* <-change for line size */
-    width: 300px !important;
+  /* Mobile tap — mirror the hover effect via .active class */
+  .glow-btn.active {
+    transform: scale(1.08);
+    color: #ffffff;
+    text-shadow: 0 0 8px var(--nebula-cyan);
+    box-shadow:
+      0 0 12px rgba(6, 182, 212, 0.5),
+      0 0 24px rgba(124, 58, 237, 0.3),
+      inset 0 0 12px rgba(6, 182, 212, 0.08);
+  }
+
+  /* Hover hint styling for mobile */
+  .home-hover-hint {
+    font-size: 0.75rem;
+    letter-spacing: 2px;
+    text-align: center;
+    padding: 0 20px;
+  }
+
+  /* Image mask — reduce padding */
+  .image-mask {
+    padding: 10px;
+    padding-bottom: 0;
   }
 }
 
-@media (max-width: 700px) {}
+/* ===============================
+   Small Mobile (≤480px)
+================================ */
+@media (max-width: 480px) {
+  .home-container {
+    padding: 70px 0 60px;
+  }
+
+  .home-left-intro {
+    max-width: 300px;
+  }
+
+  .home-left-intro .intro-name {
+    font-size: 1.8rem;
+  }
+
+  .home-left-intro .intro-designation {
+    font-size: 0.9rem;
+  }
+
+  .image-glow-wrapper,
+  .home-image-crossfade,
+  .home-image {
+    width: 180px;
+    height: 220px;
+  }
+
+  .glowing-line {
+    width: 220px !important;
+  }
+
+  .home-btn {
+    font-size: 8px;
+    padding: 10px 14px;
+    min-width: 88px;
+    min-height: 40px;
+    letter-spacing: 1.5px;
+  }
+
+  .top-left { top: max(18px, env(safe-area-inset-top)); left: max(10px, env(safe-area-inset-left)); }
+  .top-right { top: max(18px, env(safe-area-inset-top)); right: max(10px, env(safe-area-inset-right)); }
+  .bottom-left { bottom: max(18px, env(safe-area-inset-bottom)); left: max(10px, env(safe-area-inset-left)); }
+  .bottom-right { bottom: max(18px, env(safe-area-inset-bottom)); right: max(10px, env(safe-area-inset-right)); }
+
+  .home-label {
+    font-size: 9px;
+    letter-spacing: 1.5px;
+  }
+
+  .home-hover-hint {
+    font-size: 0.68rem;
+    letter-spacing: 1.5px;
+  }
+}

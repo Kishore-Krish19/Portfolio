@@ -988,10 +988,104 @@
 
 @media (max-width: 768px) {
   .achievements-section {
-    padding: 100px 6% 60px;
+    padding: 80px 6% 60px;
   }
   
   .achievements-title {
     font-size: 32px;
+  }
+
+  /* Minimized Stat Cards */
+  .stat-card {
+    min-height: auto !important;
+    padding: 20px 16px 16px !important;
+    border-radius: 16px !important;
+  }
+
+  .stat-card.leetcode::before,
+  .stat-card.hackerrank::before {
+    border-radius: 16px !important;
+  }
+
+  .hackerrank-header {
+    margin-bottom: 12px;
+  }
+
+  .hr-logo-bg {
+    padding: 8px;
+    border-radius: 10px;
+  }
+
+  .hr-header-text h3 {
+    font-size: 16px;
+  }
+
+  .hackerrank-subgrid {
+    gap: 8px !important;
+  }
+
+  .hr-subcard {
+    padding: 10px 8px !important;
+    border-radius: 12px !important;
+  }
+
+  .hr-subcard h4 {
+    font-size: 12px !important;
+  }
+
+  .hr-solves {
+    font-size: 9px !important;
+  }
+
+  .hr-stars-row {
+    font-size: 9px !important;
+  }
+
+  /* Minimized Marquee Cards */
+  .achievement-card {
+    width: 240px !important;
+    padding: 16px !important;
+    border-radius: 16px !important;
+  }
+
+  .achievement-card::before {
+    border-radius: 16px !important;
+  }
+
+  .ach-card-header-row {
+    margin-bottom: 10px;
+  }
+
+  .ach-icon-wrapper {
+    padding: 8px;
+    border-radius: 10px;
+  }
+
+  .ach-card-title {
+    font-size: 13.5px !important;
+  }
+
+  .ach-card-desc {
+    font-size: 12px !important;
+    line-height: 1.5;
+    margin-bottom: 12px;
+    height: 52px !important;
+  }
+
+  .achievement-pill-badge {
+    padding: 3px 8px;
+    font-size: 9px;
+    margin-top: 0;
+  }
+
+  .ach-card-footer {
+    padding: 8px 10px;
+    border-radius: 8px;
+    font-size: 11px;
+  }
+
+  .achievements-static-grid {
+    grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+    gap: 16px;
   }
 }

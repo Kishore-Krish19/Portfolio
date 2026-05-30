@@ -583,30 +583,236 @@
   .projects-carousel-wrapper {
     gap: 12px;
     padding: 0;
+    flex-direction: column;
   }
   .projects-carousel-wrapper .carousel-nav-btn {
     display: none;
   }
   .projects-flex-container {
+    flex: none !important;
     flex-direction: column;
-    height: auto;
+    height: auto !important;
+    gap: 16px;
+    width: 100%;
   }
   .project-card-wrapper {
-    flex: 1 1 auto;
-    min-height: 190px;
+    flex: none !important;
+    height: auto !important;
+    min-height: auto !important;
     max-width: none;
   }
+  .project-card-wrapper.expanded {
+    flex: none !important;
+    height: auto !important;
+    max-width: none;
+  }
+
+  /* Mobile Carousel Controls Styling */
+  .mobile-carousel-controls {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    margin-top: 16px;
+    width: 100%;
+    z-index: 30;
+  }
+
+  .mobile-nav-btn {
+    background: rgba(10, 5, 26, 0.85);
+    border: 1px solid rgba(124, 58, 237, 0.35);
+    color: #c7d2fe;
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    font-size: 16px;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  }
+
+  .mobile-nav-btn:active {
+    background: #7c3aed;
+    border-color: #7c3aed;
+    color: white;
+    transform: scale(0.92);
+  }
+
+  .mobile-carousel-indicator {
+    font-family: var(--font-mono, monospace);
+    font-size: 14px;
+    font-weight: 600;
+    color: #a5b4fc;
+    letter-spacing: 1px;
+    background: rgba(10, 5, 26, 0.5);
+    padding: 6px 16px;
+    border-radius: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+  }
+  
   .project-card {
     position: relative;
+    padding: 20px 18px !important;
+    border-radius: 16px;
+    height: auto !important;
+    min-height: auto !important;
   }
+
+  .project-card-wrapper.expanded .project-card {
+    padding: 20px 18px !important;
+    height: auto !important;
+    min-height: auto !important;
+  }
+
   .project-vertical-title-view {
     display: none !important;
   }
+  
   .project-expanded-view {
     opacity: 1;
+    transform: translateY(0);
     pointer-events: auto;
   }
+
+  /* Minimized elements */
+  .project-title {
+    font-size: 20px;
+  }
+
+  .project-graphic-wrapper {
+    width: 48px;
+    height: 48px;
+    border-radius: 12px;
+  }
+
+  .project-graphic-svg {
+    width: 32px;
+    height: 32px;
+  }
+
+  .project-tech-badges {
+    gap: 6px;
+    margin-top: 8px;
+  }
+
+  .tech-badge {
+    padding: 6px 10px;
+    gap: 5px;
+  }
+
+  .tech-badge-icon {
+    font-size: 13px;
+  }
+
+  .tech-badge-name {
+    font-size: 12px;
+  }
+
+  .project-desc-wrapper {
+    margin-top: 14px;
+  }
+
+  .project-desc {
+    gap: 6px;
+    font-size: 13.5px;
+    line-height: 1.5;
+  }
+
+  .project-desc li {
+    padding-left: 16px;
+  }
+
+  .project-desc li::before {
+    top: 7px;
+    width: 5px;
+    height: 5px;
+  }
+
+  .project-links {
+    gap: 10px;
+    margin-top: 16px;
+  }
+
+  .project-btn {
+    padding: 8px 18px;
+    font-size: 13px;
+    border-radius: 20px;
+  }
+
+  .project-btn .btn-icon {
+    font-size: 13px;
+  }
+
   .projects-grid-container {
     grid-template-columns: 1fr;
+    gap: 20px;
+    width: 100%;
+  }
+
+  .project-card-wrapper.grid-card {
+    min-height: auto !important;
+  }
+
+  .project-card-wrapper.grid-card .project-card {
+    padding: 20px 18px !important;
+    min-height: auto !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .project-card {
+    padding: 16px 14px !important;
+  }
+
+  .project-card-wrapper.expanded .project-card {
+    padding: 16px 14px !important;
+  }
+
+  .project-card-wrapper.grid-card {
+    min-height: auto !important;
+  }
+
+  .project-card-wrapper.grid-card .project-card {
+    padding: 16px 14px !important;
+    min-height: auto !important;
+  }
+
+  .project-title {
+    font-size: 17px;
+  }
+
+  .project-graphic-wrapper {
+    width: 40px;
+    height: 40px;
+    border-radius: 10px;
+  }
+
+  .project-graphic-svg {
+    width: 24px;
+    height: 24px;
+  }
+
+  .tech-badge {
+    padding: 4px 8px;
+  }
+
+  .tech-badge-icon {
+    font-size: 11px;
+  }
+
+  .tech-badge-name {
+    font-size: 10px;
+  }
+
+  .project-desc {
+    font-size: 12px;
+  }
+
+  .project-btn {
+    padding: 6px 12px;
+    font-size: 11px;
   }
 }

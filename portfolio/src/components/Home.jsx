@@ -34,9 +34,12 @@ export default function Home() {
     const [activeBtn, setActiveBtn] = useState(null);
     const [buttonsVisible, setButtonsVisible] = useState(false);
 
-    // Detect mobile
+    // Detect mobile — synced with CSS @media (max-width: 900px)
     useEffect(() => {
-        setIsMobile(window.innerWidth <= 768);
+        const checkMobile = () => setIsMobile(window.innerWidth <= 900);
+        checkMobile();
+        window.addEventListener('resize', checkMobile);
+        return () => window.removeEventListener('resize', checkMobile);
     }, []);
 
     useEffect(() => {
@@ -368,7 +371,9 @@ export default function Home() {
                     {/* Hover hint */}
                     <div className={`home-hover-hint ${isInitialAnimationComplete ? "visible" : ""}`}>
                         <span className="hint-arrow">↑</span>
-                        Hover over the buttons to explore
+                        {isMobile
+                            ? "Tap a button twice to explore"
+                            : "Hover over the buttons to explore"}
                         <span className="hint-arrow">↑</span>
                     </div>
                 </div>

@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { motion } from "framer-motion";
 import { createPortal } from "react-dom";
 import "./Projects.css";
@@ -475,6 +475,37 @@ export default function Projects() {
 
   const visibleIndices = getVisibleIndices();
 
+  const [isMobile, setIsMobile] = useState(false);
+  const touchStartX = useRef(0);
+  const touchEndX = useRef(0);
+
+  useEffect(() => {
+    const checkMobile = () => setIsMobile(window.innerWidth <= 868);
+    checkMobile();
+    window.addEventListener("resize", checkMobile);
+    return () => window.removeEventListener("resize", checkMobile);
+  }, []);
+
+  const handleTouchStart = (e) => {
+    touchStartX.current = e.targetTouches[0].clientX;
+  };
+
+  const handleTouchMove = (e) => {
+    touchEndX.current = e.targetTouches[0].clientX;
+  };
+
+  const handleTouchEnd = () => {
+    if (!touchStartX.current || !touchEndX.current) return;
+    const diff = touchStartX.current - touchEndX.current;
+    if (diff > 50) {
+      nextSlide();
+    } else if (diff < -50) {
+      prevSlide();
+    }
+    touchStartX.current = 0;
+    touchEndX.current = 0;
+  };
+
   useEffect(() => {
     if (isPaused || isGridMode) return;
 
@@ -515,40 +546,77 @@ export default function Projects() {
         {!isGridMode ? (
           /* LOOP CAROUSEL CONTAINER SLIDESHOW MODE */
           <div className="projects-carousel-wrapper">
-            <button className="carousel-nav-btn prev-btn" onClick={prevSlide} aria-label="Previous Project">
-              <FaChevronLeft />
-            </button>
+            {!isMobile && (
+              <button className="carousel-nav-btn prev-btn" onClick={prevSlide} aria-label="Previous Project">
+                <FaChevronLeft />
+              </button>
+            )}
 
             <div
               className="projects-flex-container"
               onMouseEnter={() => setIsPaused(true)}
               onMouseLeave={() => setIsPaused(false)}
+              onTouchStart={isMobile ? handleTouchStart : undefined}
+              onTouchMove={isMobile ? handleTouchMove : undefined}
+              onTouchEnd={isMobile ? handleTouchEnd : undefined}
             >
-              {visibleIndices.map((projectIndex, positionIdx) => {
-                const p = projects[projectIndex];
-                const isMiddle = positionIdx === 1;
+              {isMobile ? (
+                /* Mobile View: Render only the active slide fully expanded */
+                <ProjectCard
+                  key={currentSlide}
+                  project={projects[currentSlide]}
+                  themeClass={projects[currentSlide].themeClass}
+                  renderIcon={projects[currentSlide].renderIcon}
+                  isExpanded={true}
+                  onExpand={() => {}}
+                  isGridMode={false}
+                  onPlayDemo={openVideo}
+                />
+              ) : (
+                /* Desktop View: Render exactly 3 visible slide cards */
+                visibleIndices.map((projectIndex, positionIdx) => {
+                  const p = projects[projectIndex];
+                  const isMiddle = positionIdx === 1;
 
-                return (
-                  <ProjectCard
-                    key={projectIndex}
-                    project={p}
-                    themeClass={p.themeClass}
-                    renderIcon={p.renderIcon}
-                    isExpanded={isMiddle}
-                    onExpand={() => {
-                      if (positionIdx === 0) prevSlide();
-                      if (positionIdx === 2) nextSlide();
-                    }}
-                    isGridMode={false}
-                    onPlayDemo={openVideo}
-                  />
-                );
-              })}
+                  return (
+                    <ProjectCard
+                      key={projectIndex}
+                      project={p}
+                      themeClass={p.themeClass}
+                      renderIcon={p.renderIcon}
+                      isExpanded={isMiddle}
+                      onExpand={() => {
+                        if (positionIdx === 0) prevSlide();
+                        if (positionIdx === 2) nextSlide();
+                      }}
+                      isGridMode={false}
+                      onPlayDemo={openVideo}
+                    />
+                  );
+                })
+              )}
             </div>
 
-            <button className="carousel-nav-btn next-btn" onClick={nextSlide} aria-label="Next Project">
-              <FaChevronRight />
-            </button>
+            {!isMobile && (
+              <button className="carousel-nav-btn next-btn" onClick={nextSlide} aria-label="Next Project">
+                <FaChevronRight />
+              </button>
+            )}
+
+            {isMobile && (
+              /* Mobile Carousel navigation toolbar */
+              <div className="mobile-carousel-controls">
+                <button className="mobile-nav-btn" onClick={prevSlide} aria-label="Previous Project">
+                  <FaChevronLeft />
+                </button>
+                <span className="mobile-carousel-indicator">
+                  {currentSlide + 1} / {totalProjects}
+                </span>
+                <button className="mobile-nav-btn" onClick={nextSlide} aria-label="Next Project">
+                  <FaChevronRight />
+                </button>
+              </div>
+            )}
           </div>
         ) : (
           /* GRID LAYOUT GALLERY ALL PROJECTS SHOW MODE */

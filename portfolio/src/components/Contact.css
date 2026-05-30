@@ -441,11 +441,90 @@
   }
   .contact-grid {
     grid-template-columns: 1fr;
-    gap: 30px;
+    gap: 20px;
   }
   .contact-info-panel,
   .contact-form-panel {
-    padding: 36px 28px;
+    padding: 24px 20px !important;
+    border-radius: 16px !important;
+  }
+  
+  .panel-title {
+    font-size: 22px !important;
+    margin-bottom: 10px;
+  }
+
+  .panel-desc {
+    font-size: 13.5px;
+    margin-bottom: 20px;
+  }
+
+  .direct-contact-bars {
+    gap: 12px;
+    margin-bottom: 24px;
+  }
+
+  .contact-bar-item {
+    gap: 14px;
+    padding: 10px 14px !important;
+    border-radius: 12px;
+  }
+
+  .contact-bar-item .bar-text {
+    font-size: 13.5px !important;
+  }
+
+  /* Isometric icons scale-down */
+  .contact-bar-item .iso-pro,
+  .social-profiles-section .iso-pro {
+    width: 42px !important;
+    height: 42px !important;
+  }
+
+  .contact-bar-item .iso-pro span,
+  .social-profiles-section .iso-pro span {
+    width: 42px !important;
+    height: 42px !important;
+  }
+
+  .contact-bar-item .iso-pro .svg,
+  .social-profiles-section .iso-pro .svg {
+    height: 42px !important;
+    width: 42px !important;
+    padding: 11px !important;
+  }
+
+  .contact-bar-item .iso-pro .svg svg,
+  .social-profiles-section .iso-pro .svg svg {
+    width: 16px !important;
+    height: 16px !important;
+  }
+
+  .social-profiles-section .iso-list {
+    gap: 16px;
+  }
+
+  /* Form spacing */
+  .contact-form-panel {
+    gap: 16px;
+  }
+
+  .contact-form-panel input,
+  .contact-form-panel textarea {
+    padding: 10px 12px !important;
+    font-size: 13.5px;
+    border-radius: 10px;
+  }
+
+  .contact-form-panel textarea {
+    height: 120px;
+  }
+
+  .contact-form-panel .send-btn {
+    padding: 10px 20px;
+    font-size: 14px;
+    border-radius: 10px;
+    margin-top: 4px;
   }
 }
 
@@ -455,12 +534,40 @@
   }
   .form-row-two-col {
     grid-template-columns: 1fr;
-    gap: 24px;
+    gap: 16px;
   }
   .social-label {
     text-align: center;
+    font-size: 10px;
+    margin-bottom: 12px;
   }
   .social-profiles-section .iso-list {
     justify-content: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .contact-info-panel,
+  .contact-form-panel {
+    padding: 18px 16px !important;
+    border-radius: 12px !important;
+  }
+
+  .panel-title {
+    font-size: 19px !important;
+  }
+
+  .panel-desc {
+    font-size: 12.5px;
+  }
+
+  .contact-bar-item .bar-text {
+    font-size: 12.5px !important;
+  }
+
+  .contact-form-panel input,
+  .contact-form-panel textarea {
+    padding: 8px 10px !important;
+    font-size: 12.5px;
   }
 }
