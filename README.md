@@ -33,6 +33,8 @@
 | 🏆 **Achievement Marquee** | Infinite-scroll marquee of award cards with gold/silver badge tiers + LeetCode heatmap integration |
 | 📜 **Certificate Gallery** | Touch/drag-enabled carousel with auto-play, dot indicators, and credential verification links |
 | 📬 **Contact Form** | EmailJS-powered contact form with email, WhatsApp, and social profile links |
+| 📱 **Mobile Intro Overlay** | Onboarding screen recommending desktop/laptop viewing for best 3D depth, fading out gracefully after 2 seconds |
+| 🌠 **Minimalist Footer** | Sleek glassmorphic footer with gravity-themed interactive micro-animations, inline dot navigation, and clean layout controls |
 | 📱 **Fully Responsive** | Optimized for all screen sizes with mobile-first touch interactions |
 
 ---
@@ -111,7 +113,8 @@ Portfolio/
     │       ├── Resume.jsx / .css         # Resume viewer (currently disabled)
     │       ├── Contact.jsx / .css        # Contact form + social links
     │       ├── HomeButton.jsx / .css     # Floating home navigation
-    │       └── Footer.jsx / .css         # Footer with social icons
+    │       ├── MobileInfoScreen.jsx / .css # Mobile experience welcome screen overlay
+    │       └── Footer.jsx / .css         # Minimalist glassmorphic footer with custom navigation
     │
     └── dist/                   # Production build output
 ```
@@ -189,6 +192,16 @@ Portfolio/
 - Email integration via EmailJS
 - WhatsApp direct message link
 - Social profiles: LinkedIn, GitHub, LeetCode, HackerRank
+
+### 📱 Mobile Intro Overlay
+- Graceful 2-second experience overlay recommending desktop/laptop viewing for optimal 3D/parallax effects
+- Automatic fade-out animation and body scroll unlock
+
+### 🌠 Minimalist Footer
+- Glassmorphic slate container (`backdrop-filter: blur(8px)`) with subtle ambient Cyan & Purple glows
+- Single-row horizontal navigation items separated by inline dots
+- Clean borderless social vectors with branding hover glows and transforms
+- Compact arrow indicator with rise-up hover transition for smooth page top navigation
 
 ---
 
