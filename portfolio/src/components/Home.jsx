@@ -4,11 +4,11 @@ import TextType from "./TextType";
 import RotatingText from "./RotatingText";
 
 // Images
-import aboutImg from "../assets/about.jpg";
-import skillsImg from "../assets/skills.jpg";
-import projectsImg from "../assets/projects.jpg";
-import contactImg from "../assets/contact.jpg";
-import defaultImg from "../assets/default.jpg";
+import aboutImg from "../assets/about.png";
+import skillsImg from "../assets/skills.png";
+import projectsImg from "../assets/projects.png";
+import contactImg from "../assets/contact.png";
+import defaultImg from "../assets/default.png";
 
 // Corner brackets helper rendered inside every glow-btn
 function BtnCorners() {
@@ -31,6 +31,7 @@ export default function Home() {
 
     const [isMobile, setIsMobile] = useState(false);
     const [activeBtn, setActiveBtn] = useState(null);
+    const [buttonsVisible, setButtonsVisible] = useState(false);
 
     // Detect mobile
     useEffect(() => {
@@ -41,7 +42,8 @@ export default function Home() {
         const line = document.querySelector(".glowing-line");
         const wrapper = document.querySelector(".image-glow-wrapper");
         const textLabel = document.querySelector(".home-initial-label");
-
+        const leftIntro = document.querySelector(".home-left-intro");
+        const rightSkills = document.querySelector(".home-right-skills");
         if (!line || !wrapper || !textLabel) return;
 
         // Step 1: Expand Line
@@ -54,15 +56,26 @@ export default function Home() {
             wrapper.classList.add("rise");
         }, 600);
 
-        // Step 3: Fade in Text
+        // Step 3: Slide in left & right panels
+        setTimeout(() => {
+            leftIntro?.classList.add("visible");
+            rightSkills?.classList.add("visible");
+        }, 1200);
+
+        // Step 4: Fade in Text
         setTimeout(() => {
             textLabel.classList.add("visible");
         }, 1600);
 
-        // Step 4: Unlock interactions
+        // Step 5: Pop up corner buttons (after everything else)
+        setTimeout(() => {
+            setButtonsVisible(true);
+        }, 2000);
+
+        // Step 6: Unlock interactions
         setTimeout(() => {
             setIsInitialAnimationComplete(true);
-        }, 2000);
+        }, 2600);
     }, []);
 
     // Animate image change
@@ -72,9 +85,9 @@ export default function Home() {
         setTimeout(() => {
             setImage(img);
             setLabel(text);
-            setFade(false);
             setActiveBtn(btn);
-        }, 120);
+            setFade(false);
+        }, 350);
     };
 
     // Reset to default
@@ -235,7 +248,7 @@ export default function Home() {
 
                     {/* ABOUT */}
                     <button
-                        className={`home-btn glow-btn bottom-left ${activeBtn === "about" ? "active" : ""}`}
+                        className={`home-btn glow-btn bottom-left ${buttonsVisible ? "visible" : ""} ${activeBtn === "about" ? "active" : ""}`}
                         onMouseEnter={() => handleHover(aboutImg, "Meet the Developer", "about")}
                         onMouseLeave={!isMobile ? resetPreview : null}
                         onClick={(e) => {
@@ -249,7 +262,7 @@ export default function Home() {
 
                     {/* SKILLS */}
                     <button
-                        className={`home-btn glow-btn top-right ${activeBtn === "skills" ? "active" : ""}`}
+                        className={`home-btn glow-btn top-right ${buttonsVisible ? "visible" : ""} ${activeBtn === "skills" ? "active" : ""}`}
                         onMouseEnter={() => handleHover(skillsImg, "Skills Behind the Code", "skills")}
                         onMouseLeave={!isMobile ? resetPreview : null}
                         onClick={(e) => {
@@ -263,7 +276,7 @@ export default function Home() {
 
                     {/* PROJECTS */}
                     <button
-                        className={`home-btn glow-btn top-left ${activeBtn === "projects" ? "active" : ""}`}
+                        className={`home-btn glow-btn top-left ${buttonsVisible ? "visible" : ""} ${activeBtn === "projects" ? "active" : ""}`}
                         onMouseEnter={() => handleHover(projectsImg, "Crafted with Code", "projects")}
                         onMouseLeave={!isMobile ? resetPreview : null}
                         onClick={(e) => {
@@ -277,7 +290,7 @@ export default function Home() {
 
                     {/* CONTACT */}
                     <button
-                        className={`home-btn glow-btn bottom-right ${activeBtn === "contact" ? "active" : ""}`}
+                        className={`home-btn glow-btn bottom-right ${buttonsVisible ? "visible" : ""} ${activeBtn === "contact" ? "active" : ""}`}
                         onMouseEnter={() => handleHover(contactImg, "Let's Get in Touch", "contact")}
                         onMouseLeave={!isMobile ? resetPreview : null}
                         onClick={(e) => {
@@ -302,6 +315,7 @@ export default function Home() {
                     <div className="rising-stage">
                         <div className="image-mask">
                             <div className={`image-glow-wrapper ${isInitialAnimationComplete ? "rise" : ""}`}>
+                                <div className="glow-halo" />
                                 <img
                                     src={image}
                                     alt="Preview"
