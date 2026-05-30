@@ -804,8 +804,7 @@
   transition: opacity 0.8s ease, transform 0.8s ease;
 }
 
-.home-initial-label.visible,
-.home-label-container.home-initial-label {
+.home-initial-label.visible {
   opacity: 1;
   transform: translateY(0);
 }
