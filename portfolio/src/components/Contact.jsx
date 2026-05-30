@@ -1,4 +1,4 @@
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import { motion } from "framer-motion";
 import emailjs from "emailjs-com";
 import "./Contact.css";
@@ -12,6 +12,31 @@ export default function Contact() {
     });
 
     const [status, setStatus] = useState("");
+    const [activeIcon, setActiveIcon] = useState(null);
+    const [isMobile, setIsMobile] = useState(false);
+
+    // Detect mobile layout to enable double-tap redirect
+    useEffect(() => {
+        const checkMobile = () => {
+            setIsMobile(
+                window.innerWidth <= 768 ||
+                /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)
+            );
+        };
+        checkMobile();
+        window.addEventListener("resize", checkMobile);
+        return () => window.removeEventListener("resize", checkMobile);
+    }, []);
+
+    const handleIconClick = (e, identifier) => {
+        if (!isMobile) return;
+
+        if (activeIcon !== identifier) {
+            e.preventDefault();
+            e.stopPropagation();
+            setActiveIcon(identifier);
+        }
+    };
 
     const handleChange = (e) => {
         setForm({
@@ -45,7 +70,11 @@ export default function Contact() {
     const contactRef = useRef(null);
 
     return (
-        <section id="contact" className="section contact-section">
+        <section 
+            id="contact" 
+            className="section contact-section"
+            onClick={() => { if (isMobile) setActiveIcon(null); }}
+        >
             <div className="content-layer">
                 <motion.div
                     initial={{ opacity: 0, y: 30 }}
@@ -73,12 +102,18 @@ export default function Contact() {
 
                         <div className="direct-contact-bars">
                             {/* Email Bar */}
-                            <div className="contact-bar-item email-bar">
-                                <div className="iso-pro gmail-item">
+                            <div 
+                                className={`contact-bar-item email-bar ${activeIcon === "gmail" ? "active" : ""}`}
+                                onClick={() => { if (isMobile && activeIcon !== "gmail") setActiveIcon("gmail"); }}
+                            >
+                                <div className={`iso-pro gmail-item ${activeIcon === "gmail" ? "active" : ""}`}>
                                     <span />
                                     <span />
                                     <span />
-                                    <a href="mailto:kishore.e.1908@gmail.com">
+                                    <a 
+                                        href="mailto:kishore.e.1908@gmail.com"
+                                        onClick={(e) => handleIconClick(e, "gmail")}
+                                    >
                                         <svg
                                             xmlns="http://www.w3.org/2000/svg"
                                             viewBox="0 0 24 24"
@@ -89,16 +124,30 @@ export default function Contact() {
                                         </svg>
                                     </a>
                                 </div>
-                                <a href="mailto:kishore.e.1908@gmail.com" className="bar-text">kishore.e.1908@gmail.com</a>
+                                <a 
+                                    href="mailto:kishore.e.1908@gmail.com" 
+                                    className="bar-text"
+                                    onClick={(e) => handleIconClick(e, "gmail")}
+                                >
+                                    kishore.e.1908@gmail.com
+                                </a>
                             </div>
 
                             {/* WhatsApp Bar */}
-                            <div className="contact-bar-item whatsapp-bar">
-                                <div className="iso-pro whatsapp-item">
+                            <div 
+                                className={`contact-bar-item whatsapp-bar ${activeIcon === "whatsapp" ? "active" : ""}`}
+                                onClick={() => { if (isMobile && activeIcon !== "whatsapp") setActiveIcon("whatsapp"); }}
+                            >
+                                <div className={`iso-pro whatsapp-item ${activeIcon === "whatsapp" ? "active" : ""}`}>
                                     <span />
                                     <span />
                                     <span />
-                                    <a href="https://wa.me/918903664244" target="_blank" rel="noreferrer">
+                                    <a 
+                                        href="https://wa.me/918903664244" 
+                                        target="_blank" 
+                                        rel="noreferrer"
+                                        onClick={(e) => handleIconClick(e, "whatsapp")}
+                                    >
                                         <svg
                                             xmlns="http://www.w3.org/2000/svg"
                                             viewBox="0 0 448 512"
@@ -109,7 +158,15 @@ export default function Contact() {
                                         </svg>
                                     </a>
                                 </div>
-                                <a href="https://wa.me/918903664244" target="_blank" rel="noreferrer" className="bar-text">+91 8903664244</a>
+                                <a 
+                                    href="https://wa.me/918903664244" 
+                                    target="_blank" 
+                                    rel="noreferrer" 
+                                    className="bar-text"
+                                    onClick={(e) => handleIconClick(e, "whatsapp")}
+                                >
+                                    +91 8903664244
+                                </a>
                             </div>
                         </div>
 
@@ -117,7 +174,10 @@ export default function Contact() {
                             <h3 className="social-label">SOCIAL PROFILES</h3>
                             <ul className="iso-list">
                                 {/* LinkedIn */}
-                                <li className="iso-pro linkedin-item">
+                                <li 
+                                    className={`iso-pro linkedin-item ${activeIcon === "linkedin" ? "active" : ""}`}
+                                    onClick={(e) => { e.stopPropagation(); if (isMobile && activeIcon !== "linkedin") setActiveIcon("linkedin"); }}
+                                >
                                     <span />
                                     <span />
                                     <span />
@@ -125,6 +185,7 @@ export default function Contact() {
                                         href="https://linkedin.com/in/kishore-e-241369279"
                                         target="_blank"
                                         rel="noreferrer"
+                                        onClick={(e) => handleIconClick(e, "linkedin")}
                                     >
                                         <svg
                                             xmlns="http://www.w3.org/2000/svg"
@@ -139,7 +200,10 @@ export default function Contact() {
                                 </li>
 
                                 {/* GitHub */}
-                                <li className="iso-pro github-item">
+                                <li 
+                                    className={`iso-pro github-item ${activeIcon === "github" ? "active" : ""}`}
+                                    onClick={(e) => { e.stopPropagation(); if (isMobile && activeIcon !== "github") setActiveIcon("github"); }}
+                                >
                                     <span />
                                     <span />
                                     <span />
@@ -147,6 +211,7 @@ export default function Contact() {
                                         href="https://github.com/Kishore-Krish19"
                                         target="_blank"
                                         rel="noreferrer"
+                                        onClick={(e) => handleIconClick(e, "github")}
                                     >
                                         <svg
                                             xmlns="http://www.w3.org/2000/svg"
@@ -161,7 +226,10 @@ export default function Contact() {
                                 </li>
 
                                 {/* LeetCode */}
-                                <li className="iso-pro leetcode-item">
+                                <li 
+                                    className={`iso-pro leetcode-item ${activeIcon === "leetcode" ? "active" : ""}`}
+                                    onClick={(e) => { e.stopPropagation(); if (isMobile && activeIcon !== "leetcode") setActiveIcon("leetcode"); }}
+                                >
                                     <span />
                                     <span />
                                     <span />
@@ -169,6 +237,7 @@ export default function Contact() {
                                         href="https://leetcode.com/u/Kishore__E/"
                                         target="_blank"
                                         rel="noreferrer"
+                                        onClick={(e) => handleIconClick(e, "leetcode")}
                                     >
                                         <svg
                                             xmlns="http://www.w3.org/2000/svg"
@@ -183,7 +252,10 @@ export default function Contact() {
                                 </li>
 
                                 {/* HackerRank */}
-                                <li className="iso-pro hackerrank-item">
+                                <li 
+                                    className={`iso-pro hackerrank-item ${activeIcon === "hackerrank" ? "active" : ""}`}
+                                    onClick={(e) => { e.stopPropagation(); if (isMobile && activeIcon !== "hackerrank") setActiveIcon("hackerrank"); }}
+                                >
                                     <span />
                                     <span />
                                     <span />
@@ -191,6 +263,7 @@ export default function Contact() {
                                         href="https://www.hackerrank.com/profile/Kishore_krish_19"
                                         target="_blank"
                                         rel="noreferrer"
+                                        onClick={(e) => handleIconClick(e, "hackerrank")}
                                     >
                                         <svg
                                             xmlns="http://www.w3.org/2000/svg"

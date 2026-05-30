@@ -126,7 +126,8 @@
   --brand-rgb: 37, 211, 102;
 }
 
-.contact-bar-item:hover {
+.contact-bar-item:hover,
+.contact-bar-item.active {
   transform: translateY(-3px);
   background: rgba(var(--brand-rgb), 0.04);
   border-color: rgba(var(--brand-rgb), 0.25);
@@ -134,32 +135,38 @@
               inset 0 0 10px rgba(var(--brand-rgb), 0.02);
 }
 
-.contact-bar-item:hover .bar-text {
+.contact-bar-item:hover .bar-text,
+.contact-bar-item.active .bar-text {
   color: #ffffff;
   text-decoration: underline;
 }
 
 /* Card-hover triggers the nested isometric icon's 3D layers */
-.contact-bar-item:hover .iso-pro span {
+.contact-bar-item:hover .iso-pro span,
+.contact-bar-item.active .iso-pro span {
   opacity: 1;
 }
 
-.contact-bar-item:hover .iso-pro span:nth-child(1) {
+.contact-bar-item:hover .iso-pro span:nth-child(1),
+.contact-bar-item.active .iso-pro span:nth-child(1) {
   opacity: 0.15;
   transform: translate(4px, -4px);
 }
 
-.contact-bar-item:hover .iso-pro span:nth-child(2) {
+.contact-bar-item:hover .iso-pro span:nth-child(2),
+.contact-bar-item.active .iso-pro span:nth-child(2) {
   opacity: 0.3;
   transform: translate(8px, -8px);
 }
 
-.contact-bar-item:hover .iso-pro span:nth-child(3) {
+.contact-bar-item:hover .iso-pro span:nth-child(3),
+.contact-bar-item.active .iso-pro span:nth-child(3) {
   opacity: 0.55;
   transform: translate(12px, -12px);
 }
 
-.contact-bar-item:hover .iso-pro .svg {
+.contact-bar-item:hover .iso-pro .svg,
+.contact-bar-item.active .iso-pro .svg {
   transform: translate(16px, -16px);
   background: rgba(10, 5, 26, 0.95);
   border-color: var(--brand-color);
@@ -227,21 +234,25 @@
   pointer-events: none;
 }
 
-.iso-pro:hover span {
+.iso-pro:hover span,
+.iso-pro.active span {
   opacity: 1;
 }
 
-.iso-pro:hover span:nth-child(1) {
+.iso-pro:hover span:nth-child(1),
+.iso-pro.active span:nth-child(1) {
   opacity: 0.15;
   transform: translate(4px, -4px);
 }
 
-.iso-pro:hover span:nth-child(2) {
+.iso-pro:hover span:nth-child(2),
+.iso-pro.active span:nth-child(2) {
   opacity: 0.3;
   transform: translate(8px, -8px);
 }
 
-.iso-pro:hover span:nth-child(3) {
+.iso-pro:hover span:nth-child(3),
+.iso-pro.active span:nth-child(3) {
   opacity: 0.55;
   transform: translate(12px, -12px);
 }
@@ -268,7 +279,8 @@
   z-index: 5;
 }
 
-.iso-pro:hover .svg {
+.iso-pro:hover .svg,
+.iso-pro.active .svg {
   transform: translate(16px, -16px);
   background: rgba(10, 5, 26, 0.95);
   border-color: var(--brand-color);
@@ -301,7 +313,8 @@
   pointer-events: none;
 }
 
-.iso-pro:hover .text-tooltip {
+.iso-pro:hover .text-tooltip,
+.iso-pro.active .text-tooltip {
   opacity: 1;
   visibility: visible;
   transform: translateX(-50%) translateY(0) skew(-5deg);

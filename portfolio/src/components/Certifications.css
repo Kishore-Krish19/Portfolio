@@ -275,3 +275,10 @@
   background: #a855f7;
   box-shadow: 0 0 10px rgba(168, 85, 247, 0.6);
 }
+
+@media (max-width: 768px) {
+  .certifications-section {
+    min-height: auto !important;
+    padding-bottom: 32px !important;
+  }
+}

@@ -22,7 +22,7 @@ function BtnCorners() {
     );
 }
 
-export default function Home() {
+export default function Home({ startAnimation = true }) {
     // Crossfade: two slots (A and B) alternate as active
     const [slotA, setSlotA] = useState({ image: defaultImg, label: "Welcome to My Digital Space" });
     const [slotB, setSlotB] = useState({ image: defaultImg, label: "Welcome to My Digital Space" });
@@ -43,6 +43,8 @@ export default function Home() {
     }, []);
 
     useEffect(() => {
+        if (!startAnimation) return;
+
         const line = document.querySelector(".glowing-line");
         const wrapper = document.querySelector(".image-glow-wrapper");
         const textLabel = document.querySelector(".home-initial-label");
@@ -51,36 +53,45 @@ export default function Home() {
         if (!line || !wrapper || !textLabel) return;
 
         // Step 1: Expand Line
-        setTimeout(() => {
+        const t1 = setTimeout(() => {
             line.classList.add("expand");
         }, 100);
 
         // Step 2: Rise Image from line
-        setTimeout(() => {
+        const t2 = setTimeout(() => {
             wrapper.classList.add("rise");
         }, 600);
 
         // Step 3: Slide in left & right panels
-        setTimeout(() => {
+        const t3 = setTimeout(() => {
             leftIntro?.classList.add("visible");
             rightSkills?.classList.add("visible");
         }, 1200);
 
         // Step 4: Fade in Text
-        setTimeout(() => {
+        const t4 = setTimeout(() => {
             textLabel.classList.add("visible");
         }, 1600);
 
         // Step 5: Pop up corner buttons (after everything else)
-        setTimeout(() => {
+        const t5 = setTimeout(() => {
             setButtonsVisible(true);
         }, 2000);
 
         // Step 6: Unlock interactions
-        setTimeout(() => {
+        const t6 = setTimeout(() => {
             setIsInitialAnimationComplete(true);
         }, 2600);
-    }, []);
+
+        return () => {
+            clearTimeout(t1);
+            clearTimeout(t2);
+            clearTimeout(t3);
+            clearTimeout(t4);
+            clearTimeout(t5);
+            clearTimeout(t6);
+        };
+    }, [startAnimation]);
 
     // Crossfade image change — load new content into the hidden slot, then flip
     const updatePreview = useCallback((img, text, btn) => {

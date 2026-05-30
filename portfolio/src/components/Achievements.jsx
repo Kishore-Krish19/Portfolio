@@ -67,6 +67,12 @@ const allUniqueAchievements = [...track1Unique];
 export default function Achievements() {
   const [viewMode, setViewMode] = useState("marquee"); // "marquee" | "grid"
 
+  const handleMarqueeClick = () => {
+    if (window.innerWidth <= 768) {
+      setViewMode("grid");
+    }
+  };
+
   // Helper to render inline SVG icons dynamically
   const renderIcon = (iconName, badgeType) => {
     const isGold = badgeType === "gold";
@@ -429,7 +435,7 @@ export default function Achievements() {
 
         {/* VIEW MODE 1: Infinite Marquee Carousel */}
         {viewMode === "marquee" && (
-          <div className="marquee-container-wrapper">
+          <div className="marquee-container-wrapper" onClick={handleMarqueeClick}>
             {/* Track 1: Leftward Infinite Marquee */}
             <div className="marquee-track-container">
               <div className="marquee-track direction-left">

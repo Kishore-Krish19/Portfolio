@@ -9,10 +9,39 @@ import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import About from "./components/About";
 import Skills from "./components/Skills";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import Antigravity from "./components/Antigravity";
+import MobileInfoScreen from "./components/MobileInfoScreen";
 
 function App() {
+  const [showMobileInfo, setShowMobileInfo] = useState(false);
+  const [isFadingOut, setIsFadingOut] = useState(false);
+
+  // Mobile Device Check
+  useEffect(() => {
+    const isMobileDevice =
+      window.innerWidth <= 768 ||
+      /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+
+    if (isMobileDevice) {
+      setShowMobileInfo(true);
+      document.body.style.overflow = "hidden"; // Lock scroll
+
+      const timer = setTimeout(() => {
+        setIsFadingOut(true);
+        const removeTimer = setTimeout(() => {
+          setShowMobileInfo(false);
+          document.body.style.overflow = ""; // Restore scroll
+        }, 600); // Wait for transition fade to finish (0.6s)
+        return () => clearTimeout(removeTimer);
+      }, 2000); // Keep on screen for 2 seconds
+
+      return () => {
+        clearTimeout(timer);
+        document.body.style.overflow = ""; // Clean up scroll lock
+      };
+    }
+  }, []);
 
   //  Parallax Scroll Logic 
   useEffect(() => {
@@ -34,6 +63,8 @@ function App() {
 
   return (
     <>
+      {showMobileInfo && <MobileInfoScreen isFadingOut={isFadingOut} />}
+
       <div style={{ position: 'fixed', inset: 0, zIndex: 1, pointerEvents: 'none' }}>
         <Antigravity
           count={700}
@@ -63,7 +94,7 @@ function App() {
 
       <Navbar />
       <div className="page-3d">
-        <Home />
+        <Home startAnimation={!showMobileInfo} />
         <About />
         <Skills />
         <Projects />

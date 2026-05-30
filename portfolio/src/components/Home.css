@@ -1007,7 +1007,7 @@
 
   /* Label above image */
   .home-label {
-    font-size: 12px;
+    font-size: 16px;
     letter-spacing: 2px;
     margin-bottom: 0;
     padding: 0 10px;
@@ -1031,10 +1031,10 @@
   }
 
   /* Button positions — corners of the viewport with notch protection */
-  .top-left { top: max(24px, env(safe-area-inset-top)); left: max(16px, env(safe-area-inset-left)); }
-  .top-right { top: max(24px, env(safe-area-inset-top)); right: max(16px, env(safe-area-inset-right)); }
-  .bottom-left { bottom: max(24px, env(safe-area-inset-bottom)); left: max(16px, env(safe-area-inset-left)); }
-  .bottom-right { bottom: max(24px, env(safe-area-inset-bottom)); right: max(16px, env(safe-area-inset-right)); }
+  .top-left { top: max(34px, env(safe-area-inset-top)); left: max(28px, env(safe-area-inset-left)); }
+  .top-right { top: max(34px, env(safe-area-inset-top)); right: max(28px, env(safe-area-inset-right)); }
+  .bottom-left { bottom: max(54px, env(safe-area-inset-bottom)); left: max(28px, env(safe-area-inset-left)); }
+  .bottom-right { bottom: max(54px, env(safe-area-inset-bottom)); right: max(28px, env(safe-area-inset-right)); }
 
   /* Button sizing */
   .home-btn {
@@ -1110,13 +1110,13 @@
     letter-spacing: 1.5px;
   }
 
-  .top-left { top: max(18px, env(safe-area-inset-top)); left: max(10px, env(safe-area-inset-left)); }
-  .top-right { top: max(18px, env(safe-area-inset-top)); right: max(10px, env(safe-area-inset-right)); }
-  .bottom-left { bottom: max(18px, env(safe-area-inset-bottom)); left: max(10px, env(safe-area-inset-left)); }
-  .bottom-right { bottom: max(18px, env(safe-area-inset-bottom)); right: max(10px, env(safe-area-inset-right)); }
+  .top-left { top: max(26px, env(safe-area-inset-top)); left: max(18px, env(safe-area-inset-left)); }
+  .top-right { top: max(26px, env(safe-area-inset-top)); right: max(18px, env(safe-area-inset-right)); }
+  .bottom-left { bottom: max(62px, env(safe-area-inset-bottom)); left: max(18px, env(safe-area-inset-left)); }
+  .bottom-right { bottom: max(62px, env(safe-area-inset-bottom)); right: max(18px, env(safe-area-inset-right)); }
 
   .home-label {
-    font-size: 9px;
+    font-size: 13px;
     letter-spacing: 1.5px;
   }
 

@@ -289,44 +289,74 @@
 @media (max-width: 900px) {
   .navbar {
     top: 12px;
-    width: 94%;
-    height: auto;
-    padding: 12px 18px;
-    border-radius: 24px;
-    flex-direction: column;
-    gap: 10px;
+    width: 96%;
+    height: 52px;
+    padding: 0 12px;
+    border-radius: 9999px;
+    flex-direction: row;
+    justify-content: space-between;
+    gap: 8px;
   }
 
   .navbar .logo {
-    font-size: 18px;
-    letter-spacing: 3px;
+    font-size: 14px;
+    letter-spacing: 2px;
+    display: block;
   }
 
   .nav-links {
-    max-width: 100%;
-    width: 100%;
-    justify-content: center;
-    flex-wrap: wrap;
-    gap: 4px;
+    max-width: auto;
+    width: auto;
+    justify-content: flex-end;
+    flex-wrap: nowrap;
+    gap: 2px;
   }
 
   .nav-btn {
-    padding: 7px 9px;
+    padding: 6px 8px;
   }
 
   .nav-icon svg {
-    width: 15px;
-    height: 15px;
+    width: 14px;
+    height: 14px;
   }
 
   /* Tooltip stays below on mobile too */
   .nav-tooltip {
     top: calc(100% + 8px);
     transform: translateX(-50%) translateY(-4px);
+    font-size: 9px;
+    padding: 3px 8px;
   }
 
   .nav-btn:hover .nav-tooltip {
     transform: translateX(-50%) translateY(0);
+  }
+}
+
+@media (max-width: 550px) {
+  .navbar {
+    justify-content: center;
+    width: 96%;
+    padding: 0 8px;
+  }
+
+  .navbar .logo {
+    display: none !important;
+  }
+
+  .nav-links {
+    justify-content: center;
+    gap: 1px;
+  }
+
+  .nav-btn {
+    padding: 6px;
+  }
+
+  .nav-icon svg {
+    width: 13px;
+    height: 13px;
   }
 }
 

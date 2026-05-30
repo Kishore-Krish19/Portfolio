@@ -1041,15 +1041,31 @@
     font-size: 9px !important;
   }
 
-  /* Minimized Marquee Cards */
+  /* Minimized Cards Base for Mobile */
   .achievement-card {
-    width: 240px !important;
-    padding: 16px !important;
-    border-radius: 16px !important;
+    padding: 14px !important;
+    border-radius: 14px !important;
   }
 
   .achievement-card::before {
-    border-radius: 16px !important;
+    border-radius: 14px !important;
+  }
+
+  /* Specific width only inside the moving marquee */
+  .marquee-track .achievement-card {
+    width: 240px !important;
+  }
+
+  /* Full viewport width in grid view to prevent tiny misaligned cards */
+  .achievements-static-grid .achievement-card {
+    width: 100% !important;
+  }
+
+  /* Expand description inside grid view for complete legibility */
+  .achievements-static-grid .ach-card-desc {
+    height: auto !important;
+    display: block !important;
+    -webkit-line-clamp: unset !important;
   }
 
   .ach-card-header-row {
