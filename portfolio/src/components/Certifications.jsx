@@ -6,32 +6,32 @@ import "./Certifications.css";
 const certificates = [
   {
     title: "Crash Course on Python",
-    imgSrc: "src/assets/certificates/crash_course_python.png", 
+    imgSrc: "/certificates/crash_course_python.png", 
     verifyUrl: "https://coursera.org/verify/Q5TEVDD6Z39G"
   },
   {
     title: "Programming Foundations with JS, HTML & CSS",
-    imgSrc: "src/assets/certificates/html.png", 
+    imgSrc: "/certificates/html.png", 
     verifyUrl: "https://coursera.org/verify/JZSWFKQYYKC3"
   },
   {
     title: "Python (Basic) Certificate",
-    imgSrc: "src/assets/certificates/python.png", 
+    imgSrc: "/certificates/python.png", 
     verifyUrl: "https://www.hackerrank.com/certificates/iframe/3d706f71c414"
   },
   {
     title: " C Programming",
-    imgSrc: "src/assets/certificates/c_progrgamming.png", 
+    imgSrc: "/certificates/c_progrgamming.png", 
     verifyUrl: "https://coursera.org/verify/UCOSLQZ7D9SD"
   },
   {
     title: "Problem Solving (Basic) Certificate",
-    imgSrc: "src/assets/certificates/problem_solving.png", 
+    imgSrc: "/certificates/problem_solving.png", 
     verifyUrl: "https://www.hackerrank.com/certificates/iframe/16e99e49dd76"
   },
   {
     title: "Java (Basic) Certificate",
-    imgSrc: "src/assets/certificates/java.png", 
+    imgSrc: "/certificates/java.png", 
     verifyUrl: "https://www.hackerrank.com/certificates/iframe/11644eb3634e"
   }
 ];
