@@ -162,9 +162,9 @@ export default function Projects() {
       year: "March 2026",
       tech: ["React.js", "TypeScript", "Tailwind CSS", "Gemini AI"],
       desc: [
-        "Interactive multi-game lab featuring classic puzzles with intelligent AI hint generation and automated solving",
-        "Dual-deployment architecture supporting a full-featured React/TypeScript web app and a lightweight standalone HTML version",
-        "Engaging animations and responsive UI built with Tailwind CSS, Framer Motion, and Canvas Confetti"
+        "Interactive puzzle lab with Sudoku, Sliding Puzzle, Maze, and Color Sorter powered by Gemini AI hints",
+        "Dual deployment as a full React/TypeScript web app and a standalone single-HTML version",
+        "Modern UI with Tailwind CSS, Framer Motion animations, and Canvas Confetti effects"
       ],
       github: "https://github.com/Kishore-Krish19/AI_Puzzle_lab",
       demo: "https://ai-puzzle-lab.vercel.app",
@@ -189,9 +189,9 @@ export default function Projects() {
       year: "March 2026",
       tech: ["React.js", "Python", "NLP", "Machine Learning"],
       desc: [
-        "Advanced prompt engineering platform for creating and optimizing complex AI prompts",
-        "Interactive testing suite with full token and cost analytical metrics",
-        "Seamless history and iteration tracking for multi-agent orchestrations"
+        "Intelligent prompt optimization platform that analyzes intent and refines raw input for AI systems",
+        "Multi-model benchmarking across Gemini, Groq, and Qwen with automatic best-output selection",
+        "Multilingual speech-to-text input with real-time prompt enhancement and feedback"
       ],
       github: "https://github.com/Kishore-Krish19/Prompt_Forge_AI",
       demo: "https://prompt-forge-ai-nu.vercel.app",
@@ -209,9 +209,9 @@ export default function Projects() {
       year: "December 2025",
       tech: ["Python", "React.js", "NLP", "Machine Learning"],
       desc: [
-        "Full-stack intent-based chatbot using a TensorFlow/Keras neural network with NLTK preprocessing for NLP",
-        "Flask REST API backend serving a ChatGPT-style React (Vite) frontend with markdown support and dark/light theme toggle",
-        "Single-service production deployment on Render with FAQ quick-prompts and Git LFS for large ML model files"
+        "ML-powered intent classification chatbot using TensorFlow/Keras with NLTK preprocessing",
+        "ChatGPT-style React UI with markdown rendering and dark/light theme toggle",
+        "Dockerized full-stack deployment on Render with FAQ quick-prompts and Git LFS"
       ],
       github: "https://github.com/Kishore-Krish19/ChatBot-Project",
       demo: "https://chatbot-001-xyz.onrender.com",
@@ -231,9 +231,9 @@ export default function Projects() {
       year: "February 2026",
       tech: ["React.js", "HTML", "CSS", "JavaScript"],
       desc: [
-        "Dynamic workflow analyzer visualising task stats and tracking daily efficiency indices",
-        "Polished dark-mode analytics panels with smooth micro-animations",
-        "Optimized layout ensuring 100% responsiveness and fluid transitions"
+        "National-level technical symposium website with event registration and payment integration",
+        "Google Apps Script backend handling validation, Google Sheets storage, and email confirmations",
+        "Responsive animated UI with countdown timers, QR codes, and downloadable event posters"
       ],
       github: "https://github.com/Kishore-Krish19/EFFICACY_website",
       demo: "https://gcee-efficacy26.vercel.app",
@@ -250,9 +250,9 @@ export default function Projects() {
       year: "March 2026",
       tech: ["Java", "Spring Boot", "MySQL", "React.js"],
       desc: [
-        "Java Enterprise core back-end managing scheduled multi-platform postings",
-        "Interactive analytics dashboard tracking user engagements and growth metrics",
-        "Robust database model built with MySQL to handle high-frequency scheduler operations"
+        "Java Enterprise backend managing scheduled multi-platform social media postings",
+        "Interactive analytics dashboard tracking user engagement and growth metrics",
+        "PostgreSQL database model handling high-frequency scheduler operations"
       ],
       github: "https://github.com/Muhammed-umer/socialMediaManagement",
       demo: null,
@@ -272,9 +272,9 @@ export default function Projects() {
       year: "January 2026",
       tech: ["Java", "React.js", "Data Structures", "Recursion"],
       desc: [
-        "Dynamic mathematical arena visualizing solving iterations of Towers of Hanoi",
-        "Interactive recursive execution with custom disc counts and custom speed parameters",
-        "Strengthened conceptual core structures covering call stacks and algorithmic paths"
+        "Multiplayer Tower of Hanoi platform optimized for 180+ concurrent players via Socket.IO",
+        "Real-time leaderboards, tournament brackets, and admin dashboard controls",
+        "Secure user authentication with session handling and cloud deployment"
       ],
       github: "https://github.com/Kishore-Krish19/Hanoi-Arena",
       demo: "https://hanoi-arena.vercel.app",
@@ -294,9 +294,9 @@ export default function Projects() {
       year: "March 2026",
       tech: ["HTML", "CSS", "JavaScript", "React.js"],
       desc: [
-        "A premium visual facelift redesign of the Government College of Engineering web portal",
-        "Modern fluid grid system supporting high-performance academic information modules",
-        "Optimized SEO tags, meta-descriptors and accessibility indices"
+        "Complete visual redesign of the Government College of Engineering web portal",
+        "Modern fluid grid layout with high-performance academic information modules",
+        "Optimized SEO meta tags, accessibility indices, and responsive design"
       ],
       github: "https://github.com/Kishore-Krish19/gcee.ac.in",
       demo: "https://gcee-ac-in-web.vercel.app",
@@ -314,9 +314,9 @@ export default function Projects() {
       year: "April 2026",
       tech: ["React.js", "Python", "Node.js", "MySQL"],
       desc: [
-        "Collaborative social trip scheduling engine syncing group travel plans seamlessly",
-        "Intelligent cost-splitting matrix with built-in multicurrency ledger features",
-        "Interactive travel itinerary timelines with robust automated routing recommendations"
+        "Real-time location tracking app that lets friends share live positions during group trips",
+        "Interactive map displaying friend locations with live distance calculations between members",
+        "One-tap emergency button that instantly alerts all nearby friends with your location"
       ],
       github: "https://github.com/Muhammed-umer/TripSync",
       demo: "https://tripsync-college-trip.web.app",
@@ -334,9 +334,9 @@ export default function Projects() {
       year: "May 2026",
       tech: ["React.js", "JavaScript", "Node.js"],
       desc: [
-        "Tailored developer tool formatting unstructured notes into sleek, bulleted standup formats",
-        "Integrated template presets for Agile developers, remote teams, and managers",
-        "Instant one-click clipboard copy with standardized markdown rendering layouts"
+        "AI-powered standup generator using Gemini with automatic Groq fallback",
+        "Multiple tone presets: Professional, Casual, Short & Punchy, and Detailed",
+        "One-click clipboard copy with Slack-ready markdown formatting"
       ],
       github: "https://github.com/Kishore-Krish19/Standup_Formatter",
       demo: "https://standup-formatter-nu.vercel.app",
@@ -353,9 +353,9 @@ export default function Projects() {
       year: "March 2026",
       tech: ["Python", "Machine Learning", "NLP", "React.js"],
       desc: [
-        "Autonomous analytical pipeline parsing dataset sheets to yield insight trends",
-        "Generates clean data summaries and plots automatically using neural intelligence",
-        "Conversational NLP queries enabling non-technical users to analyze statistics"
+        "CLI-based AI assistant that auto-analyzes CSV datasets with statistical summaries and heatmaps",
+        "Trains baseline RandomForest models and generates plain-English AI insights via Qwen LLM",
+        "Conversational memory enabling contextual follow-up questions about uploaded data"
       ],
       github: "https://github.com/Kishore-Krish19/AI-Data-Analyst-Agent",
       demo: null,
@@ -373,9 +373,9 @@ export default function Projects() {
       year: "June 2025",
       tech: ["Java", "JavaFX", "Spring Boot", "MySQL"],
       desc: [
-        "JavaFX-based desktop application using MVC architecture",
-        "Spring Boot REST APIs with full CRUD operations",
-        "Secure integration between frontend and backend with remote database access"
+        "JavaFX desktop application built with MVC architecture pattern",
+        "Spring Boot REST APIs providing full CRUD operations",
+        "Secure frontend-backend integration with remote MySQL database access"
       ],
       github: "https://github.com/Kishore-Krish19/Form",
       demo: null,
@@ -393,8 +393,9 @@ export default function Projects() {
       year: "March 2025",
       tech: ["HTML", "CSS", "JavaScript"],
       desc: [
-        "Built multiple mini web applications",
-        "Focused on responsive and user-friendly UI design"
+        "Collection of interactive browser apps: Paint Brush, Image Grayscale Converter, and To-Do List",
+        "Pure HTML/CSS/JS with no backend — runs entirely in the browser",
+        "Mobile and desktop friendly with easy-to-extend modular structure"
       ],
       github: "https://github.com/Kishore-Krish19/Mini_Projects_with_HTML_CSS_JS",
       demo: " https://kishore-krish19.github.io/Mini_Projects_with_HTML_CSS_JS",
@@ -411,9 +412,9 @@ export default function Projects() {
       year: "December 2025",
       tech: ["Java", "React.js", "Data Structures", "Recursion"],
       desc: [
-        "Console and graphical visualizer for mathematical Hanoi puzzles",
-        "Recursive algorithmic execution showcasing complete call-stack iterations",
-        "Interactive peg and disk configurations for custom puzzle levels"
+        "Interactive Tower of Hanoi game with click-based disk movement and auto-solve",
+        "Dark/light theme toggle with sound effects, move counter, and timer tracking",
+        "Configurable 3–7 disk difficulty with optimal solution visualization"
       ],
       github: "https://github.com/Kishore-Krish19/TowersOfHanoi",
       demo: "https://towers-of-hanoi-game.vercel.app",
@@ -432,9 +433,9 @@ export default function Projects() {
       year: "August 2024",
       tech: ["HTML", "CSS"],
       desc: [
-        "Personal portfolio website built from scratch using pure HTML and CSS",
-        "Clean and structured layout showcasing projects, skills, and contact information",
-        "Deployed via GitHub Pages with a responsive and accessible design"
+        "Sample advertisement website built for a personal mini business venture",
+        "Created as a hands-on learning project while mastering HTML, CSS, and JavaScript",
+        "Deployed via GitHub Pages with a clean, responsive, and accessible layout"
       ],
       github: "https://github.com/Kishore-Krish19/My_website",
       demo: "https://kishore-krish19.github.io/My_website/",

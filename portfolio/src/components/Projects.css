@@ -336,13 +336,31 @@
 }
 
 .project-desc {
-  padding-left: 20px;
+  padding-left: 0;
   display: flex;
   flex-direction: column;
   gap: 10px;
   color: #cbd5e1;
   font-size: 16.5px;
   line-height: 1.6;
+  list-style: none;
+}
+
+.project-desc li {
+  position: relative;
+  padding-left: 20px;
+}
+
+.project-desc li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 10px;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--theme-color, #a855f7);
+  box-shadow: 0 0 6px rgba(var(--theme-rgb, 168, 85, 247), 0.5);
 }
 
 .project-footer {
@@ -510,12 +528,15 @@
 .project-card-wrapper.grid-card {
   flex: none;
   width: 100%;
-  height: 480px;
+  min-height: 480px;
+  height: auto;
+  overflow: visible;
 }
 
 .project-card-wrapper.grid-card .project-card {
   position: relative;
-  height: 100%;
+  height: auto;
+  min-height: 100%;
   padding: 36px 40px;
 }
 
