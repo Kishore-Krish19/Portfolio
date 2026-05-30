@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef, useCallback } from "react";
 import "./Home.css";
 import TextType from "./TextType";
 import RotatingText from "./RotatingText";
@@ -23,9 +23,10 @@ function BtnCorners() {
 }
 
 export default function Home() {
-    const [image, setImage] = useState(defaultImg);
-    const [label, setLabel] = useState("Welcome to My Digital Space");
-    const [fade, setFade] = useState(false);
+    // Crossfade: two slots (A and B) alternate as active
+    const [slotA, setSlotA] = useState({ image: defaultImg, label: "Welcome to My Digital Space" });
+    const [slotB, setSlotB] = useState({ image: defaultImg, label: "Welcome to My Digital Space" });
+    const [activeSlot, setActiveSlot] = useState("A"); // which slot is currently visible
 
     const [isInitialAnimationComplete, setIsInitialAnimationComplete] = useState(false);
 
@@ -78,22 +79,25 @@ export default function Home() {
         }, 2600);
     }, []);
 
-    // Animate image change
-    const updatePreview = (img, text, btn) => {
-        setFade(true);
-
-        setTimeout(() => {
-            setImage(img);
-            setLabel(text);
-            setActiveBtn(btn);
-            setFade(false);
-        }, 350);
-    };
+    // Crossfade image change — load new content into the hidden slot, then flip
+    const updatePreview = useCallback((img, text, btn) => {
+        setActiveBtn(btn);
+        setActiveSlot((prev) => {
+            const next = prev === "A" ? "B" : "A";
+            // Load the new content into the currently-hidden slot
+            if (next === "A") {
+                setSlotA({ image: img, label: text });
+            } else {
+                setSlotB({ image: img, label: text });
+            }
+            return next;
+        });
+    }, []);
 
     // Reset to default
-    const resetPreview = () => {
+    const resetPreview = useCallback(() => {
         updatePreview(defaultImg, "Welcome to My Digital Space", null);
-    };
+    }, [updatePreview]);
 
     // Desktop hover
     const handleHover = (img, text, btn) => {
@@ -306,9 +310,14 @@ export default function Home() {
 
                 {/* CENTER CONTENT */}
                 <div className="home-center">
-                    {/* Label */}
-                    <div className={`home-label home-initial-label ${fade ? "fade" : ""} ${isInitialAnimationComplete ? "visible" : ""}`}>
-                        {label}
+                    {/* Crossfade Labels */}
+                    <div className="home-label-container home-initial-label">
+                        <div className={`home-label home-label-slot ${activeSlot === "A" ? "active" : ""}`}>
+                            {slotA.label}
+                        </div>
+                        <div className={`home-label home-label-slot ${activeSlot === "B" ? "active" : ""}`}>
+                            {slotB.label}
+                        </div>
                     </div>
 
                     {/* Rising Animation Stage */}
@@ -316,11 +325,18 @@ export default function Home() {
                         <div className="image-mask">
                             <div className={`image-glow-wrapper ${isInitialAnimationComplete ? "rise" : ""}`}>
                                 <div className="glow-halo" />
-                                <img
-                                    src={image}
-                                    alt="Preview"
-                                    className={`home-image ${fade ? "fade" : ""}`}
-                                />
+                                <div className="home-image-crossfade">
+                                    <img
+                                        src={slotA.image}
+                                        alt="Preview"
+                                        className={`home-image home-image-slot ${activeSlot === "A" ? "active" : ""}`}
+                                    />
+                                    <img
+                                        src={slotB.image}
+                                        alt="Preview"
+                                        className={`home-image home-image-slot ${activeSlot === "B" ? "active" : ""}`}
+                                    />
+                                </div>
                             </div>
                             {/* Thruster line */}
                             <div className={`glowing-line ${isInitialAnimationComplete ? "expand" : ""}`}></div>
