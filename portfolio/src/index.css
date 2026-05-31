@@ -15,6 +15,7 @@
 }
 
 html,
+body,
 #root {
   width: 100%;
   min-height: 100%;
@@ -22,6 +23,15 @@ html,
   /* Dark base for space */
   overflow-x: hidden;
   font-family: system-ui, sans-serif;
+  
+  /* Hide scrollbar for Firefox and IE/Edge */
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+/* Hide scrollbar for Chrome, Safari, and Opera */
+::-webkit-scrollbar {
+  display: none;
 }
 
 /* 3D perspective for whole page */
