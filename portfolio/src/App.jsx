@@ -12,6 +12,7 @@ import Skills from "./components/Skills";
 import { useEffect, useState } from "react";
 import Antigravity from "./components/Antigravity";
 import MobileInfoScreen from "./components/MobileInfoScreen";
+import MusicPlayer from "./components/MusicPlayer";
 
 function App() {
   const [showMobileInfo, setShowMobileInfo] = useState(false);
@@ -77,7 +78,7 @@ function App() {
 
       <div style={{ position: 'fixed', inset: 0, zIndex: 1, pointerEvents: 'none' }}>
         <Antigravity
-          count={isMobile ? 400 : 700}
+          count={isMobile ? 400 : 800}
           magnetRadius={isMobile ? 4 : 6}
           ringRadius={isMobile ? 2 : 3}
           waveSpeed={0.4}
@@ -116,6 +117,8 @@ function App() {
       </div>
 
       <Footer />
+
+      <MusicPlayer />
 
     </>
   );

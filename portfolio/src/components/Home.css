@@ -954,7 +954,7 @@
     justify-content: center;
     align-items: center;
     gap: 0;
-    padding: 80px 0 70px;
+    padding: 20px 0 90px;
     box-sizing: border-box;
   }
 
@@ -1033,8 +1033,8 @@
   /* Button positions — corners of the viewport with notch protection */
   .top-left { top: max(34px, env(safe-area-inset-top)); left: max(28px, env(safe-area-inset-left)); }
   .top-right { top: max(34px, env(safe-area-inset-top)); right: max(28px, env(safe-area-inset-right)); }
-  .bottom-left { bottom: max(54px, env(safe-area-inset-bottom)); left: max(28px, env(safe-area-inset-left)); }
-  .bottom-right { bottom: max(54px, env(safe-area-inset-bottom)); right: max(28px, env(safe-area-inset-right)); }
+  .bottom-left { bottom: max(110px, env(safe-area-inset-bottom)); left: max(28px, env(safe-area-inset-left)); }
+  .bottom-right { bottom: max(110px, env(safe-area-inset-bottom)); right: max(28px, env(safe-area-inset-right)); }
 
   /* Button sizing */
   .home-btn {
@@ -1076,7 +1076,7 @@
 ================================ */
 @media (max-width: 480px) {
   .home-container {
-    padding: 70px 0 60px;
+    padding: 40px 0 130px;
   }
 
   .home-left-intro {
@@ -1112,8 +1112,8 @@
 
   .top-left { top: max(26px, env(safe-area-inset-top)); left: max(18px, env(safe-area-inset-left)); }
   .top-right { top: max(26px, env(safe-area-inset-top)); right: max(18px, env(safe-area-inset-right)); }
-  .bottom-left { bottom: max(62px, env(safe-area-inset-bottom)); left: max(18px, env(safe-area-inset-left)); }
-  .bottom-right { bottom: max(62px, env(safe-area-inset-bottom)); right: max(18px, env(safe-area-inset-right)); }
+  .bottom-left { bottom: max(110px, env(safe-area-inset-bottom)); left: max(18px, env(safe-area-inset-left)); }
+  .bottom-right { bottom: max(110px, env(safe-area-inset-bottom)); right: max(18px, env(safe-area-inset-right)); }
 
   .home-label {
     font-size: 13px;
@@ -1123,5 +1123,76 @@
   .home-hover-hint {
     font-size: 0.68rem;
     letter-spacing: 1.5px;
+  }
+}
+
+/* ===============================
+   Short Screen / Landscape Viewports
+================================ */
+@media (min-width: 901px) and (max-height: 750px) {
+  .image-glow-wrapper,
+  .home-image-crossfade,
+  .home-image {
+    width: 280px !important;
+    height: 320px !important;
+  }
+
+  .glowing-line {
+    width: 320px !important;
+  }
+
+  .home-center {
+    gap: 30px !important;
+  }
+
+  .home-label {
+    font-size: 20px !important;
+  }
+
+  .home-left-intro {
+    left: 40px !important;
+    top: 50% !important;
+    transform: translateY(-50%) translateX(-40px) !important;
+    width: 260px !important;
+  }
+
+  .home-left-intro.visible {
+    transform: translateY(-50%) translateX(0) !important;
+  }
+
+  .home-right-skills {
+    right: 40px !important;
+    top: 50% !important;
+    transform: translateY(-50%) translateX(40px) !important;
+    width: 280px !important;
+  }
+
+  .home-right-skills.visible {
+    transform: translateY(-50%) translateX(0) !important;
+  }
+
+  .top-left {
+    top: 45px !important;
+    left: 45px !important;
+  }
+
+  .top-right {
+    top: 45px !important;
+    right: 45px !important;
+  }
+
+  .bottom-left {
+    bottom: 100px !important;
+    left: 45px !important;
+  }
+
+  .bottom-right {
+    bottom: 100px !important;
+    right: 45px !important;
+  }
+
+  .home-hover-hint {
+    font-size: 0.75rem !important;
+    letter-spacing: 2px !important;
   }
 }
