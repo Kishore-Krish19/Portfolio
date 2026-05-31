@@ -256,6 +256,25 @@
 }
 
 /* Mobile Adjustments */
+@media (max-width: 1200px) {
+  .skills-section {
+    padding: 50px 6% 40px;
+  }
+
+  .skill-card-wrapper {
+    width: 110px;
+    height: 123px;
+  }
+
+  .skill-icon {
+    font-size: 36px;
+  }
+
+  .skill-name {
+    font-size: 11px;
+  }
+}
+
 @media (max-width: 900px) {
   .skills-section {
     padding: 30px 6% 30px;

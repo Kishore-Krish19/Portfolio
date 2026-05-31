@@ -74,7 +74,7 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 80px;
+  gap: clamp(30px, 6vh, 80px);
   height: 100%;
   z-index: 2;
 }
@@ -84,7 +84,7 @@
 ================================ */
 .home-label {
   font-family: var(--font-display);
-  font-size: 30px;
+  font-size: clamp(16px, 2.2vw, 30px);
   font-weight: 900;
   text-align: center;
   letter-spacing: 4px;
@@ -133,13 +133,13 @@
 /* Crossfade container for images */
 .home-image-crossfade {
   position: relative;
-  width: 420px;           /* <-change for image size */
-  height: 480px;          /* <-change for image size */
+  width: clamp(280px, 30vw, 430px);  /* fluid: scales with viewport */
+  height: clamp(320px, 34vw, 490px);
 }
 
 .home-image {
-  width: 420px;           /* <-change for image size */
-  height: 480px;          /* <-change for image size */
+  width: clamp(280px, 30vw, 430px);  /* fluid: scales with viewport */
+  height: clamp(320px, 34vw, 490px);
   object-fit: contain;
   object-position: bottom center;
   border-radius: 0;
@@ -173,17 +173,17 @@
 ================================ */
 .home-btn {
   position: absolute;
-  min-width: 130px;
-  min-height: 50px;
-  padding: 14px 28px;
+  min-width: clamp(90px, 9vw, 130px);
+  min-height: clamp(40px, 5vh, 50px);
+  padding: clamp(10px, 1.2vh, 14px) clamp(16px, 2vw, 28px);
   background: transparent;
   color: var(--nebula-cyan);
   border: none;
   border-radius: 2px;
   font-family: var(--font-display);
-  font-size: 12px;
+  font-size: clamp(9px, 0.85vw, 12px);
   font-weight: 1000;
-  letter-spacing: 3px;
+  letter-spacing: clamp(2px, 0.25vw, 3px);
   text-transform: uppercase;
   cursor: pointer;
   box-sizing: border-box;
@@ -211,23 +211,23 @@
    Button Positions
 ================================ */
 .top-left {
-  top: 130px;
-  left: 200px;
+  top: clamp(80px, 12vh, 130px);
+  left: clamp(40px, 14vw, 220px);
 }
 
 .top-right {
-  top: 130px;
-  right: 200px;
+  top: clamp(80px, 12vh, 130px);
+  right: clamp(40px, 14vw, 220px);
 }
 
 .bottom-left {
-  bottom: 160px;
-  left: 200px;
+  bottom: clamp(80px, 14vh, 160px);
+  left: clamp(40px, 14vw, 220px);
 }
 
 .bottom-right {
-  bottom: 160px;
-  right: 200px;
+  bottom: clamp(80px, 14vh, 160px);
+  right: clamp(40px, 14vw, 220px);
 }
 
 /* ===============================
@@ -334,8 +334,8 @@
 ================================ */
 .image-glow-wrapper {
   position: relative;
-  width: 430px;                   /*  <- change for image glow size */
-  height: 480px;                  /* <-change for image glow size */
+  width: clamp(290px, 31vw, 440px);  /* fluid: scales with viewport */
+  height: clamp(320px, 34vw, 490px);
   border-radius: 6px;
   display: flex;
   align-items: center;
@@ -363,9 +363,9 @@
 ================================ */
 .home-left-intro {
   position: absolute;
-  left: 200px;
-  top: 360px;
-  width: 320px;
+  left: clamp(40px, 12vw, 240px);
+  top: clamp(280px, 35vh, 400px);
+  width: clamp(220px, 22vw, 340px);
   z-index: 5;
   text-align: left;
   font-family: var(--font-body);
@@ -395,7 +395,7 @@
 
 .home-left-intro .intro-name {
   font-family: var(--font-display);
-  font-size: 3.2rem;
+  font-size: clamp(1.8rem, 2.5vw, 3.2rem);
   font-weight: 900;
   background: linear-gradient(90deg, var(--nebula-cyan), #38bdf8, var(--nebula-blue));
   -webkit-background-clip: text;
@@ -420,7 +420,7 @@
 
 .home-left-intro .intro-designation {
   font-family: var(--font-display);
-  font-size: 1.25rem;
+  font-size: clamp(0.95rem, 1.2vw, 1.25rem);
   font-weight: 800;
   color: var(--nebula-violet);
   margin: 0;
@@ -474,9 +474,9 @@
 ================================ */
 .home-right-skills {
   position: absolute;
-  right: 200px;
-  top: 390px;
-  width: 320px;
+  right: clamp(40px, 12vw, 240px);
+  top: clamp(300px, 38vh, 430px);
+  width: clamp(220px, 22vw, 340px);
   z-index: 5;
   display: flex;
   flex-direction: column;
@@ -887,7 +887,7 @@
 
 /* Glowing Line — now a thruster trail */
 .glowing-line {
-  width: 450px;           /* <-change for line size */
+  width: clamp(260px, 33vw, 450px); /* fluid: scales with viewport */
   height: 3px;
   background: linear-gradient(90deg,
     transparent,
@@ -911,25 +911,49 @@
 }
 
 /* ===============================
-   Responsive: 1280px
+   Responsive: 1600px+ (Ultra-wide)
 ================================ */
-@media (max-width: 1280px) {
+@media (min-width: 1600px) {
   .home-left-intro {
-    left: 30px;
-    width: 260px;
+    left: clamp(200px, 10vw, 320px);
+    width: clamp(320px, 22vw, 420px);
   }
 
   .home-left-intro .intro-name {
-    font-size: 2rem;
+    font-size: 4rem;
+  }
+
+  .home-left-intro .intro-designation {
+    font-size: 1.5rem;
+  }
+
+  .home-right-skills {
+    right: clamp(200px, 10vw, 320px);
+    width: clamp(320px, 22vw, 420px);
+  }
+
+  .image-glow-wrapper,
+  .home-image-crossfade,
+  .home-image {
+    width: 520px;
+    height: 600px;
+  }
+
+  .glowing-line {
+    width: 560px;
+  }
+}
+
+/* ===============================
+   Responsive: 1280px
+================================ */
+@media (max-width: 1280px) {
+  .home-left-intro .intro-name {
+    font-size: 2.4rem;
   }
 
   .home-left-intro .intro-designation {
     font-size: 1.1rem;
-  }
-
-  .home-right-skills {
-    right: 30px;
-    width: 280px;
   }
 
   .btn-action {
@@ -939,9 +963,33 @@
 }
 
 /* ===============================
-   Mobile Responsiveness
+   Responsive: 1100px (Intermediate / zoomed-in desktops)
 ================================ */
-@media (max-width: 900px) {
+@media (max-width: 1100px) {
+  /* Image scales via clamp() — no hard override needed */
+  /* Side panels scale via vw-based positions — no override needed */
+
+  .btn-action {
+    padding: 8px 12px;
+    font-size: 8.5px;
+    letter-spacing: 1.5px;
+  }
+
+  /* Slightly reduce corner buttons at this range */
+  .home-btn {
+    min-width: 96px;
+    min-height: 38px;
+    padding: 9px 15px;
+    font-size: 9px;
+    letter-spacing: 2px;
+  }
+}
+
+/* ===============================
+   Mobile Responsiveness (≤650px)
+   — Pushed from 900px so desktop zoom (125-150%) doesn't trigger it
+================================ */
+@media (max-width: 650px) {
   /* Hide right side panel */
   .home-right-skills {
     display: none !important;
@@ -1036,13 +1084,13 @@
   .bottom-left { bottom: max(110px, env(safe-area-inset-bottom)); left: max(28px, env(safe-area-inset-left)); }
   .bottom-right { bottom: max(110px, env(safe-area-inset-bottom)); right: max(28px, env(safe-area-inset-right)); }
 
-  /* Button sizing */
+  /* Button sizing — reduced for tablet */
   .home-btn {
-    font-size: 9px;
-    padding: 12px 18px;
-    min-width: 100px;
-    min-height: 44px;
-    letter-spacing: 2px;
+    font-size: 8px;
+    padding: 9px 14px;
+    min-width: 84px;
+    min-height: 36px;
+    letter-spacing: 1.5px;
   }
 
   /* Mobile tap — mirror the hover effect via .active class */
@@ -1103,11 +1151,11 @@
   }
 
   .home-btn {
-    font-size: 8px;
-    padding: 10px 14px;
-    min-width: 88px;
-    min-height: 40px;
-    letter-spacing: 1.5px;
+    font-size: 7px;
+    padding: 7px 10px;
+    min-width: 68px;
+    min-height: 28px;
+    letter-spacing: 1px;
   }
 
   .top-left { top: max(26px, env(safe-area-inset-top)); left: max(18px, env(safe-area-inset-left)); }
@@ -1129,7 +1177,7 @@
 /* ===============================
    Short Screen / Landscape Viewports
 ================================ */
-@media (min-width: 901px) and (max-height: 750px) {
+@media (min-width: 651px) and (max-height: 750px) {
   .image-glow-wrapper,
   .home-image-crossfade,
   .home-image {
@@ -1150,10 +1198,11 @@
   }
 
   .home-left-intro {
-    left: 40px !important;
+    left: 5vw !important;
     top: 50% !important;
-    transform: translateY(-50%) translateX(-40px) !important;
-    width: 260px !important;
+    transform: translateY(-50%) translateX(-20px) !important;
+    width: 22vw !important;
+    min-width: 180px !important;
   }
 
   .home-left-intro.visible {
@@ -1161,10 +1210,11 @@
   }
 
   .home-right-skills {
-    right: 40px !important;
+    right: 5vw !important;
     top: 50% !important;
-    transform: translateY(-50%) translateX(40px) !important;
-    width: 280px !important;
+    transform: translateY(-50%) translateX(20px) !important;
+    width: 22vw !important;
+    min-width: 180px !important;
   }
 
   .home-right-skills.visible {

@@ -518,7 +518,7 @@
 
 .projects-grid-container {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(420px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(min(420px, 100%), 1fr));
   gap: 30px;
   width: 95%;
   max-width: 1600px;
@@ -579,6 +579,16 @@
 }
 
 /* Adaptive Media Query System */
+@media (max-width: 1200px) {
+  .projects-carousel-wrapper {
+    padding: 0 50px;
+  }
+
+  .projects-section {
+    padding: 45px 4% 60px;
+  }
+}
+
 @media (max-width: 868px) {
   .projects-carousel-wrapper {
     gap: 12px;

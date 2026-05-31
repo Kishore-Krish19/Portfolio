@@ -448,6 +448,21 @@
    Adaptive Media Queries
    ========================================== */
 
+@media (max-width: 1200px) {
+  .contact-section {
+    padding: 80px 4% 60px;
+  }
+
+  .contact-grid {
+    gap: 28px;
+  }
+
+  .contact-info-panel,
+  .contact-form-panel {
+    padding: 32px 28px;
+  }
+}
+
 @media (max-width: 968px) {
   .contact-section {
     padding: 80px 3% 60px;

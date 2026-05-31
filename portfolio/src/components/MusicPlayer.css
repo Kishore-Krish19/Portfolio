@@ -231,3 +231,40 @@
       0 4px 16px rgba(0, 0, 0, 0.5);
   }
 }
+
+/* =====================
+   RESPONSIVE
+   ===================== */
+
+@media (max-width: 768px) {
+  .music-player-btn {
+    bottom: 20px;
+    right: 20px;
+    width: 36px;
+    height: 36px;
+  }
+
+  .music-ring-1 {
+    width: 60px;
+    height: 60px;
+  }
+
+  .music-ring-2 {
+    width: 76px;
+    height: 76px;
+  }
+
+  .music-tooltip {
+    font-size: 10px;
+    padding: 4px 8px;
+  }
+}
+
+@media (max-width: 480px) {
+  .music-player-btn {
+    bottom: 16px;
+    right: 16px;
+    width: 34px;
+    height: 34px;
+  }
+}
