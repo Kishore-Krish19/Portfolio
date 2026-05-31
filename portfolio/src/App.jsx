@@ -16,31 +16,41 @@ import MobileInfoScreen from "./components/MobileInfoScreen";
 function App() {
   const [showMobileInfo, setShowMobileInfo] = useState(false);
   const [isFadingOut, setIsFadingOut] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
 
   // Mobile Device Check
   useEffect(() => {
-    const isMobileDevice =
-      window.innerWidth <= 768 ||
-      /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+    let timer;
+    let removeTimer;
 
-    if (isMobileDevice) {
-      setShowMobileInfo(true);
-      document.body.style.overflow = "hidden"; // Lock scroll
+    const checkMobile = () => {
+      const isMobileDevice =
+        window.innerWidth <= 768 ||
+        /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+      setIsMobile(isMobileDevice);
 
-      const timer = setTimeout(() => {
-        setIsFadingOut(true);
-        const removeTimer = setTimeout(() => {
-          setShowMobileInfo(false);
-          document.body.style.overflow = ""; // Restore scroll
-        }, 600); // Wait for transition fade to finish (0.6s)
-        return () => clearTimeout(removeTimer);
-      }, 2000); // Keep on screen for 2 seconds
+      if (isMobileDevice && !timer) {
+        setShowMobileInfo(true);
+        document.body.style.overflow = "hidden"; // Lock scroll
 
-      return () => {
-        clearTimeout(timer);
-        document.body.style.overflow = ""; // Clean up scroll lock
-      };
-    }
+        timer = setTimeout(() => {
+          setIsFadingOut(true);
+          removeTimer = setTimeout(() => {
+            setShowMobileInfo(false);
+            document.body.style.overflow = ""; // Restore scroll
+          }, 600); // Wait for transition fade to finish (0.6s)
+        }, 2000); // Keep on screen for 2 seconds
+      }
+    };
+
+    checkMobile();
+    window.addEventListener("resize", checkMobile);
+    return () => {
+      window.removeEventListener("resize", checkMobile);
+      if (timer) clearTimeout(timer);
+      if (removeTimer) clearTimeout(removeTimer);
+      document.body.style.overflow = ""; // Clean up scroll lock
+    };
   }, []);
 
   //  Parallax Scroll Logic 
@@ -67,9 +77,9 @@ function App() {
 
       <div style={{ position: 'fixed', inset: 0, zIndex: 1, pointerEvents: 'none' }}>
         <Antigravity
-          count={700}
-          magnetRadius={6}
-          ringRadius={3}
+          count={isMobile ? 400 : 700}
+          magnetRadius={isMobile ? 4 : 6}
+          ringRadius={isMobile ? 2 : 3}
           waveSpeed={0.4}
           waveAmplitude={1}
           particleSize={0.25}

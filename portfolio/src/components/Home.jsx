@@ -5,10 +5,17 @@ import RotatingText from "./RotatingText";
 
 // Images
 import aboutImg from "../assets/about.png";
-import skillsImg from "../assets/skills.png";
-import projectsImg from "../assets/projects.png";
-import contactImg from "../assets/contact.png";
-import defaultImg from "../assets/default.png";
+import skillsImg from "../assets/skills.webp";
+import projectsImg from "../assets/projects.webp";
+import contactImg from "../assets/contact.webp";
+import defaultImg from "../assets/default.webp";
+
+// Preload hover images in variables to prevent loading delay
+const preloadedImages = [aboutImg, skillsImg, projectsImg, contactImg, defaultImg].map((src) => {
+    const img = new Image();
+    img.src = src;
+    return img;
+});
 
 // Corner brackets helper rendered inside every glow-btn
 function BtnCorners() {

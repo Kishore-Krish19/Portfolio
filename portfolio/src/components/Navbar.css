@@ -22,9 +22,9 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  gap: 20px;
+  gap: 0;
 
-  padding: 0 24px;
+  padding: 0 20px;
   color: white;
   z-index: 9999;
 
@@ -86,21 +86,34 @@
   background-clip: text;
   
   filter: drop-shadow(0 0 5px rgba(24, 217, 224, 0.4));
-  
   cursor: pointer;
-  transition: letter-spacing 0.3s cubic-bezier(0.2, 0.8, 0.2, 1), 
-              filter 0.3s ease, 
-              transform 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
-  
+
+  /* Hidden by default — collapses to zero width */
+  max-width: 0;
+  overflow: hidden;
   opacity: 0;
-  transform: translateY(-10px) scale(0.95);
+  margin-right: 0;
+  padding-right: 0;
+
+  transition:
+    max-width 0.45s cubic-bezier(0.16, 1, 0.3, 1),
+    opacity 0.35s ease,
+    margin-right 0.45s cubic-bezier(0.16, 1, 0.3, 1),
+    letter-spacing 0.3s ease,
+    filter 0.3s ease;
 }
 
-.navbar .logo:hover {
-  filter: drop-shadow(0 0 12px rgba(24, 217, 224, 0.8)) 
+/* Reveal logo when the whole navbar is hovered */
+.navbar:hover .logo {
+  max-width: 220px;
+  opacity: 1;
+  margin-right: 16px;
+}
+
+.navbar:hover .logo:hover {
+  filter: drop-shadow(0 0 12px rgba(24, 217, 224, 0.8))
           drop-shadow(0 0 25px rgba(147, 51, 234, 0.5));
   letter-spacing: 6px;
-  transform: scale(1.04);
 }
 
 /* ===============================
@@ -248,7 +261,6 @@
    Bounce-in Entrance Animation
  ================================ */
 
-.navbar .logo,
 .navbar .nav-btn {
   opacity: 0;
   transform: translateY(-10px) scale(0.95);
@@ -274,8 +286,9 @@
   100% { background-position: 200% center; }
 }
 
-.navbar.show .logo {
-  animation: bounceIn 0.45s ease-out forwards, cosmicFlow 6s linear infinite;
+/* Logo animation fires only when hovered after navbar shows */
+.navbar.show:hover .logo {
+  animation: cosmicFlow 6s linear infinite;
 }
 
 .navbar.show .nav-btn {
@@ -301,7 +314,6 @@
   .navbar .logo {
     font-size: 14px;
     letter-spacing: 2px;
-    display: block;
   }
 
   .nav-links {

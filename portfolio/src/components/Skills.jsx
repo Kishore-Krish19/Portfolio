@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import { useRef, useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import "./Skills.css";
 
@@ -51,39 +51,36 @@ const skillsData = [
 
 // 8 directional origins for the scatter pop-in effect
 const directions = [
-  { x: 0, y: -80 },    // top
-  { x: 0, y: 80 },     // bottom
-  { x: -100, y: 0 },   // left
-  { x: 100, y: 0 },    // right
-  { x: -80, y: -70 },  // top-left
-  { x: 80, y: -70 },   // top-right
-  { x: -80, y: 70 },   // bottom-left
-  { x: 80, y: 70 },    // bottom-right
+  { x: 0,    y: -80 },
+  { x: 0,    y:  80 },
+  { x: -100, y:   0 },
+  { x:  100, y:   0 },
+  { x: -80,  y: -70 },
+  { x:  80,  y: -70 },
+  { x: -80,  y:  70 },
+  { x:  80,  y:  70 },
 ];
 
-// Deterministic but varied direction per index (so it's consistent across re-renders)
 const getDirection = (index) => directions[index % directions.length];
 
-// Interactive Card Component with directional pop-in
-const SkillCard = ({ name, icon, color, index }) => {
+// Individual skill card
+const SkillCard = ({ name, icon, color, index, isInView }) => {
   const cardRef = useRef(null);
-  const [landed, setLanded] = useState(false);
-  const dir = getDirection(index);
 
-  // Mouse tracking logic for the hover glow
   const handleMouseMove = (e) => {
     if (!cardRef.current) return;
     const rect = cardRef.current.getBoundingClientRect();
-    const x = e.clientX - rect.left;
-    const y = e.clientY - rect.top;
-    cardRef.current.style.setProperty("--mouse-x", `${x}px`);
-    cardRef.current.style.setProperty("--mouse-y", `${y}px`);
+    cardRef.current.style.setProperty("--mouse-x", `${e.clientX - rect.left}px`);
+    cardRef.current.style.setProperty("--mouse-y", `${e.clientY - rect.top}px`);
   };
+
+  const dir = getDirection(index);
+  const waveDelay = `${(index % 8) * 0.4}s`;
 
   return (
     <motion.div
-      className={`skill-card-wrapper ${landed ? "pop-animate" : ""}`}
-      style={landed ? { animationDelay: `${(index % 8) * 0.5}s` } : undefined}
+      className="skill-card-wrapper pop-animate"
+      style={{ "--wave-delay": waveDelay }}
       ref={cardRef}
       onMouseMove={handleMouseMove}
       initial={{
@@ -93,31 +90,83 @@ const SkillCard = ({ name, icon, color, index }) => {
         scale: 0.5,
         rotate: (dir.x > 0 ? 1 : -1) * (8 + (index % 3) * 4),
       }}
-      whileInView={{
-        opacity: 1,
-        x: 0,
-        y: 0,
-        scale: 1,
-        rotate: 0,
-      }}
-      transition={{
-        type: "spring",
-        stiffness: 120,
-        damping: 18,
-        mass: 0.8,
-        delay: index * 0.07,
-      }}
-      viewport={{ once: false, amount: 0.1 }}
-      onAnimationComplete={() => setLanded(true)}
-      onViewportLeave={() => setLanded(false)}
+      animate={
+        isInView
+          ? {
+              opacity: 1,
+              x: 0,
+              y: 0,
+              scale: 1,
+              rotate: 0,
+              transition: {
+                type: "spring",
+                stiffness: 95,
+                damping: 20,
+                mass: 0.9,
+                delay: index * 0.04,
+              },
+            }
+          : {
+              opacity: 0,
+              scale: 0.82,
+              y: -12,
+              transition: { duration: 0.35, ease: "easeInOut", delay: 0 },
+            }
+      }
     >
       <div className="skill-card-content">
-        <div className="skill-icon" style={{ color: color }}>
+        <div className="skill-icon" style={{ color }}>
           {icon}
         </div>
         <span className="skill-name">{name}</span>
       </div>
     </motion.div>
+  );
+};
+
+// Row wrapper — cards stay mounted always.
+// Bumping animKey on each entry remounts them so `initial` fires fresh (pop-in).
+// When leaving, animate fades them to opacity:0 while still on-screen.
+const SkillRow = ({ skills, startIndex }) => {
+  const sentinelRef = useRef(null);
+  const [animKey, setAnimKey] = useState(0);
+  const [isInView, setIsInView] = useState(false);
+
+  useEffect(() => {
+    const el = sentinelRef.current;
+    if (!el) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          // Remount cards so initial fires → fresh pop-in every visit
+          setAnimKey((k) => k + 1);
+          setIsInView(true);
+        } else {
+          // Cards stay mounted, animate fades them out while still visible
+          setIsInView(false);
+        }
+      },
+      { threshold: 0.15 }
+    );
+
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, []);
+
+  return (
+    <div className="skills-line" ref={sentinelRef}>
+      {skills.map((skill, i) => (
+        <SkillCard
+          key={`${animKey}-${skill.name}`}
+          name={skill.name}
+          icon={skill.icon}
+          color={skill.color}
+          index={startIndex + i}
+          isInView={isInView}
+        />
+      ))}
+    </div>
   );
 };
 
@@ -128,7 +177,7 @@ export default function Skills() {
 
   return (
     <section id="skills" className="section skills-section">
-      
+
       <motion.div
         initial={{ opacity: 0, y: 30 }}
         whileInView={{ opacity: 1, y: 0 }}
@@ -143,33 +192,8 @@ export default function Skills() {
 
       {/* Two Stacked Lines Layout */}
       <div className="skills-stack-container">
-        
-        {/* Top Line */}
-        <div className="skills-line">
-          {topRow.map((skill, index) => (
-            <SkillCard 
-              key={skill.name} 
-              name={skill.name} 
-              icon={skill.icon} 
-              color={skill.color}
-              index={index}
-            />
-          ))}
-        </div>
-
-        {/* Bottom Line */}
-        <div className="skills-line">
-          {bottomRow.map((skill, index) => (
-            <SkillCard 
-              key={skill.name} 
-              name={skill.name} 
-              icon={skill.icon} 
-              color={skill.color}
-              index={half + index}
-            />
-          ))}
-        </div>
-
+        <SkillRow skills={topRow} startIndex={0} />
+        <SkillRow skills={bottomRow} startIndex={half} />
       </div>
 
     </section>
