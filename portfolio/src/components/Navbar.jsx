@@ -173,7 +173,7 @@ export default function Navbar() {
 
   return (
     <nav className={`navbar ${show ? "show" : ""}`}>
-      <h2 className="logo">Kishore E</h2>
+      {/* <h2 className="logo">Kishore E</h2> */}
 
       <div className="nav-links">
         {navItems.map((item, index) => (

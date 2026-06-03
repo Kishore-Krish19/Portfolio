@@ -1,6 +1,6 @@
 .projects-section {
   position: relative;
-  min-height: 100vh;
+  min-height: var(--vh, 100vh);
   color: white;
   padding: 45px 5% 60px;
   z-index: 10;
@@ -580,11 +580,11 @@
 
 /* Adaptive Media Query System */
 @media (max-width: 1200px) {
-  .projects-carousel-wrapper {
+  :root:not([data-zoom-compensated]) .projects-carousel-wrapper {
     padding: 0 50px;
   }
 
-  .projects-section {
+  :root:not([data-zoom-compensated]) .projects-section {
     padding: 45px 4% 60px;
   }
 }

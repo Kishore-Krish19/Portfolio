@@ -4,7 +4,7 @@
 
 .certifications-section {
   position: relative;
-  min-height: 100vh;
+  min-height: var(--vh, 100vh);
   padding: 45px 8% 80px;
   color: white;
   overflow: hidden;
@@ -277,11 +277,11 @@
 }
 
 @media (max-width: 1024px) {
-  .certifications-section {
+  :root:not([data-zoom-compensated]) .certifications-section {
     padding: 45px 5% 60px;
   }
 
-  .carousel-container {
+  :root:not([data-zoom-compensated]) .carousel-container {
     max-width: 780px;
   }
 }

@@ -4,7 +4,7 @@
 
 .contact-section {
   position: relative;
-  min-height: 100vh;
+  min-height: var(--vh, 100vh);
   color: white;
   padding: 80px 5% 60px;
   z-index: 10;
@@ -449,113 +449,113 @@
    ========================================== */
 
 @media (max-width: 1200px) {
-  .contact-section {
+  :root:not([data-zoom-compensated]) .contact-section {
     padding: 80px 4% 60px;
   }
 
-  .contact-grid {
+  :root:not([data-zoom-compensated]) .contact-grid {
     gap: 28px;
   }
 
-  .contact-info-panel,
-  .contact-form-panel {
+  :root:not([data-zoom-compensated]) .contact-info-panel,
+  :root:not([data-zoom-compensated]) .contact-form-panel {
     padding: 32px 28px;
   }
 }
 
 @media (max-width: 968px) {
-  .contact-section {
+  :root:not([data-zoom-compensated]) .contact-section {
     padding: 80px 3% 60px;
   }
-  .contact-grid {
+  :root:not([data-zoom-compensated]) .contact-grid {
     grid-template-columns: 1fr;
     gap: 40px;
   }
-  .contact-info-panel {
+  :root:not([data-zoom-compensated]) .contact-info-panel {
     padding: 24px 20px !important;
     border-radius: 16px !important;
     position: relative;
     z-index: 10;
   }
-  .contact-form-panel {
+  :root:not([data-zoom-compensated]) .contact-form-panel {
     padding: 24px 20px !important;
     border-radius: 16px !important;
     position: relative;
     z-index: 5;
   }
   
-  .panel-title {
+  :root:not([data-zoom-compensated]) .panel-title {
     font-size: 22px !important;
     margin-bottom: 10px;
   }
 
-  .panel-desc {
+  :root:not([data-zoom-compensated]) .panel-desc {
     font-size: 13.5px;
     margin-bottom: 20px;
   }
 
-  .direct-contact-bars {
+  :root:not([data-zoom-compensated]) .direct-contact-bars {
     gap: 12px;
     margin-bottom: 24px;
   }
 
-  .contact-bar-item {
+  :root:not([data-zoom-compensated]) .contact-bar-item {
     gap: 14px;
     padding: 10px 14px !important;
     border-radius: 12px;
   }
 
-  .contact-bar-item .bar-text {
+  :root:not([data-zoom-compensated]) .contact-bar-item .bar-text {
     font-size: 13.5px !important;
   }
 
   /* Isometric icons scale-down */
-  .contact-bar-item .iso-pro,
-  .social-profiles-section .iso-pro {
+  :root:not([data-zoom-compensated]) .contact-bar-item .iso-pro,
+  :root:not([data-zoom-compensated]) .social-profiles-section .iso-pro {
     width: 42px !important;
     height: 42px !important;
   }
 
-  .contact-bar-item .iso-pro span,
-  .social-profiles-section .iso-pro span {
+  :root:not([data-zoom-compensated]) .contact-bar-item .iso-pro span,
+  :root:not([data-zoom-compensated]) .social-profiles-section .iso-pro span {
     width: 42px !important;
     height: 42px !important;
   }
 
-  .contact-bar-item .iso-pro .svg,
-  .social-profiles-section .iso-pro .svg {
+  :root:not([data-zoom-compensated]) .contact-bar-item .iso-pro .svg,
+  :root:not([data-zoom-compensated]) .social-profiles-section .iso-pro .svg {
     height: 42px !important;
     width: 42px !important;
     padding: 11px !important;
   }
 
-  .contact-bar-item .iso-pro .svg svg,
-  .social-profiles-section .iso-pro .svg svg {
+  :root:not([data-zoom-compensated]) .contact-bar-item .iso-pro .svg svg,
+  :root:not([data-zoom-compensated]) .social-profiles-section .iso-pro .svg svg {
     width: 16px !important;
     height: 16px !important;
   }
 
-  .social-profiles-section .iso-list {
+  :root:not([data-zoom-compensated]) .social-profiles-section .iso-list {
     gap: 16px;
   }
 
   /* Form spacing */
-  .contact-form-panel {
+  :root:not([data-zoom-compensated]) .contact-form-panel {
     gap: 16px;
   }
 
-  .contact-form-panel input,
-  .contact-form-panel textarea {
+  :root:not([data-zoom-compensated]) .contact-form-panel input,
+  :root:not([data-zoom-compensated]) .contact-form-panel textarea {
     padding: 10px 12px !important;
     font-size: 13.5px;
     border-radius: 10px;
   }
 
-  .contact-form-panel textarea {
+  :root:not([data-zoom-compensated]) .contact-form-panel textarea {
     height: 120px;
   }
 
-  .contact-form-panel .send-btn {
+  :root:not([data-zoom-compensated]) .contact-form-panel .send-btn {
     padding: 10px 20px;
     font-size: 14px;
     border-radius: 10px;

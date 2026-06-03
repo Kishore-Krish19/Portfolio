@@ -206,7 +206,7 @@
    Mobile Responsive Adjustments
    =============================== */
 @media (max-width: 1024px) {
-  .footer-main-row {
+  :root:not([data-zoom-compensated]) .footer-main-row {
     flex-direction: column;
     align-items: flex-start;
     gap: 15px;

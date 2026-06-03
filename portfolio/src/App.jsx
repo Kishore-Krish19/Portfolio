@@ -9,15 +9,20 @@ import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import About from "./components/About";
 import Skills from "./components/Skills";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
 import Antigravity from "./components/Antigravity";
 import MobileInfoScreen from "./components/MobileInfoScreen";
 import MusicPlayer from "./components/MusicPlayer";
+import { useDesktopScale } from "./adapt.js";
+
 
 function App() {
   const [showMobileInfo, setShowMobileInfo] = useState(false);
   const [isFadingOut, setIsFadingOut] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
+
+  // Apply proportional desktop scaling
+  useDesktopScale();
 
   // Mobile Device Check
   useEffect(() => {
@@ -32,15 +37,15 @@ function App() {
 
       if (isMobileDevice && !timer) {
         setShowMobileInfo(true);
-        document.body.style.overflow = "hidden"; // Lock scroll
+        document.body.style.overflow = "hidden";
 
         timer = setTimeout(() => {
           setIsFadingOut(true);
           removeTimer = setTimeout(() => {
             setShowMobileInfo(false);
-            document.body.style.overflow = ""; // Restore scroll
-          }, 600); // Wait for transition fade to finish (0.6s)
-        }, 2000); // Keep on screen for 2 seconds
+            document.body.style.overflow = "";
+          }, 600);
+        }, 2000);
       }
     };
 
@@ -50,11 +55,11 @@ function App() {
       window.removeEventListener("resize", checkMobile);
       if (timer) clearTimeout(timer);
       if (removeTimer) clearTimeout(removeTimer);
-      document.body.style.overflow = ""; // Clean up scroll lock
+      document.body.style.overflow = "";
     };
   }, []);
 
-  //  Parallax Scroll Logic 
+  // Parallax Scroll Logic
   useEffect(() => {
     const far = document.getElementById("layer-far");
     const mid = document.getElementById("layer-mid");
@@ -76,7 +81,7 @@ function App() {
     <>
       {showMobileInfo && <MobileInfoScreen isFadingOut={isFadingOut} />}
 
-      <div style={{ position: 'fixed', inset: 0, zIndex: 1, pointerEvents: 'none' }}>
+      <div style={{ position: 'fixed', top: 0, left: 0, width: 'calc(100% / var(--desktop-scale, 1))', height: 'calc(100% / var(--desktop-scale, 1))', zIndex: 1, pointerEvents: 'none' }}>
         <Antigravity
           count={isMobile ? 400 : 800}
           magnetRadius={isMobile ? 4 : 6}

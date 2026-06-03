@@ -29,7 +29,9 @@
 .home-container {
   position: relative;
   width: 100%;
-  height: 100vh;
+  height: var(--vh, 100vh);
+  /* Use min-height so it never collapses at high zoom levels */
+  min-height: 600px;
   background: transparent;
   overflow: hidden;
   display: flex;
@@ -74,7 +76,8 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: clamp(30px, 6vh, 80px);
+  /* Use fixed gap so it doesn't collapse at smaller effective viewports */
+  gap: 40px;
   height: 100%;
   z-index: 2;
 }
@@ -84,7 +87,8 @@
 ================================ */
 .home-label {
   font-family: var(--font-display);
-  font-size: clamp(16px, 2.2vw, 30px);
+  /* Fixed size so it reads the same at all browser zoom levels */
+  font-size: 22px;
   font-weight: 900;
   text-align: center;
   letter-spacing: 4px;
@@ -133,13 +137,14 @@
 /* Crossfade container for images */
 .home-image-crossfade {
   position: relative;
-  width: clamp(280px, 30vw, 430px);  /* fluid: scales with viewport */
-  height: clamp(320px, 34vw, 490px);
+  /* Fixed dimensions — browser zoom scales the whole page, not just this */
+  width: 380px;
+  height: 430px;
 }
 
 .home-image {
-  width: clamp(280px, 30vw, 430px);  /* fluid: scales with viewport */
-  height: clamp(320px, 34vw, 490px);
+  width: 380px;
+  height: 430px;
   object-fit: contain;
   object-position: bottom center;
   border-radius: 0;
@@ -173,17 +178,17 @@
 ================================ */
 .home-btn {
   position: absolute;
-  min-width: clamp(90px, 9vw, 130px);
-  min-height: clamp(40px, 5vh, 50px);
-  padding: clamp(10px, 1.2vh, 14px) clamp(16px, 2vw, 28px);
+  min-width: 120px;
+  min-height: 46px;
+  padding: 12px 24px;
   background: transparent;
   color: var(--nebula-cyan);
   border: none;
   border-radius: 2px;
   font-family: var(--font-display);
-  font-size: clamp(9px, 0.85vw, 12px);
+  font-size: 11px;
   font-weight: 1000;
-  letter-spacing: clamp(2px, 0.25vw, 3px);
+  letter-spacing: 2.5px;
   text-transform: uppercase;
   cursor: pointer;
   box-sizing: border-box;
@@ -209,25 +214,27 @@
 
 /* ===============================
    Button Positions
+   Fixed px values so they stay in the same
+   corners at every browser zoom level.
 ================================ */
 .top-left {
-  top: clamp(80px, 12vh, 130px);
-  left: clamp(40px, 14vw, 220px);
+  top: 110px;
+  left: 180px;
 }
 
 .top-right {
-  top: clamp(80px, 12vh, 130px);
-  right: clamp(40px, 14vw, 220px);
+  top: 110px;
+  right: 180px;
 }
 
 .bottom-left {
-  bottom: clamp(80px, 14vh, 160px);
-  left: clamp(40px, 14vw, 220px);
+  bottom: 120px;
+  left: 180px;
 }
 
 .bottom-right {
-  bottom: clamp(80px, 14vh, 160px);
-  right: clamp(40px, 14vw, 220px);
+  bottom: 120px;
+  right: 180px;
 }
 
 /* ===============================
@@ -334,8 +341,8 @@
 ================================ */
 .image-glow-wrapper {
   position: relative;
-  width: clamp(290px, 31vw, 440px);  /* fluid: scales with viewport */
-  height: clamp(320px, 34vw, 490px);
+  width: 390px;
+  height: 430px;
   border-radius: 6px;
   display: flex;
   align-items: center;
@@ -363,39 +370,42 @@
 ================================ */
 .home-left-intro {
   position: absolute;
-  left: clamp(40px, 12vw, 240px);
-  top: clamp(280px, 35vh, 400px);
-  width: clamp(220px, 22vw, 340px);
+  /* Fixed position matching the 100% design exactly */
+  left: 180px;
+  /* Use top: 50% + translateY to always be vertically centered regardless of zoom */
+  top: 50%;
+  transform: translateX(-40px) translateY(-50%);
+  width: 280px;
   z-index: 5;
   text-align: left;
   font-family: var(--font-body);
   user-select: none;
   /* Entrance animation — starts hidden */
   opacity: 0;
-  transform: translateX(-40px);
   transition: opacity 0.8s cubic-bezier(0.25, 1, 0.5, 1),
               transform 0.8s cubic-bezier(0.25, 1, 0.5, 1);
 }
 
 .home-left-intro.visible {
   opacity: 1;
-  transform: translateX(0);
+  transform: translateX(0) translateY(-50%);
 }
 
 .home-left-intro .intro-title {
   font-family: var(--font-mono);
-  font-size: 1rem;
+  font-size: 14px;
   font-weight: 600;
   color: var(--star-bright);
   margin: 0 0 6px 0;
   letter-spacing: 3px;
   text-transform: uppercase;
   text-shadow: 0 0 10px rgba(6, 182, 212, 0.5);
+  white-space: nowrap;
 }
 
 .home-left-intro .intro-name {
   font-family: var(--font-display);
-  font-size: clamp(1.8rem, 2.5vw, 3.2rem);
+  font-size: 3rem;
   font-weight: 900;
   background: linear-gradient(90deg, var(--nebula-cyan), #38bdf8, var(--nebula-blue));
   -webkit-background-clip: text;
@@ -409,18 +419,19 @@
 
 .home-left-intro .intro-subtitle {
   font-family: var(--font-mono);
-  font-size: 0.95rem;
+  font-size: 13px;
   font-weight: 600;
   color: var(--star-bright);
   margin: 0 0 6px 0;
   letter-spacing: 2px;
   text-transform: uppercase;
   opacity: 0.9;
+  white-space: nowrap;
 }
 
 .home-left-intro .intro-designation {
   font-family: var(--font-display);
-  font-size: clamp(0.95rem, 1.2vw, 1.25rem);
+  font-size: 1.15rem;
   font-weight: 800;
   color: var(--nebula-violet);
   margin: 0;
@@ -474,9 +485,11 @@
 ================================ */
 .home-right-skills {
   position: absolute;
-  right: clamp(40px, 12vw, 240px);
-  top: clamp(300px, 38vh, 430px);
-  width: clamp(220px, 22vw, 340px);
+  right: 180px;
+  /* Mirror the left panel — vertically centered */
+  top: 50%;
+  transform: translateX(40px) translateY(-50%);
+  width: 280px;
   z-index: 5;
   display: flex;
   flex-direction: column;
@@ -484,14 +497,13 @@
   align-items: flex-end;
   /* Entrance animation — starts hidden */
   opacity: 0;
-  transform: translateX(40px);
   transition: opacity 0.8s cubic-bezier(0.25, 1, 0.5, 1) 0.15s,
               transform 0.8s cubic-bezier(0.25, 1, 0.5, 1) 0.15s;
 }
 
 .home-right-skills.visible {
   opacity: 1;
-  transform: translateX(0);
+  transform: translateX(0) translateY(-50%);
 }
 
 /* Love Tagline */
@@ -506,7 +518,7 @@
 
 .love-static {
   font-family: var(--font-mono);
-  font-size: 1rem;
+  font-size: 14px;
   font-weight: 600;
   color: var(--star-bright);
   letter-spacing: 2px;
@@ -517,7 +529,7 @@
 
 .love-rotating {
   font-family: var(--font-display) !important;
-  font-size: 1.25rem !important;
+  font-size: 18px !important;
   font-weight: 800 !important;
   letter-spacing: 3px;
   text-transform: uppercase;
@@ -820,7 +832,7 @@
   align-items: center;
   gap: 10px;
   font-family: var(--font-mono);
-  font-size: 0.9rem;
+  font-size: 13px;
   font-weight: 500;
   letter-spacing: 2.5px;
   text-transform: uppercase;
@@ -887,7 +899,7 @@
 
 /* Glowing Line — now a thruster trail */
 .glowing-line {
-  width: clamp(260px, 33vw, 450px); /* fluid: scales with viewport */
+  width: 390px;
   height: 3px;
   background: linear-gradient(90deg,
     transparent,
@@ -915,32 +927,32 @@
 ================================ */
 @media (min-width: 1600px) {
   .home-left-intro {
-    left: clamp(200px, 10vw, 320px);
-    width: clamp(320px, 22vw, 420px);
+    left: clamp(240px, 12vw, 320px);
+    width: clamp(300px, 22vw, 420px);
   }
 
   .home-left-intro .intro-name {
-    font-size: 4rem;
+    font-size: 3.8rem;
   }
 
   .home-left-intro .intro-designation {
-    font-size: 1.5rem;
+    font-size: 1.35rem;
   }
 
   .home-right-skills {
-    right: clamp(200px, 10vw, 320px);
-    width: clamp(320px, 22vw, 420px);
+    right: clamp(240px, 12vw, 320px);
+    width: clamp(300px, 22vw, 420px);
   }
 
   .image-glow-wrapper,
   .home-image-crossfade,
   .home-image {
-    width: 520px;
-    height: 600px;
+    width: 480px;
+    height: 540px;
   }
 
   .glowing-line {
-    width: 560px;
+    width: 480px;
   }
 }
 
@@ -948,35 +960,46 @@
    Responsive: 1280px
 ================================ */
 @media (max-width: 1280px) {
-  .home-left-intro .intro-name {
-    font-size: 2.4rem;
+  :root:not([data-zoom-compensated]) .home-left-intro .intro-name {
+    font-size: 2.6rem;
   }
 
-  .home-left-intro .intro-designation {
-    font-size: 1.1rem;
+  :root:not([data-zoom-compensated]) .home-left-intro .intro-designation {
+    font-size: 1.05rem;
   }
 
-  .btn-action {
+  :root:not([data-zoom-compensated]) .btn-action {
     padding: 10px 16px;
     font-size: 9px;
   }
 }
 
 /* ===============================
-   Responsive: 1100px (Intermediate / zoomed-in desktops)
+   Responsive: 1100px
 ================================ */
 @media (max-width: 1100px) {
-  /* Image scales via clamp() — no hard override needed */
-  /* Side panels scale via vw-based positions — no override needed */
+  :root:not([data-zoom-compensated]) .home-left-intro {
+    left: 100px;
+    width: 240px;
+  }
 
-  .btn-action {
+  :root:not([data-zoom-compensated]) .home-right-skills {
+    right: 100px;
+    width: 240px;
+  }
+
+  :root:not([data-zoom-compensated]) .top-left  { left: 100px; }
+  :root:not([data-zoom-compensated]) .top-right { right: 100px; }
+  :root:not([data-zoom-compensated]) .bottom-left  { left: 100px; }
+  :root:not([data-zoom-compensated]) .bottom-right { right: 100px; }
+
+  :root:not([data-zoom-compensated]) .btn-action {
     padding: 8px 12px;
     font-size: 8.5px;
     letter-spacing: 1.5px;
   }
 
-  /* Slightly reduce corner buttons at this range */
-  .home-btn {
+  :root:not([data-zoom-compensated]) .home-btn {
     min-width: 96px;
     min-height: 38px;
     padding: 9px 15px;
@@ -1178,70 +1201,68 @@
    Short Screen / Landscape Viewports
 ================================ */
 @media (min-width: 651px) and (max-height: 750px) {
-  .image-glow-wrapper,
-  .home-image-crossfade,
-  .home-image {
+  :root:not([data-zoom-compensated]) .image-glow-wrapper,
+  :root:not([data-zoom-compensated]) .home-image-crossfade,
+  :root:not([data-zoom-compensated]) .home-image {
     width: 280px !important;
     height: 320px !important;
   }
 
-  .glowing-line {
-    width: 320px !important;
+  :root:not([data-zoom-compensated]) .glowing-line {
+    width: 300px !important;
   }
 
-  .home-center {
-    gap: 30px !important;
+  :root:not([data-zoom-compensated]) .home-center {
+    gap: 20px !important;
   }
 
-  .home-label {
-    font-size: 20px !important;
+  :root:not([data-zoom-compensated]) .home-label {
+    font-size: 18px !important;
   }
 
-  .home-left-intro {
-    left: 5vw !important;
+  :root:not([data-zoom-compensated]) .home-left-intro {
+    left: 80px !important;
     top: 50% !important;
-    transform: translateY(-50%) translateX(-20px) !important;
-    width: 22vw !important;
-    min-width: 180px !important;
+    transform: translateX(-40px) translateY(-50%) !important;
+    width: 220px !important;
   }
 
-  .home-left-intro.visible {
-    transform: translateY(-50%) translateX(0) !important;
+  :root:not([data-zoom-compensated]) .home-left-intro.visible {
+    transform: translateX(0) translateY(-50%) !important;
   }
 
-  .home-right-skills {
-    right: 5vw !important;
+  :root:not([data-zoom-compensated]) .home-right-skills {
+    right: 80px !important;
     top: 50% !important;
-    transform: translateY(-50%) translateX(20px) !important;
-    width: 22vw !important;
-    min-width: 180px !important;
+    transform: translateX(40px) translateY(-50%) !important;
+    width: 220px !important;
   }
 
-  .home-right-skills.visible {
-    transform: translateY(-50%) translateX(0) !important;
+  :root:not([data-zoom-compensated]) .home-right-skills.visible {
+    transform: translateX(0) translateY(-50%) !important;
   }
 
-  .top-left {
-    top: 45px !important;
-    left: 45px !important;
+  :root:not([data-zoom-compensated]) .top-left {
+    top: 40px !important;
+    left: 80px !important;
   }
 
-  .top-right {
-    top: 45px !important;
-    right: 45px !important;
+  :root:not([data-zoom-compensated]) .top-right {
+    top: 40px !important;
+    right: 80px !important;
   }
 
-  .bottom-left {
-    bottom: 100px !important;
-    left: 45px !important;
+  :root:not([data-zoom-compensated]) .bottom-left {
+    bottom: 40px !important;
+    left: 80px !important;
   }
 
-  .bottom-right {
-    bottom: 100px !important;
-    right: 45px !important;
+  :root:not([data-zoom-compensated]) .bottom-right {
+    bottom: 40px !important;
+    right: 80px !important;
   }
 
-  .home-hover-hint {
+  :root:not([data-zoom-compensated]) .home-hover-hint {
     font-size: 0.75rem !important;
     letter-spacing: 2px !important;
   }

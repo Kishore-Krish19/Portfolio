@@ -1,7 +1,7 @@
 /* ===== ABOUT SECTION ===== */
 .about-section {
     position: relative;
-    min-height: 100vh;
+    min-height: var(--vh, 100vh);
     padding: 45px 7% 100px;
     overflow: hidden;
     background: inherit;
@@ -396,30 +396,30 @@
 
 /* ===== RESPONSIVE ===== */
 @media (max-width: 1100px) {
-    .about-container {
+    :root:not([data-zoom-compensated]) .about-container {
         grid-template-columns: 1fr;
     }
 
-    .about-left {
+    :root:not([data-zoom-compensated]) .about-left {
         max-width: 100%;
     }
 
-    .constellation-wrapper {
+    :root:not([data-zoom-compensated]) .constellation-wrapper {
         justify-content: center;
         margin-top: 20px;
     }
 }
 
 @media (max-width: 1024px) {
-    .about-section {
+    :root:not([data-zoom-compensated]) .about-section {
         padding: 45px 5% 80px;
     }
 
-    .constellation-container {
+    :root:not([data-zoom-compensated]) .constellation-container {
         max-width: 500px;
     }
 
-    .about-buttons {
+    :root:not([data-zoom-compensated]) .about-buttons {
         flex-wrap: wrap;
     }
 }

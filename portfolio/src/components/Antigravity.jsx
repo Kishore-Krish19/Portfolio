@@ -36,8 +36,12 @@ const AntigravityInner = ({
       customPointer.current.x = (e.clientX / window.innerWidth) * 2 - 1;
       customPointer.current.y = -(e.clientY / window.innerHeight) * 2 + 1;
     };
+
     window.addEventListener('mousemove', handleMouseMove);
-    return () => window.removeEventListener('mousemove', handleMouseMove);
+
+    return () => {
+      window.removeEventListener('mousemove', handleMouseMove);
+    };
   }, []);
 
   const particles = useMemo(() => {
