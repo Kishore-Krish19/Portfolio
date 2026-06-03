@@ -26,10 +26,7 @@ body,
 }
 
 html {
-  /* zoom is set inline by JS (useDesktopScale).
-     When zoom is applied to <html>, the browser scales
-     the entire visual including fixed-position elements.
-     This is the only property that needs special handling. */
+
   min-height: 100%;
 }
 

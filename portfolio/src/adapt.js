@@ -18,12 +18,12 @@ import { useEffect, useCallback, useRef } from "react";
 
 // Standard browser zoom levels and their counter-scales
 const ZOOM_LEVELS = [
-  { zoom: 1.00, counter: 1.0000, label: "100%" },
-  { zoom: 1.10, counter: 0.9091, label: "110%" },
-  { zoom: 1.25, counter: 0.8000, label: "125%" },
-  { zoom: 1.50, counter: 0.6667, label: "150%" },
-  { zoom: 1.75, counter: 0.5714, label: "175%" },
-  { zoom: 2.00, counter: 0.5000, label: "200%" },
+  { zoom: 1.00, counter: 0.9000, label: "100%" },
+  { zoom: 1.10, counter: 0.8182, label: "110%" },
+  { zoom: 1.25, counter: 0.7200, label: "125%" },
+  { zoom: 1.50, counter: 0.6000, label: "150%" },
+  { zoom: 1.75, counter: 0.5143, label: "175%" },
+  { zoom: 2.00, counter: 0.4500, label: "200%" },
 ];
 
 /**
@@ -85,9 +85,9 @@ export function useDesktopScale() {
     const detected = detectZoomLevel(ratio);
 
     let counterZoom;
-    if (!detected || detected.zoom === 1.0) {
-      // 100 % zoom or unrecognised → no counter-scaling
-      counterZoom = 1;
+    if (!detected) {
+      // Unrecognised → default to 90% target scale (0.9)
+      counterZoom = 0.9;
     } else {
       counterZoom = detected.counter;
     }
