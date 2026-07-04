@@ -2,13 +2,41 @@ import { motion } from "framer-motion";
 import "./Experience.css";
 
 const experiences = [
-    {
+  {
+    id: "exp-intern",
+    role: "React Native Developer Intern",
+    company: "FeOS Technologies",
+    category: "Internship Experience",
+    icon: "reactnative",
+    gradient: "cyan",
+    date: "June 2026 – Present",
+    certificate: "/certificates/Kishore Internship Certificate.webp",
+    certificateBadge: "Internship Certificate",
+    highlights: [
+      "Developing a service marketplace mobile application using React Native.",
+      "Building reusable and responsive mobile UI components.",
+      "Integrating React Native frontend with Node.js REST APIs.",
+      "Implementing authentication, onboarding, profile management, and navigation flows.",
+      "Improving application performance, debugging issues, and enhancing user experience.",
+    ],
+    tags: [
+      "React Native",
+      "Expo",
+      "Node.js",
+      "REST API",
+      "Android",
+      "Mobile Development",
+    ],
+  },
+  {
     id: "exp-1",
     role: "AI Prompt Optimizer Extension",
     category: "Open-Source & AI Product",
     icon: "aiprompt",
     gradient: "sky",
     date: "May 2026",
+    certificate: "/certificates/Extension-published.webp",
+    certificateBadge: "Published Extension",
     highlights: [
       "Designed and published an AI-powered browser extension on the Microsoft Edge Add-ons Store",
       "Built a system that transforms rough prompts into structured, high-quality AI prompts",
@@ -23,6 +51,8 @@ const experiences = [
     icon: "agentverse",
     gradient: "rose",
     date: "March 2026",
+    certificate: "/certificates/AgentVerse-26_Certificate.webp",
+    certificateBadge: "Event Coordinator",
     highlights: [
       "Coordinated and managed AgentVerse 2026, a college-level project expo featuring 30+ participating teams",
       "Handled complete event execution including team coordination, scheduling, registrations, and stage management",
@@ -121,6 +151,17 @@ const IconAIPrompt = () => (
   </svg>
 );
 
+const IconReactNative = () => (
+  <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" viewBox="0 0 24 24"
+    fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+    <rect x="5" y="2" width="14" height="20" rx="2" ry="2" />
+    <path d="M12 18h.01" />
+    <ellipse cx="12" cy="10" rx="4" ry="1.5" transform="rotate(30 12 10)" />
+    <ellipse cx="12" cy="10" rx="4" ry="1.5" transform="rotate(-30 12 10)" />
+    <circle cx="12" cy="10" r="1" />
+  </svg>
+);
+
 const renderIcon = (icon) => {
   switch (icon) {
     case "event": return <IconEvent />;
@@ -129,9 +170,53 @@ const renderIcon = (icon) => {
     case "seminar": return <IconSeminar />;
     case "agentverse": return <IconAgentVerse />;
     case "aiprompt": return <IconAIPrompt />;
+    case "reactnative": return <IconReactNative />;
     default: return <IconEvent />;
   }
 };
+
+const renderCardContent = (exp) => (
+  <>
+    {/* Glow */}
+    <div className="exp-card-glow" />
+
+    {/* Header row */}
+    <div className="exp-card-header">
+      <div className={`exp-icon-wrapper exp-icon--${exp.gradient}`}>
+        {renderIcon(exp.icon)}
+      </div>
+      <div className="exp-header-text">
+        <span className="exp-category">
+          {exp.category}
+          {exp.company && <span className="exp-company-separator"> • </span>}
+          {exp.company && <span className="exp-company-name">{exp.company}</span>}
+        </span>
+        <h3 className="exp-role">{exp.role}</h3>
+      </div>
+      <span className="exp-date">{exp.date}</span>
+    </div>
+
+    {/* Divider */}
+    <div className={`exp-divider exp-divider--${exp.gradient}`} />
+
+    {/* Highlights */}
+    <ul className="exp-highlights">
+      {exp.highlights.map((h, i) => (
+        <li key={i} className="exp-highlight-item">
+          <span className={`exp-bullet exp-bullet--${exp.gradient}`} />
+          {h}
+        </li>
+      ))}
+    </ul>
+
+    {/* Tags */}
+    <div className="exp-tags">
+      {exp.tags.map((tag) => (
+        <span key={tag} className={`exp-tag exp-tag--${exp.gradient}`}>{tag}</span>
+      ))}
+    </div>
+  </>
+);
 
 export default function Experience() {
   const cardVariants = {
@@ -164,56 +249,72 @@ export default function Experience() {
           viewport={{ once: false, amount: 0.2 }}
         >
           A snapshot of key experiences that shaped my technical and leadership journey.
+          <span className="exp-hint-text">
+            <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" style={{ display: 'inline-block', verticalAlign: 'middle', marginRight: '5px', marginTop: '-2px', color: '#06b6d4' }}>
+              <circle cx="12" cy="12" r="10" />
+              <line x1="12" y1="16" x2="12" y2="12" />
+              <line x1="12" y1="8" x2="12.01" y2="8" />
+            </svg>
+            Tip: Hover on cards to view certificate!
+          </span>
         </motion.p>
 
-        {/* Cards */}
+        {/* Cards Grid */}
         <div className="exp-cards-grid">
-          {experiences.map((exp, i) => (
-            <motion.div
-              key={exp.id}
-              className={`exp-card exp-card--${exp.gradient}`}
-              variants={cardVariants}
-              initial="hidden"
-              whileInView="visible"
-              custom={i}
-              viewport={{ once: false, amount: 0.15 }}
-            >
-              {/* Glow */}
-              <div className="exp-card-glow" />
+          {experiences.map((exp, i) => {
+            const hasCertificate = !!exp.certificate;
 
-              {/* Header row */}
-              <div className="exp-card-header">
-                <div className={`exp-icon-wrapper exp-icon--${exp.gradient}`}>
-                  {renderIcon(exp.icon)}
-                </div>
-                <div className="exp-header-text">
-                  <span className="exp-category">{exp.category}</span>
-                  <h3 className="exp-role">{exp.role}</h3>
-                </div>
-                <span className="exp-date">{exp.date}</span>
-              </div>
+            if (hasCertificate) {
+              return (
+                <motion.div
+                  key={exp.id}
+                  className={`exp-card-flip exp-card-flip--${exp.gradient}`}
+                  variants={cardVariants}
+                  initial="hidden"
+                  whileInView="visible"
+                  custom={i}
+                  viewport={{ once: false, amount: 0.15 }}
+                  tabIndex={0}
+                  aria-label={`${exp.role} at ${exp.company} experience card. Hover or focus to view the certificate.`}
+                >
+                  <div className="exp-card-inner">
+                    {/* Front Side */}
+                    <div className="exp-card-front">
+                      <div className={`exp-card exp-card--${exp.gradient}`}>
+                        {renderCardContent(exp)}
+                      </div>
+                    </div>
 
-              {/* Divider */}
-              <div className={`exp-divider exp-divider--${exp.gradient}`} />
+                    {/* Back Side */}
+                    <div className="exp-card-back">
+                      <div className={`exp-cert-badge exp-cert-badge--${exp.gradient}`}>
+                        {exp.certificateBadge || "Certificate"}
+                      </div>
+                      <img
+                        src={exp.certificate}
+                        alt={`${exp.role} ${exp.company ? `Certificate from ${exp.company}` : "Certificate"}`}
+                        className="exp-cert-img"
+                      />
+                    </div>
+                  </div>
+                </motion.div>
+              );
+            }
 
-              {/* Highlights */}
-              <ul className="exp-highlights">
-                {exp.highlights.map((h, i) => (
-                  <li key={i} className="exp-highlight-item">
-                    <span className={`exp-bullet exp-bullet--${exp.gradient}`} />
-                    {h}
-                  </li>
-                ))}
-              </ul>
-
-              {/* Tags */}
-              <div className="exp-tags">
-                {exp.tags.map((tag) => (
-                  <span key={tag} className={`exp-tag exp-tag--${exp.gradient}`}>{tag}</span>
-                ))}
-              </div>
-            </motion.div>
-          ))}
+            return (
+              <motion.div
+                key={exp.id}
+                className={`exp-card exp-card--${exp.gradient}`}
+                variants={cardVariants}
+                initial="hidden"
+                whileInView="visible"
+                custom={i}
+                viewport={{ once: false, amount: 0.15 }}
+              >
+                {renderCardContent(exp)}
+              </motion.div>
+            );
+          })}
         </div>
       </div>
     </section>

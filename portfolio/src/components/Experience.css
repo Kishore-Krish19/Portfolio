@@ -30,6 +30,16 @@
   line-height: 1.6;
 }
 
+.exp-hint-text {
+  display: block;
+  font-size: 12.5px;
+  color: #06b6d4;
+  margin-top: 8px;
+  font-weight: 500;
+  letter-spacing: 0.015em;
+  opacity: 0.85;
+}
+
 /* ---------- Cards Grid ---------- */
 
 .exp-cards-grid {
@@ -559,5 +569,231 @@
   .exp-tag {
     font-size: 8px !important;
     padding: 1px 6px;
+  }
+}
+
+/* ==========================================================================
+   Flip Card Animation Styles (Internship Experience)
+   ========================================================================== */
+
+/* ---------- Flip Card Container ---------- */
+.exp-card-flip {
+  perspective: 1000px;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+  outline: none;
+}
+
+@media (hover: hover) {
+  .exp-card-flip:hover {
+    transform: translateY(-8px) scale(1.015);
+  }
+}
+
+.exp-card-flip:focus-visible {
+  outline: 2px solid #06b6d4;
+  outline-offset: 4px;
+  border-radius: 24px;
+}
+
+@media (max-width: 768px) {
+  .exp-card-flip:focus-visible {
+    border-radius: 16px;
+  }
+}
+
+@media (max-width: 480px) {
+  .exp-card-flip:focus-visible {
+    border-radius: 12px;
+  }
+}
+
+/* ---------- Flip Card Inner ---------- */
+.exp-card-inner {
+  position: relative;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  transform-style: preserve-3d;
+  transition: transform 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+@media (hover: hover) {
+  .exp-card-flip:hover .exp-card-inner {
+    transform: rotateY(180deg);
+  }
+}
+
+.exp-card-flip:focus-within .exp-card-inner,
+.exp-card-flip:focus .exp-card-inner {
+  transform: rotateY(180deg);
+}
+
+/* Disable inner card translate when inside flip container */
+.exp-card-flip .exp-card:hover {
+  transform: none !important;
+  box-shadow: none !important;
+}
+
+/* ---------- Front & Back Sides ---------- */
+.exp-card-front,
+.exp-card-back {
+  width: 100%;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+
+.exp-card-front {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.exp-card-front .exp-card {
+  height: 100%;
+  margin: 0;
+  flex: 1;
+}
+
+.exp-card-back {
+  position: absolute;
+  inset: 0;
+  transform: rotateY(180deg);
+  background: #ffffff;
+  border-radius: 24px;
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4),
+              inset 0 1px 1px rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  z-index: 1;
+  transition: border-color 0.5s cubic-bezier(0.16, 1, 0.3, 1),
+              box-shadow 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Cyan hover states */
+@media (hover: hover) {
+  .exp-card-flip--cyan:hover .exp-card-back {
+    box-shadow: 0 22px 48px rgba(6, 182, 212, 0.18),
+                0 0 30px rgba(6, 182, 212, 0.06);
+    border-color: rgba(6, 182, 212, 0.25);
+  }
+}
+.exp-card-flip--cyan:focus-within .exp-card-back {
+  box-shadow: 0 22px 48px rgba(6, 182, 212, 0.18),
+              0 0 30px rgba(6, 182, 212, 0.06);
+  border-color: rgba(6, 182, 212, 0.25);
+}
+
+/* Sky hover states */
+@media (hover: hover) {
+  .exp-card-flip--sky:hover .exp-card-back {
+    box-shadow: 0 22px 48px rgba(56, 189, 248, 0.18),
+                0 0 30px rgba(56, 189, 248, 0.06);
+    border-color: rgba(56, 189, 248, 0.25);
+  }
+}
+.exp-card-flip--sky:focus-within .exp-card-back {
+  box-shadow: 0 22px 48px rgba(56, 189, 248, 0.18),
+              0 0 30px rgba(56, 189, 248, 0.06);
+  border-color: rgba(56, 189, 248, 0.25);
+}
+
+/* Rose hover states */
+@media (hover: hover) {
+  .exp-card-flip--rose:hover .exp-card-back {
+    box-shadow: 0 22px 48px rgba(244, 63, 94, 0.18),
+                0 0 30px rgba(244, 63, 94, 0.06);
+    border-color: rgba(244, 63, 94, 0.25);
+  }
+}
+.exp-card-flip--rose:focus-within .exp-card-back {
+  box-shadow: 0 22px 48px rgba(244, 63, 94, 0.18),
+              0 0 30px rgba(244, 63, 94, 0.06);
+  border-color: rgba(244, 63, 94, 0.25);
+}
+
+/* Mobile Adjustments for Back Side */
+@media (max-width: 768px) {
+  .exp-card-back {
+    border-radius: 16px;
+    padding: 16px;
+  }
+}
+
+@media (max-width: 480px) {
+  .exp-card-back {
+    border-radius: 12px;
+    padding: 12px;
+  }
+}
+
+/* ---------- Certificate Badge, Image, and Separators ---------- */
+.exp-cert-badge {
+  position: absolute;
+  top: 16px;
+  color: white;
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  padding: 4px 12px;
+  border-radius: 9999px;
+  z-index: 10;
+}
+
+.exp-cert-badge--cyan {
+  background: linear-gradient(135deg, #06b6d4 0%, #0891b0 100%);
+  box-shadow: 0 4px 12px rgba(6, 182, 212, 0.3);
+}
+
+.exp-cert-badge--sky {
+  background: linear-gradient(135deg, #38bdf8 0%, #0ea5e9 100%);
+  box-shadow: 0 4px 12px rgba(56, 189, 248, 0.3);
+}
+
+.exp-cert-badge--rose {
+  background: linear-gradient(135deg, #f43f5e 0%, #e11d48 100%);
+  box-shadow: 0 4px 12px rgba(244, 63, 94, 0.3);
+}
+
+@media (max-width: 768px) {
+  .exp-cert-badge {
+    top: 12px;
+    font-size: 9px;
+    padding: 3px 10px;
+  }
+}
+
+.exp-cert-img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  border-radius: 12px;
+}
+
+.exp-company-separator {
+  color: #4b5563;
+  margin: 0 4px;
+}
+
+.exp-company-name {
+  color: #9ca3af;
+  font-weight: 600;
+}
+
+/* ---------- Reduced Motion ---------- */
+@media (prefers-reduced-motion: reduce) {
+  .exp-card-inner {
+    transition: none !important;
+  }
+  .exp-card-flip {
+    transition: none !important;
   }
 }
