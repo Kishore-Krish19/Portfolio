@@ -13,11 +13,9 @@
   justify-content: flex-start;
 }
 
-.achievements-title {
-}
+.achievements-title {}
 
-.achievements-subtitle-underline {
-}
+.achievements-subtitle-underline {}
 
 /* ==========================================================================
    Interactive Stats Cards Grid (Perfectly Level Height Constraints)
@@ -34,8 +32,10 @@
 
 @media (min-width: 1024px) {
   .stats-grid {
-    grid-template-columns: 1.35fr 1fr; /* Asymmetric Bento Grid layout */
-    grid-auto-rows: 1fr; /* Forces equal height constraints */
+    grid-template-columns: 1.35fr 1fr;
+    /* Asymmetric Bento Grid layout */
+    grid-auto-rows: 1fr;
+    /* Forces equal height constraints */
     align-items: stretch;
   }
 }
@@ -49,7 +49,8 @@
 
 .stat-card {
   position: relative;
-  background: rgba(17, 10, 31, 0.45); /* Frosted translucent background */
+  background: rgba(17, 10, 31, 0.45);
+  /* Frosted translucent background */
   backdrop-filter: blur(20px);
   border: 1px solid rgba(255, 255, 255, 0.08);
   border-radius: 24px;
@@ -62,7 +63,7 @@
   justify-content: flex-start;
   transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
   box-shadow: 0 10px 40px rgba(0, 0, 0, 0.4),
-              inset 0 1px 1px rgba(255, 255, 255, 0.05);
+    inset 0 1px 1px rgba(255, 255, 255, 0.05);
   text-decoration: none;
   color: white;
   box-sizing: border-box;
@@ -73,7 +74,7 @@
   transform: translateY(-6px) scale(1.01);
   border-color: rgba(255, 255, 255, 0.16);
   box-shadow: 0 20px 45px rgba(0, 0, 0, 0.55),
-              inset 0 1px 1px rgba(255, 255, 255, 0.08);
+    inset 0 1px 1px rgba(255, 255, 255, 0.08);
 }
 
 /* LeetCode Custom Neon Glowing Borders */
@@ -165,12 +166,10 @@
 .shimmer-wave {
   position: absolute;
   inset: 0;
-  background: linear-gradient(
-    90deg,
-    transparent 0%,
-    rgba(255, 255, 255, 0.03) 50%,
-    transparent 100%
-  );
+  background: linear-gradient(90deg,
+      transparent 0%,
+      rgba(255, 255, 255, 0.03) 50%,
+      transparent 100%);
   transform: translateX(-100%);
   animation: shimmerMove 4s infinite;
 }
@@ -237,129 +236,166 @@
   opacity: 0.95;
 }
 
-/* 2x2 Subgrid Flex Layout Extensions */
-.hackerrank-subgrid {
+/* 2x2 Hexagonal Sub-cards Grid */
+.hackerrank-hex-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 16px;
+  gap: 16px 20px;
+  justify-items: center;
+  align-content: center;
   width: 100%;
-  margin-top: 4px;
-  flex-grow: 1; /* Instructs subgrid space allocation matching with Left panel */
+  margin-top: auto;
+  margin-bottom: auto;
+  flex-grow: 1;
+  /* Instructs subgrid space allocation matching with Left panel */
+  box-sizing: border-box;
 }
 
-/* Individual Sub-card Balanced Dimension rules */
-.hr-subcard {
-  background: rgba(255, 255, 255, 0.02);
-  border: 1px solid rgba(255, 255, 255, 0.05);
-  border-radius: 18px;
-  padding: 16px 12px;
+@media (min-width: 480px) {
+  .hackerrank-hex-grid {
+    gap: 20px 24px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .hackerrank-hex-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 18px 24px;
+    align-items: center;
+    width: 100%;
+  }
+}
+
+/* Individual Hexagon Container */
+.hr-hexagon {
+  position: relative;
+  width: 110px;
+  height: 126px;
+  /* Maintaining roughly 1:1.15 aspect ratio */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), filter 0.4s ease;
+  cursor: pointer;
+  user-select: none;
+}
+
+/* Make hexagons responsive on very small screens if wrapped */
+@media (max-width: 360px) {
+  .hr-hexagon {
+    width: 90px;
+    height: 104px;
+  }
+}
+
+/* SVGs representing the rounded hexagon background */
+.hr-hex-svg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  filter: drop-shadow(0 4px 10px rgba(0, 0, 0, 0.3));
+  transition: filter 0.3s ease;
+}
+
+/* Hexagon SVG paths */
+.hr-hex-svg path {
+  transition: all 0.3s ease;
+}
+
+/* Dynamic Hover Effects */
+.hr-hexagon:hover {
+  transform: translateY(-6px) scale(1.08);
+}
+
+.hr-hexagon.gold:hover {
+  filter: drop-shadow(0 6px 16px rgba(245, 158, 11, 0.35)) drop-shadow(0 0 10px rgba(245, 158, 11, 0.2));
+}
+
+.hr-hexagon.silver:hover {
+  filter: drop-shadow(0 6px 16px rgba(203, 213, 225, 0.35)) drop-shadow(0 0 10px rgba(203, 213, 225, 0.2));
+}
+
+.hr-hexagon:hover .hr-hex-svg path {
+  stroke-width: 4px;
+}
+
+.hr-hexagon.gold:hover .hr-hex-svg path {
+  stroke: #f59e0b;
+}
+
+.hr-hexagon.silver:hover .hr-hex-svg path {
+  stroke: #cbd5e1;
+}
+
+/* Hexagon Content Layer */
+.hr-hex-content {
+  position: absolute;
+  z-index: 5;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center; /* Centers items vertically inside equal space blocks */
-  text-align: center;
-  gap: 4px;
-  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-  box-sizing: border-box;
-  position: relative;
-  overflow: hidden;
-}
-
-.hr-subcard::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.04), transparent 70%);
-  opacity: 0;
-  transition: opacity 0.4s ease;
-  pointer-events: none;
-}
-
-.hr-subcard:hover::after {
-  opacity: 1;
-}
-
-/* Gold Skill Chip Variants */
-.hr-subcard.gold {
-  border-color: rgba(251, 191, 36, 0.08);
-}
-
-.hr-subcard.gold:hover {
-  background: rgba(251, 191, 36, 0.04);
-  border-color: rgba(251, 191, 36, 0.45);
-  transform: translateY(-4px) scale(1.03);
-  box-shadow: 0 12px 24px -8px rgba(251, 191, 36, 0.2),
-              0 0 16px rgba(251, 191, 36, 0.04);
-}
-
-/* Silver Skill Chip Variants */
-.hr-subcard.silver {
-  border-color: rgba(148, 163, 184, 0.08);
-}
-
-.hr-subcard.silver:hover {
-  background: rgba(148, 163, 184, 0.04);
-  border-color: rgba(148, 163, 184, 0.45);
-  transform: translateY(-4px) scale(1.03);
-  box-shadow: 0 12px 24px -8px rgba(148, 163, 184, 0.2),
-              0 0 16px rgba(148, 163, 184, 0.04);
-}
-
-.hr-subcard h4 {
-  font-size: 15px;
-  font-weight: 700;
-  color: #ffffff;
-  margin: 0;
-}
-
-.hr-badge {
-  font-size: 9px;
-  font-weight: 800;
-  text-transform: uppercase;
-  letter-spacing: 0.06em;
-  padding: 1px 6px;
-  border-radius: 99px;
-  margin: 2px 0 0;
-}
-
-.hr-badge.gold {
-  color: #fbbf24;
-  background: rgba(251, 191, 36, 0.05);
-  border: 1px solid rgba(251, 191, 36, 0.12);
-}
-
-.hr-badge.silver {
-  color: #cbd5e1;
-  background: rgba(148, 163, 184, 0.05);
-  border: 1px solid rgba(148, 163, 184, 0.12);
-}
-
-.hr-stars-row {
-  font-size: 11px;
-  color: #fbbf24;
-  display: flex;
   justify-content: center;
-  gap: 1.5px;
-  filter: drop-shadow(0 0 3px rgba(251, 191, 36, 0.5));
+  width: 100%;
+  height: 100%;
+  padding: 10px;
+  box-sizing: border-box;
+  text-align: center;
 }
 
-.hr-subcard.silver .hr-stars-row {
-  color: #cbd5e1;
-  filter: drop-shadow(0 0 3px rgba(148, 163, 184, 0.5));
+/* Custom SVG Icons inside Hexagon */
+.hr-hex-icon {
+  width: 28px;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 4px;
+  transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
-.hr-solves {
+.hr-hexagon.gold .hr-hex-content {
+  color: #1e293b;
+  /* Dark charcoal/navy color for contrast */
+}
+
+.hr-hexagon.silver .hr-hex-content {
+  color: #334155;
+  /* Slightly lighter charcoal to match silver gradient */
+}
+
+.hr-hex-icon svg {
+  width: 100%;
+  height: 100%;
+}
+
+.hr-hexagon:hover .hr-hex-icon {
+  transform: scale(1.18) translateY(-2px);
+}
+
+/* Text elements */
+.hr-hex-title {
+  font-size: 12px;
+  font-weight: 800;
+  margin: 3px 0 1px;
+  line-height: 1.1;
+  text-transform: capitalize;
+  letter-spacing: -0.01em;
+  font-family: 'Inter', sans-serif;
+}
+
+/* Stars Row */
+.hr-hex-stars {
   font-size: 10px;
-  font-weight: 600;
-  color: #6b7280;
-  letter-spacing: 0.04em;
-  text-transform: uppercase;
+  line-height: 1;
   margin-top: 2px;
-  transition: color 0.3s ease;
-}
-
-.hr-subcard:hover .hr-solves {
-  color: #9ca3af;
+  display: flex;
+  gap: 0.5px;
+  justify-content: center;
+  opacity: 0.9;
 }
 
 /* ==========================================================================
@@ -504,6 +540,7 @@
   0% {
     transform: translateX(0%);
   }
+
   100% {
     transform: translateX(-25%);
   }
@@ -513,6 +550,7 @@
   0% {
     transform: translateX(-25%);
   }
+
   100% {
     transform: translateX(0%);
   }
@@ -536,7 +574,7 @@
   transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
   user-select: none;
   box-shadow: 0 10px 35px rgba(0, 0, 0, 0.35),
-              inset 0 1px 1px rgba(255, 255, 255, 0.05);
+    inset 0 1px 1px rgba(255, 255, 255, 0.05);
 }
 
 @media (min-width: 768px) {
@@ -568,7 +606,7 @@
   background: rgba(23, 14, 42, 0.75);
   transform: translateY(-8px) scale(1.015);
   box-shadow: 0 20px 45px rgba(168, 85, 247, 0.12),
-              0 0 24px rgba(168, 85, 247, 0.03);
+    0 0 24px rgba(168, 85, 247, 0.03);
 }
 
 .achievement-card:hover::before {
@@ -580,7 +618,7 @@
 .achievement-card:has(.achievement-pill-badge.gold):hover {
   border-color: rgba(251, 191, 36, 0.25);
   box-shadow: 0 22px 48px rgba(251, 191, 36, 0.12),
-              0 0 24px rgba(251, 191, 36, 0.04);
+    0 0 24px rgba(251, 191, 36, 0.04);
 }
 
 .achievement-card:has(.achievement-pill-badge.gold):hover::before {
@@ -590,7 +628,7 @@
 .achievement-card:has(.achievement-pill-badge.silver):hover {
   border-color: rgba(148, 163, 184, 0.25);
   box-shadow: 0 22px 48px rgba(148, 163, 184, 0.12),
-              0 0 24px rgba(148, 163, 184, 0.04);
+    0 0 24px rgba(148, 163, 184, 0.04);
 }
 
 .achievement-card:has(.achievement-pill-badge.silver):hover::before {
@@ -600,7 +638,7 @@
 .achievement-card:has(.achievement-pill-badge.top4):hover {
   border-color: rgba(168, 85, 247, 0.3);
   box-shadow: 0 22px 48px rgba(168, 85, 247, 0.12),
-              0 0 24px rgba(168, 85, 247, 0.04);
+    0 0 24px rgba(168, 85, 247, 0.04);
 }
 
 .achievement-card:has(.achievement-pill-badge.top4):hover::before {
@@ -633,7 +671,8 @@
   align-items: center;
   gap: 6px;
   padding: 5px 12px;
-  border-radius: 9999px; /* This creates the perfect oval capsule rim shape */
+  border-radius: 9999px;
+  /* This creates the perfect oval capsule rim shape */
   font-size: 11px;
   font-weight: 800;
   text-transform: capitalize;
@@ -655,7 +694,8 @@
 .achievement-pill-badge.gold {
   background: linear-gradient(135deg, #fbbf24 0%, #d97706 100%);
   border-color: rgba(253, 230, 138, 0.4);
-  color: #000000; /* Dark text for legibility on gold background */
+  color: #000000;
+  /* Dark text for legibility on gold background */
 }
 
 /* Silver Variant (e.g., 2nd Prize) */
@@ -875,8 +915,8 @@
 .photo-item:hover {
   transform: translateY(-6px);
   border-color: rgba(168, 85, 247, 0.4);
-  box-shadow: 0 20px 25px -5px rgba(168, 85, 247, 0.1), 
-              0 10px 10px -5px rgba(0, 0, 0, 0.04);
+  box-shadow: 0 20px 25px -5px rgba(168, 85, 247, 0.1),
+    0 10px 10px -5px rgba(0, 0, 0, 0.04);
 }
 
 .photo-img-wrapper {
@@ -900,12 +940,10 @@
 .photo-overlay {
   position: absolute;
   inset: 0;
-  background: linear-gradient(
-    to top,
-    rgba(10, 5, 26, 0.95) 0%,
-    rgba(10, 5, 26, 0.4) 50%,
-    transparent 100%
-  );
+  background: linear-gradient(to top,
+      rgba(10, 5, 26, 0.95) 0%,
+      rgba(10, 5, 26, 0.4) 50%,
+      transparent 100%);
   opacity: 0.85;
   transition: opacity 0.3s ease;
   display: flex;
@@ -990,7 +1028,7 @@
   .achievements-section {
     padding: 80px 6% 60px;
   }
-  
+
   .achievements-title {
     font-size: 32px;
   }

@@ -358,37 +358,112 @@ export default function Achievements() {
                   </div>
                 </div>
 
-                {/* 2x2 Sub-cards Grid */}
-                <div className="hackerrank-subgrid">
+                {/* 2x2 Hexagonal Sub-cards Grid */}
+                <div className="hackerrank-hex-grid">
 
-                  {/* Sub-card 2: Java */}
-                  <div className="hr-subcard gold">
-                    <h4>Java</h4>
-                    <span className="hr-badge gold">5 Star Gold</span>
-                    <div className="hr-stars-row">{"★".repeat(5)}</div>
-                    <span className="hr-solves">26 Solved</span>
+                  {/* Hexagon 1: Java */}
+                  <div className="hr-hexagon gold">
+                    <svg viewBox="0 0 100 115" className="hr-hex-svg">
+                      <defs>
+                        <linearGradient id="gold-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+                          <stop offset="0%" stopColor="#FFE066" />
+                          <stop offset="100%" stopColor="#F59E0B" />
+                        </linearGradient>
+                      </defs>
+                      <path 
+                        d="M 55.2 5 L 89.8 25 Q 95 28, 95 34 L 95 76 Q 95 82, 89.8 85 L 55.2 105 Q 50 108, 44.8 105 L 10.2 85 Q 5 82, 5 76 L 5 34 Q 5 28, 10.2 25 L 44.8 5 Q 50 2, 55.2 5 Z" 
+                        fill="url(#gold-grad)" 
+                        stroke="#D97706"
+                        strokeWidth="3"
+                      />
+                    </svg>
+                    <div className="hr-hex-content">
+                      <div className="hr-hex-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+                          <path d="M9 3c0 2-2 2-2 4" />
+                          <path d="M12 2c0 2-2 2-2 5" />
+                          <path d="M15 3c0 2-2 2-2 4" />
+                          <path d="M5 9h12v7a4 4 0 0 1-4 4H9a4 4 0 0 1-4-4V9Z" />
+                          <path d="M17 11h2a2 2 0 0 1 2 2v1a2 2 0 0 1-2 2h-2" />
+                          <path d="M3 21h16" />
+                        </svg>
+                      </div>
+                      <span className="hr-hex-title">Java</span>
+                      <div className="hr-hex-stars">{"★".repeat(5)}</div>
+                    </div>
                   </div>
 
-                  {/* Sub-card 4: C */}
-                  <div className="hr-subcard gold">
-                    <h4>C</h4>
-                    <span className="hr-badge gold">5 Star Gold</span>
-                    <div className="hr-stars-row">{"★".repeat(5)}</div>
-                    <span className="hr-solves">23 Solved</span>
+                  {/* Hexagon 2: Python */}
+                  <div className="hr-hexagon silver">
+                    <svg viewBox="0 0 100 115" className="hr-hex-svg">
+                      <defs>
+                        <linearGradient id="silver-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+                          <stop offset="0%" stopColor="#F1F5F9" />
+                          <stop offset="100%" stopColor="#CBD5E1" />
+                        </linearGradient>
+                      </defs>
+                      <path 
+                        d="M 55.2 5 L 89.8 25 Q 95 28, 95 34 L 95 76 Q 95 82, 89.8 85 L 55.2 105 Q 50 108, 44.8 105 L 10.2 85 Q 5 82, 5 76 L 5 34 Q 5 28, 10.2 25 L 44.8 5 Q 50 2, 55.2 5 Z" 
+                        fill="url(#silver-grad)" 
+                        stroke="#94A3B8"
+                        strokeWidth="3"
+                      />
+                    </svg>
+                    <div className="hr-hex-content">
+                      <div className="hr-hex-icon">
+                        <svg viewBox="0 0 24 24" fill="currentColor">
+                          <path d="M11.87 2c-2.29 0-4.22 1.5-4.52 3.63L7.3 6h4.57V7H5.2c-1.76 0-3.2 1.44-3.2 3.2v2.7c0 1.76 1.44 3.2 3.2 3.2h1.6v-1.9c0-1.76 1.44-3.2 3.2-3.2h4.57v-1c0-2.29-1.93-4.2-4.22-4.2h-.98V5.2a1.2 1.2 0 0 0-1.2-1.2H11.87V2zm-1.8 1.5c.44 0 .8.36.8.8s-.36.8-.8.8-.8-.36-.8-.8.36-.8.8-.8z"/>
+                          <path d="M12.13 22c2.29 0 4.22-1.5 4.52-3.63l.05-.37h-4.57v-1H18.8c1.76 0 3.2-1.44 3.2-3.2v-2.7c0-1.76-1.44-3.2-3.2-3.2h-1.6v1.9c0 1.76-1.44 3.2-3.2 3.2h-4.57v1c0 2.29 1.93 4.2 4.22 4.2h.98v.6a1.2 1.2 0 0 0 1.2 1.2h.48v2zm1.8-1.5c-.44 0-.8-.36-.8-.8s.36-.8.8-.8.8.36.8.8-.36.8-.8.8z"/>
+                        </svg>
+                      </div>
+                      <span className="hr-hex-title">Python</span>
+                      <div className="hr-hex-stars">{"★".repeat(4)}</div>
+                    </div>
                   </div>
-                  {/* Sub-card 3: Problem Solving */}
-                  <div className="hr-subcard gold">
-                    <h4>SQL</h4>
-                    <span className="hr-badge gold">5 Star Gold</span>
-                    <div className="hr-stars-row">{"★".repeat(5)}</div>
-                    <span className="hr-solves">48 Solved</span>
+
+                  {/* Hexagon 3: SQL */}
+                  <div className="hr-hexagon gold">
+                    <svg viewBox="0 0 100 115" className="hr-hex-svg">
+                      <path 
+                        d="M 55.2 5 L 89.8 25 Q 95 28, 95 34 L 95 76 Q 95 82, 89.8 85 L 55.2 105 Q 50 108, 44.8 105 L 10.2 85 Q 5 82, 5 76 L 5 34 Q 5 28, 10.2 25 L 44.8 5 Q 50 2, 55.2 5 Z" 
+                        fill="url(#gold-grad)" 
+                        stroke="#D97706"
+                        strokeWidth="3"
+                      />
+                    </svg>
+                    <div className="hr-hex-content">
+                      <div className="hr-hex-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                          <ellipse cx="12" cy="5" rx="8" ry="2.5" />
+                          <path d="M4 5v5c0 1.38 3.58 2.5 8 2.5s8-1.12 8-2.5V5" />
+                          <path d="M4 10v5c0 1.38 3.58 2.5 8 2.5s8-1.12 8-2.5v-5" />
+                          <path d="M4 15v5c0 1.38 3.58 2.5 8 2.5s8-1.12 8-2.5v-5" />
+                        </svg>
+                      </div>
+                      <span className="hr-hex-title">Sql</span>
+                      <div className="hr-hex-stars">{"★".repeat(5)}</div>
+                    </div>
                   </div>
-                  {/* Sub-card 1: Python */}
-                  <div className="hr-subcard silver">
-                    <h4>Python</h4>
-                    <span className="hr-badge silver">4 Star Silver</span>
-                    <div className="hr-stars-row">{"★".repeat(4)}</div>
-                    <span className="hr-solves">16 Solved</span>
+
+                  {/* Hexagon 4: C */}
+                  <div className="hr-hexagon gold">
+                    <svg viewBox="0 0 100 115" className="hr-hex-svg">
+                      <path 
+                        d="M 55.2 5 L 89.8 25 Q 95 28, 95 34 L 95 76 Q 95 82, 89.8 85 L 55.2 105 Q 50 108, 44.8 105 L 10.2 85 Q 5 82, 5 76 L 5 34 Q 5 28, 10.2 25 L 44.8 5 Q 50 2, 55.2 5 Z" 
+                        fill="url(#gold-grad)" 
+                        stroke="#D97706"
+                        strokeWidth="3"
+                      />
+                    </svg>
+                    <div className="hr-hex-content">
+                      <div className="hr-hex-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
+                          <path d="M 16.5 7.5 A 6 6 0 1 0 16.5 16.5" />
+                        </svg>
+                      </div>
+                      <span className="hr-hex-title">C language</span>
+                      <div className="hr-hex-stars">{"★".repeat(5)}</div>
+                    </div>
                   </div>
 
                 </div>
