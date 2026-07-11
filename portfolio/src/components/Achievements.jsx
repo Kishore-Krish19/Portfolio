@@ -23,7 +23,7 @@ const track1Unique = [
     icon: "medal",
     location: "Government College Of Engineering Erode"
   },
-   {
+  {
     title: "2nd Prize in The Trust Chain",
     date: "Feb 2026",
     desc: "Secured 2nd Prize among 50+ participants from various colleges.",
@@ -370,9 +370,9 @@ export default function Achievements() {
                           <stop offset="100%" stopColor="#F59E0B" />
                         </linearGradient>
                       </defs>
-                      <path 
-                        d="M 55.2 5 L 89.8 25 Q 95 28, 95 34 L 95 76 Q 95 82, 89.8 85 L 55.2 105 Q 50 108, 44.8 105 L 10.2 85 Q 5 82, 5 76 L 5 34 Q 5 28, 10.2 25 L 44.8 5 Q 50 2, 55.2 5 Z" 
-                        fill="url(#gold-grad)" 
+                      <path
+                        d="M 55.2 5 L 89.8 25 Q 95 28, 95 34 L 95 76 Q 95 82, 89.8 85 L 55.2 105 Q 50 108, 44.8 105 L 10.2 85 Q 5 82, 5 76 L 5 34 Q 5 28, 10.2 25 L 44.8 5 Q 50 2, 55.2 5 Z"
+                        fill="url(#gold-grad)"
                         stroke="#D97706"
                         strokeWidth="3"
                       />
@@ -394,39 +394,39 @@ export default function Achievements() {
                   </div>
 
                   {/* Hexagon 2: Python */}
-                  <div className="hr-hexagon silver">
+                  <div className="hr-hexagon gold">
                     <svg viewBox="0 0 100 115" className="hr-hex-svg">
                       <defs>
-                        <linearGradient id="silver-grad" x1="0%" y1="0%" x2="100%" y2="100%">
-                          <stop offset="0%" stopColor="#F1F5F9" />
-                          <stop offset="100%" stopColor="#CBD5E1" />
+                        <linearGradient id="gold-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+                          <stop offset="0%" stopColor="#FFE066" />
+                          <stop offset="100%" stopColor="#F59E0B" />
                         </linearGradient>
                       </defs>
-                      <path 
-                        d="M 55.2 5 L 89.8 25 Q 95 28, 95 34 L 95 76 Q 95 82, 89.8 85 L 55.2 105 Q 50 108, 44.8 105 L 10.2 85 Q 5 82, 5 76 L 5 34 Q 5 28, 10.2 25 L 44.8 5 Q 50 2, 55.2 5 Z" 
-                        fill="url(#silver-grad)" 
-                        stroke="#94A3B8"
+                      <path
+                        d="M 55.2 5 L 89.8 25 Q 95 28, 95 34 L 95 76 Q 95 82, 89.8 85 L 55.2 105 Q 50 108, 44.8 105 L 10.2 85 Q 5 82, 5 76 L 5 34 Q 5 28, 10.2 25 L 44.8 5 Q 50 2, 55.2 5 Z"
+                        fill="url(#gold-grad)"
+                        stroke="#D97706"
                         strokeWidth="3"
                       />
                     </svg>
                     <div className="hr-hex-content">
                       <div className="hr-hex-icon">
                         <svg viewBox="0 0 24 24" fill="currentColor">
-                          <path d="M11.87 2c-2.29 0-4.22 1.5-4.52 3.63L7.3 6h4.57V7H5.2c-1.76 0-3.2 1.44-3.2 3.2v2.7c0 1.76 1.44 3.2 3.2 3.2h1.6v-1.9c0-1.76 1.44-3.2 3.2-3.2h4.57v-1c0-2.29-1.93-4.2-4.22-4.2h-.98V5.2a1.2 1.2 0 0 0-1.2-1.2H11.87V2zm-1.8 1.5c.44 0 .8.36.8.8s-.36.8-.8.8-.8-.36-.8-.8.36-.8.8-.8z"/>
-                          <path d="M12.13 22c2.29 0 4.22-1.5 4.52-3.63l.05-.37h-4.57v-1H18.8c1.76 0 3.2-1.44 3.2-3.2v-2.7c0-1.76-1.44-3.2-3.2-3.2h-1.6v1.9c0 1.76-1.44 3.2-3.2 3.2h-4.57v1c0 2.29 1.93 4.2 4.22 4.2h.98v.6a1.2 1.2 0 0 0 1.2 1.2h.48v2zm1.8-1.5c-.44 0-.8-.36-.8-.8s.36-.8.8-.8.8.36.8.8-.36.8-.8.8z"/>
+                          <path d="M11.87 2c-2.29 0-4.22 1.5-4.52 3.63L7.3 6h4.57V7H5.2c-1.76 0-3.2 1.44-3.2 3.2v2.7c0 1.76 1.44 3.2 3.2 3.2h1.6v-1.9c0-1.76 1.44-3.2 3.2-3.2h4.57v-1c0-2.29-1.93-4.2-4.22-4.2h-.98V5.2a1.2 1.2 0 0 0-1.2-1.2H11.87V2zm-1.8 1.5c.44 0 .8.36.8.8s-.36.8-.8.8-.8-.36-.8-.8.36-.8.8-.8z" />
+                          <path d="M12.13 22c2.29 0 4.22-1.5 4.52-3.63l.05-.37h-4.57v-1H18.8c1.76 0 3.2-1.44 3.2-3.2v-2.7c0-1.76-1.44-3.2-3.2-3.2h-1.6v1.9c0 1.76-1.44 3.2-3.2 3.2h-4.57v1c0 2.29 1.93 4.2 4.22 4.2h.98v.6a1.2 1.2 0 0 0 1.2 1.2h.48v2zm1.8-1.5c-.44 0-.8-.36-.8-.8s.36-.8.8-.8.8.36.8.8-.36.8-.8.8z" />
                         </svg>
                       </div>
                       <span className="hr-hex-title">Python</span>
-                      <div className="hr-hex-stars">{"★".repeat(4)}</div>
+                      <div className="hr-hex-stars">{"★".repeat(5)}</div>
                     </div>
                   </div>
 
                   {/* Hexagon 3: SQL */}
                   <div className="hr-hexagon gold">
                     <svg viewBox="0 0 100 115" className="hr-hex-svg">
-                      <path 
-                        d="M 55.2 5 L 89.8 25 Q 95 28, 95 34 L 95 76 Q 95 82, 89.8 85 L 55.2 105 Q 50 108, 44.8 105 L 10.2 85 Q 5 82, 5 76 L 5 34 Q 5 28, 10.2 25 L 44.8 5 Q 50 2, 55.2 5 Z" 
-                        fill="url(#gold-grad)" 
+                      <path
+                        d="M 55.2 5 L 89.8 25 Q 95 28, 95 34 L 95 76 Q 95 82, 89.8 85 L 55.2 105 Q 50 108, 44.8 105 L 10.2 85 Q 5 82, 5 76 L 5 34 Q 5 28, 10.2 25 L 44.8 5 Q 50 2, 55.2 5 Z"
+                        fill="url(#gold-grad)"
                         stroke="#D97706"
                         strokeWidth="3"
                       />
@@ -448,9 +448,9 @@ export default function Achievements() {
                   {/* Hexagon 4: C */}
                   <div className="hr-hexagon gold">
                     <svg viewBox="0 0 100 115" className="hr-hex-svg">
-                      <path 
-                        d="M 55.2 5 L 89.8 25 Q 95 28, 95 34 L 95 76 Q 95 82, 89.8 85 L 55.2 105 Q 50 108, 44.8 105 L 10.2 85 Q 5 82, 5 76 L 5 34 Q 5 28, 10.2 25 L 44.8 5 Q 50 2, 55.2 5 Z" 
-                        fill="url(#gold-grad)" 
+                      <path
+                        d="M 55.2 5 L 89.8 25 Q 95 28, 95 34 L 95 76 Q 95 82, 89.8 85 L 55.2 105 Q 50 108, 44.8 105 L 10.2 85 Q 5 82, 5 76 L 5 34 Q 5 28, 10.2 25 L 44.8 5 Q 50 2, 55.2 5 Z"
+                        fill="url(#gold-grad)"
                         stroke="#D97706"
                         strokeWidth="3"
                       />
