@@ -9,7 +9,7 @@ const experiences = [
     category: "Internship Experience",
     icon: "reactnative",
     gradient: "cyan",
-    date: "June 2026 – Present",
+    date: "June 2026 – July 2026",
     certificate: "/certificates/Kishore Internship Certificate.webp",
     certificateBadge: "Internship Certificate",
     highlights: [
