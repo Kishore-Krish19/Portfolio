@@ -1,6 +1,7 @@
 import { useState, useMemo, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import "./About.css";
+import LinkedInBadge from "./LinkedInBadge";
 
 export default function About() {
   const [hoveredPlanet, setHoveredPlanet] = useState(null);
@@ -16,15 +17,15 @@ export default function About() {
 
     const handleScroll = () => {
       if (!timelineRef.current) return;
-      
+
       const rect = timelineRef.current.getBoundingClientRect();
       const windowH = window.innerHeight;
-      
+
       // Calculate active progress strictly within the bounds of the timeline block
       const totalHeight = rect.height;
       const entryPoint = windowH * 0.6; // Laser starts lighting up when timeline is 60% down the screen
       const scrolledIntoTimeline = entryPoint - rect.top;
-      
+
       const progress = Math.min(1, Math.max(0, scrolledIntoTimeline / totalHeight));
       targetProgress.current = progress;
 
@@ -42,7 +43,7 @@ export default function About() {
 
     const animate = () => {
       currentProgress.current = lerp(currentProgress.current, targetProgress.current, 0.1);
-      
+
       if (Math.abs(currentProgress.current - scrollProgress) > 0.0001) {
         setScrollProgress(currentProgress.current);
       }
@@ -51,7 +52,7 @@ export default function About() {
 
     rafRef.current = requestAnimationFrame(animate);
     window.addEventListener("scroll", handleScroll, { passive: true });
-    
+
     // Initial calculation jumpstart
     setTimeout(handleScroll, 100);
 
@@ -293,6 +294,20 @@ export default function About() {
           </motion.div>
         </motion.div>
 
+        {/* ===== MIDDLE LINKEDIN BADGE ===== */}
+        <motion.div
+          className="about-linkedin-wrapper"
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1], delay: 0.1 }}
+          viewport={{ once: false, amount: 0.2 }}
+        >
+          <div className="linkedin-badge-card">
+            <div className="linkedin-badge-glow" />
+            <LinkedInBadge />
+          </div>
+        </motion.div>
+
         {/* ===== RIGHT CONSTELLATION ===== */}
         <motion.div
           className="constellation-wrapper"
@@ -302,7 +317,6 @@ export default function About() {
           viewport={{ once: false, amount: 0.2 }}
         >
           <div className="constellation-container">
-
             {/* Tooltip */}
             <AnimatePresence>
               {active && (
@@ -554,17 +568,17 @@ export default function About() {
                     <h3 className="edu-card-title">B.E. Computer Science &amp; Engineering</h3>
                   </div>
                   <div className="edu-card-year edu-year--purple">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg>
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M8 2v4" /><path d="M16 2v4" /><rect width="18" height="18" x="3" y="4" rx="2" /><path d="M3 10h18" /></svg>
                     2023 – Present
                   </div>
                 </div>
                 <div className="edu-card-divider" />
                 <div className="edu-card-detail">
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><rect x="4" y="2" width="16" height="20" rx="2"/><path d="M9 22v-3a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v3"/></svg>
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><rect x="4" y="2" width="16" height="20" rx="2" /><path d="M9 22v-3a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v3" /></svg>
                   <span>Government College of Engineering, Erode</span>
                 </div>
                 <div className="edu-card-award edu-award--purple">
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="m15.477 12.89 1.515 8.526a.5.5 0 0 1-.81.47l-3.58-2.687a1 1 0 0 0-1.197 0l-3.586 2.686a.5.5 0 0 1-.81-.469l1.514-8.526"/><circle cx="12" cy="8" r="6"/></svg>
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="m15.477 12.89 1.515 8.526a.5.5 0 0 1-.81.47l-3.58-2.687a1 1 0 0 0-1.197 0l-3.586 2.686a.5.5 0 0 1-.81-.469l1.514-8.526" /><circle cx="12" cy="8" r="6" /></svg>
                   CGPA: 8.45 &nbsp;·&nbsp; Till 5th Semester
                 </div>
               </div>
@@ -595,17 +609,17 @@ export default function About() {
                     <h3 className="edu-card-title">Higher Secondary — 12th Standard</h3>
                   </div>
                   <div className="edu-card-year edu-year--cyan">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg>
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M8 2v4" /><path d="M16 2v4" /><rect width="18" height="18" x="3" y="4" rx="2" /><path d="M3 10h18" /></svg>
                     Completed 2023
                   </div>
                 </div>
                 <div className="edu-card-divider" />
                 <div className="edu-card-detail">
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><rect x="4" y="2" width="16" height="20" rx="2"/><path d="M9 22v-3a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v3"/></svg>
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><rect x="4" y="2" width="16" height="20" rx="2" /><path d="M9 22v-3a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v3" /></svg>
                   <span>Dharmapuri District Government Model School, Dharmapuri</span>
                 </div>
                 <div className="edu-card-award edu-award--cyan">
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="m15.477 12.89 1.515 8.526a.5.5 0 0 1-.81.47l-3.58-2.687a1 1 0 0 0-1.197 0l-3.586 2.686a.5.5 0 0 1-.81-.469l1.514-8.526"/><circle cx="12" cy="8" r="6"/></svg>
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="m15.477 12.89 1.515 8.526a.5.5 0 0 1-.81.47l-3.58-2.687a1 1 0 0 0-1.197 0l-3.586 2.686a.5.5 0 0 1-.81-.469l1.514-8.526" /><circle cx="12" cy="8" r="6" /></svg>
                   Percentage: 87.5%
                 </div>
               </div>
@@ -636,17 +650,17 @@ export default function About() {
                     <h3 className="edu-card-title">Secondary School — 10th Standard</h3>
                   </div>
                   <div className="edu-card-year edu-year--emerald">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg>
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M8 2v4" /><path d="M16 2v4" /><rect width="18" height="18" x="3" y="4" rx="2" /><path d="M3 10h18" /></svg>
                     Completed 2021
                   </div>
                 </div>
                 <div className="edu-card-divider" />
                 <div className="edu-card-detail">
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><rect x="4" y="2" width="16" height="20" rx="2"/><path d="M9 22v-3a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v3"/></svg>
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><rect x="4" y="2" width="16" height="20" rx="2" /><path d="M9 22v-3a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v3" /></svg>
                   <span>Government Boys Higher Secondary School, Kaveripattinam</span>
                 </div>
                 <div className="edu-card-award edu-award--emerald">
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="m15.477 12.89 1.515 8.526a.5.5 0 0 1-.81.47l-3.58-2.687a1 1 0 0 0-1.197 0l-3.586 2.686a.5.5 0 0 1-.81-.469l1.514-8.526"/><circle cx="12" cy="8" r="6"/></svg>
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="m15.477 12.89 1.515 8.526a.5.5 0 0 1-.81.47l-3.58-2.687a1 1 0 0 0-1.197 0l-3.586 2.686a.5.5 0 0 1-.81-.469l1.514-8.526" /><circle cx="12" cy="8" r="6" /></svg>
                   Percentage: 90%
                 </div>
               </div>
