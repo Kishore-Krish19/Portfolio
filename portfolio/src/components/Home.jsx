@@ -266,7 +266,7 @@ export default function Home({ startAnimation = true }) {
                                 className="btn-action btn-get-resume"
                                 onClick={() => {
                                     const link = document.createElement("a");
-                                    link.href = "/resume.pdf";
+                                    link.href = "/Kishore_E_Resume.pdf";
                                     link.download = "Kishore_E_Resume.pdf";
                                     document.body.appendChild(link);
                                     link.click();
