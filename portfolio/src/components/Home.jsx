@@ -261,7 +261,18 @@ export default function Home({ startAnimation = true }) {
                     <div className="action-buttons-row">
                         <div className="home-iso-pro resume-item">
                             <span /><span /><span />
-                            <button className="btn-action btn-get-resume">
+                            <button
+                                type="button"
+                                className="btn-action btn-get-resume"
+                                onClick={() => {
+                                    const link = document.createElement("a");
+                                    link.href = "/resume.pdf";
+                                    link.download = "Kishore_E_Resume.pdf";
+                                    document.body.appendChild(link);
+                                    link.click();
+                                    document.body.removeChild(link);
+                                }}
+                            >
                                 GET RESUME &nbsp;<i className="fas fa-download"></i>
                             </button>
                         </div>
